@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int HPMax;
     public Role role;
 
-    private int HP;
+    private int HP { get; set; }
     
     // Start is called before the first frame update
     void Start()
