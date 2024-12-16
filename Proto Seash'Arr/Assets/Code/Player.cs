@@ -48,6 +48,16 @@ public class Player : MonoBehaviour
         
     }
 
+    public int GetHP()
+    {
+        return HP;
+    }
+
+    public void SetHP(int newHP)
+    {
+        HP = newHP;
+    }
+
     // Update is called once per frame
     void Update()
     {
