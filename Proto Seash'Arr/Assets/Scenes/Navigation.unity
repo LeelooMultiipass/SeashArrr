@@ -1938,7 +1938,6 @@ GameObject:
   m_Component:
   - component: {fileID: 979218301}
   - component: {fileID: 979218302}
-  - component: {fileID: 979218303}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -2017,24 +2016,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &979218303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979218300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c826923f3d0a05c4fad56129418dce82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 7700430871220954792, guid: e0a86b123b25bd941b79aba108978c88, type: 3}
-  - {fileID: 6001484966731046502, guid: 30f475a39949a3a4ba2a888d98cd20ef, type: 3}
-  - {fileID: 1267618505546091406, guid: bf46bf21e1075ba4b82edc83d6a6ee7d, type: 3}
-  - {fileID: 7150876285688529378, guid: 81286cb31c1025543acbc81a799b40e1, type: 3}
-  numberToSpawn: 4
 --- !u!1 &1022080881
 GameObject:
   m_ObjectHideFlags: 0
