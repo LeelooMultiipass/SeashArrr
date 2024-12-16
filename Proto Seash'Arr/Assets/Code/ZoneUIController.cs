@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ZoneUIController : MonoBehaviour
 {
-    public GameObject linkedUI;  // L'UI qui sera activ閑 et d閟activ閑 pour cette zone
+    public GameObject linkedUI;  // Le panneau UI qui s'affiche lorsque le joueur appuie sur E/X
+    public GameObject buttonIcon; // L'ic么ne du bouton qui s'affiche lorsque le joueur entre dans la zone
+
+    private bool isPlayerInZone = false; // Le joueur est-il dans la zone ?
+    private bool isUIVisible = false;   // Le panneau UI est-il visible actuellement ?
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (linkedUI != null)
+            isPlayerInZone = true;
+
+            // Afficher l'ic么ne du bouton
+            if (buttonIcon != null)
             {
-                linkedUI.SetActive(true);  // Activer l'UI quand le joueur entre
+                buttonIcon.SetActive(true);
             }
         }
     }
@@ -22,9 +28,65 @@ public class ZoneUIController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (linkedUI != null)
+            isPlayerInZone = false;
+
+            // Cacher l'ic么ne du bouton
+            if (buttonIcon != null)
             {
-                linkedUI.SetActive(false);  // D閟activer l'UI quand le joueur sort
+                buttonIcon.SetActive(false);
+            }
+
+            // Cacher le panneau UI si encore visible
+            HideUI();
+        }
+    }
+
+    private void Update()
+    {
+        // Si le joueur est dans la zone, v茅rifier l'entr茅e utilisateur
+        if (isPlayerInZone)
+        {
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("XButton"))
+            {
+                // Basculer entre afficher et masquer le panneau UI
+                if (isUIVisible)
+                {
+                    HideUI();
+                }
+                else
+                {
+                    ShowUI();
+                }
+            }
+        }
+    }
+
+    private void ShowUI()
+    {
+        if (linkedUI != null)
+        {
+            linkedUI.SetActive(true); // Activer le panneau UI
+            isUIVisible = true;
+
+            // Cacher l'ic么ne du bouton pendant que l'UI est affich茅e
+            if (buttonIcon != null)
+            {
+                buttonIcon.SetActive(false);
+            }
+        }
+    }
+
+    private void HideUI()
+    {
+        if (linkedUI != null)
+        {
+            linkedUI.SetActive(false); // D茅sactiver le panneau UI
+            isUIVisible = false;
+
+            // R茅afficher l'ic么ne du bouton si le joueur est toujours dans la zone
+            if (isPlayerInZone && buttonIcon != null)
+            {
+                buttonIcon.SetActive(true);
             }
         }
     }
