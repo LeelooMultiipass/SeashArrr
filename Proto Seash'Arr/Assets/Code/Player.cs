@@ -17,14 +17,14 @@ public class Player : MonoBehaviour
         Cannonier
     }
 
-    private int HP;
+    [SerializeField] private int HPMax;
     public Role role;
+
+    private int HP;
     
     // Start is called before the first frame update
     void Start()
     {
-        HP = 100;
-        
         // Set the good skin on the prefab
         switch (role)
         {
