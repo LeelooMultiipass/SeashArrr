@@ -18,10 +18,10 @@ public class Ennemy : MonoBehaviour
 
     
     [SerializeField] private EnnemyType Type;
-    public int HP { get; set; }
+    private int HP;
 
-    private List<Player> listPlayers = Fight.players;
-    private List<Ennemy> listEnnemies = Fight.ennemies;
+    private List<Player> listPlayers = Fight.Players;
+    private List<Ennemy> listEnnemies = Fight.Ennemies;
     
     public enum EnnemyType
     {
@@ -214,6 +214,21 @@ public class Ennemy : MonoBehaviour
     void Start()
     {
         HP = HPMax;
+    }
+    
+    public int GetHP()
+    {
+        return HP;
+    }
+
+    public void SetHP(int newHP)
+    {
+        HP = newHP;
+    }
+
+    public int GetHPMax()
+    {
+        return HPMax;
     }
 
     // Update is called once per frame

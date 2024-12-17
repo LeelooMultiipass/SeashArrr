@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Fight : MonoBehaviour
 {
-    public static List<Player> players = new List<Player>();
-    public static List<Ennemy> ennemies = new List<Ennemy>();
+    public static List<Player> Players = new List<Player>();
+    public static List<Ennemy> Ennemies = new List<Ennemy>();
 
     [SerializeField] private GameObject player1GO;
     [SerializeField] private GameObject player2GO;
@@ -47,9 +47,9 @@ public class Fight : MonoBehaviour
         Player2 = player2GO.GetComponent(typeof(Player)) as Player;
         Player3 = player3GO.GetComponent(typeof(Player)) as Player;
         
-        players.Add(Player1);
-        players.Add(Player2);
-        players.Add(Player3);
+        Players.Add(Player1);
+        Players.Add(Player2);
+        Players.Add(Player3);
         
         // Génère les ennemis (en fonction du temps in game)
 
@@ -76,24 +76,24 @@ public class Fight : MonoBehaviour
         Ennemy4 = ennemy4GO.GetComponent(typeof(Ennemy)) as Ennemy;
         Ennemy5 = ennemy5GO.GetComponent(typeof(Ennemy)) as Ennemy;
         
-        ennemies.Add(Ennemy1);
-        ennemies.Add(Ennemy2);
-        ennemies.Add(Ennemy3);
-        ennemies.Add(Ennemy4);
-        ennemies.Add(Ennemy5);
+        Ennemies.Add(Ennemy1);
+        Ennemies.Add(Ennemy2);
+        Ennemies.Add(Ennemy3);
+        Ennemies.Add(Ennemy4);
+        Ennemies.Add(Ennemy5);
         
         
         // Randomise l'ordre
 
         List<int> order = new List<int>();
-        order.Add(Player1.GetHP());
-        order.Add(Player2.GetHP());
-        order.Add(Player3.GetHP());
-        order.Add(Ennemy1.HP);
-        order.Add(Ennemy2.HP);
-        order.Add(Ennemy3.HP);
-        order.Add(Ennemy4.HP);
-        order.Add(Ennemy5.HP);
+        order.Add(Player1!.GetHP());
+        order.Add(Player2!.GetHP());
+        order.Add(Player3!.GetHP());
+        order.Add(Ennemy1!.GetHP());
+        order.Add(Ennemy2!.GetHP());
+        order.Add(Ennemy3!.GetHP());
+        order.Add(Ennemy4!.GetHP());
+        order.Add(Ennemy5!.GetHP());
         
         System.Random rand = new System.Random();
         int p = order.Count();
