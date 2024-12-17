@@ -1,13 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
-public class RandomFight : MonoBehaviour
+public class StatsManager : MonoBehaviour
 {
-    // Temps de jeu
+   // Temps de jeu
     [Header("Temps globaux")]
     public float TempsNavigation = 0;
     public float TempsFight = 0;
@@ -36,6 +35,28 @@ public class RandomFight : MonoBehaviour
     public GameObject UI;
     [Space(20)]
 
+    [Header("Statistiques")]
+    public int boatHealth;
+    public int canonHealth;
+    public int nbrWood;
+    public int nbrIron;
+    public int nbrFood;
+    public int nbrRhum;
+    public int nbrRagout;
+    public int boatMaxHealth=300;
+    public int canonMaxHealth=100;
+    [Space(20)]
+
+    [Header("Texts")]
+    public TMP_Text boatHealthText;
+    public TMP_Text canonHealthText;
+    public TMP_Text nbrWoodText;
+    public TMP_Text nbrIronText;
+    public TMP_Text nbrFoodText;
+    public TMP_Text nbrRhumText;
+    public TMP_Text nbrRagoutText;
+    [Space(20)]
+    
     // Le random
     System.Random rnd = new System.Random();
 
@@ -44,12 +65,27 @@ public class RandomFight : MonoBehaviour
     void Start()
     {
         LancementFight = rnd.Next(TempsMinNavigation, TempsMaxNavigation); //Randomise automatiquement le premier lancement de combat
+        boatHealth = boatMaxHealth;
+        canonHealth = canonMaxHealth;
+        UpdateText();
+    }
+
+    private void UpdateText()
+    {
+        boatHealthText.text = boatHealth + " / " + boatMaxHealth;
+        canonHealthText.text = canonHealth + " / " + canonMaxHealth;
+        nbrWoodText.text = nbrWood +"";
+        nbrIronText.text = nbrIron + "";
+        nbrFoodText.text = nbrFood + "";
+        nbrRhumText.text = nbrRhum + "";
+        nbrRagoutText.text = nbrRagout + "";
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Navigation == true) 
+        if (Navigation == true)
         {
             TempsNavigation += Time.deltaTime;
             if (Mathf.Abs(TempsNavigation - LancementFight) < 0.1f)
@@ -79,8 +115,8 @@ public class RandomFight : MonoBehaviour
                 Fight = false;
                 Navigation = true;
                 CameraNavigation.SetActive(!CameraNavigation.activeSelf);
-               CameraFight.SetActive(!CameraFight.activeSelf);
-               UI.SetActive(!UI.activeSelf);
+                CameraFight.SetActive(!CameraFight.activeSelf);
+                UI.SetActive(!UI.activeSelf);
 
                 // Réinitialiser TempsFight pour arrêter le timer
                 TempsFight = 0;
@@ -88,4 +124,3 @@ public class RandomFight : MonoBehaviour
         }
     }
 }
-
