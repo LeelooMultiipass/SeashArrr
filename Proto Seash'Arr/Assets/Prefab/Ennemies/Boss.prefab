@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7942747449053400581}
   - component: {fileID: 38298901206381863}
   - component: {fileID: 7872976212950942316}
-  - component: {fileID: 7117855307774245442}
+  - component: {fileID: 2714597025272582549}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 6782000543342229285}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 62.88, y: 0, z: 0}
-  m_LocalScale: {x: 7.396897, y: 7.396897, z: 7.396897}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,7 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7117855307774245442
+--- !u!114 &2714597025272582549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +115,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6782000543342229285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb15993e702107438f30c63d6e63a66, type: 3}
+  m_Script: {fileID: 11500000, guid: b49054bb643631545ba3b89d1b18a043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPMax: 0
+  ATT: 0
+  HealPower: 0
+  BoostPower: 0
+  Type: 0

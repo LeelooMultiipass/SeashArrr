@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 851224759851905564}
   - component: {fileID: 1287866461522788347}
   - component: {fileID: 2823054781991447094}
-  - component: {fileID: 2051765588387969597}
+  - component: {fileID: 1590905869918263032}
   m_Layer: 0
   m_Name: Healer
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 7899676115581702089}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.720001, y: 0, z: 0}
-  m_LocalScale: {x: 7.396897, y: 7.396897, z: 7.396897}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,7 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2051765588387969597
+--- !u!114 &1590905869918263032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +115,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7899676115581702089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75d4a39a9b0f6f47a9c92887854c358, type: 3}
+  m_Script: {fileID: 11500000, guid: b49054bb643631545ba3b89d1b18a043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPMax: 0
+  ATT: 0
+  HealPower: 0
+  BoostPower: 0
+  Type: 0

@@ -18,7 +18,7 @@ public class Ennemy : MonoBehaviour
 
     
     [SerializeField] private EnnemyType Type;
-    private int HP { get; set; }
+    public int HP { get; set; }
 
     private List<Player> listPlayers = Fight.players;
     private List<Ennemy> listEnnemies = Fight.ennemies;

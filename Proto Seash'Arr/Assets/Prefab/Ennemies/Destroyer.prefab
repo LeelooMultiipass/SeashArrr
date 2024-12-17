@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7354562602989845300}
   - component: {fileID: 3180101911652819118}
   - component: {fileID: 1897481375995011175}
-  - component: {fileID: 4320819009521592383}
+  - component: {fileID: 7738589643041130844}
   m_Layer: 0
   m_Name: Destroyer
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 7578683774125072217}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.93, y: 0, z: 0}
-  m_LocalScale: {x: 7.396897, y: 7.396897, z: 7.396897}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,7 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4320819009521592383
+--- !u!114 &7738589643041130844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +115,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7578683774125072217}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d338b507b0a704abcdc64dbe2fd20c, type: 3}
+  m_Script: {fileID: 11500000, guid: b49054bb643631545ba3b89d1b18a043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPMax: 0
+  ATT: 0
+  HealPower: 0
+  BoostPower: 0
+  Type: 0

@@ -1,21 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class Fight : MonoBehaviour
 {
     public static List<Player> players = new List<Player>();
     public static List<Ennemy> ennemies = new List<Ennemy>();
 
-    [Header("Boutons")]
-    public GameObject BoutonAttaquer;
-    public GameObject BoutonHeal;
-    public GameObject BoutonFixBoat;
-    public GameObject BoutonFixCanon;
-    public GameObject BoutonCanon;
-    public GameObject BoutonBoost;
+    [SerializeField] private GameObject player1GO;
+    [SerializeField] private GameObject player2GO;
+    [SerializeField] private GameObject player3GO;
+
+    [SerializeField] private GameObject fighterGO;
+    [SerializeField] private GameObject destroyerGO;
+    [SerializeField] private GameObject healerGO;
+    [SerializeField] private GameObject aoeGO;
+    [SerializeField] private GameObject bossGO;
+    
+
+    [SerializeField] private GameObject placeEnnemy1;
+    [SerializeField] private GameObject placeEnnemy2;
+    [SerializeField] private GameObject placeEnnemy3;
+    [SerializeField] private GameObject placeEnnemy4;
+    [SerializeField] private GameObject placeEnnemy5;
+
+    public static Player Player1;
+    public static Player Player2;
+    public static Player Player3;
+
+    public static Ennemy Ennemy1;
+    public static Ennemy Ennemy2;
+    public static Ennemy Ennemy3;
+    public static Ennemy Ennemy4;
+    public static Ennemy Ennemy5;
+    
+    
 
     public bool playerTurn = true; // Indique si c'est le tour du joueur
     public bool monsterTurn = false;
@@ -23,45 +43,70 @@ public class Fight : MonoBehaviour
     private void Start()
     {
         // Génère la liste des players
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Player player3 = new Player();
+        Player1 = player1GO.GetComponent(typeof(Player)) as Player;
+        Player2 = player2GO.GetComponent(typeof(Player)) as Player;
+        Player3 = player3GO.GetComponent(typeof(Player)) as Player;
         
-        players.Add(player1);
-        players.Add(player2);
-        players.Add(player3);
+        players.Add(Player1);
+        players.Add(Player2);
+        players.Add(Player3);
         
-        // Génère la liste des ennemis (en fonction du temps in game)
-        Ennemy ennemy1 = new Ennemy();
-        Ennemy ennemy2 = new Ennemy();
-        Ennemy ennemy3 = new Ennemy();
-        Ennemy ennemy4 = new Ennemy();
-        
-        ennemies.Add(ennemy1);
-        ennemies.Add(ennemy2);
-        ennemies.Add(ennemy3);
-        ennemies.Add(ennemy4);
+        // Génère les ennemis (en fonction du temps in game)
 
-        foreach (var ennemy in ennemies)
-        {
-            int i = Random.Range(0, 3);
-            switch (i)
-            {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
+        var prefabList = new List<GameObject>();
+        prefabList.Add(fighterGO);
+        prefabList.Add(destroyerGO);
+        prefabList.Add(healerGO);
+        prefabList.Add(aoeGO);
 
-            }
-        }
+        var prefabIndice = Random.Range(0, 3);
+        GameObject ennemy1GO = Instantiate(prefabList[prefabIndice], placeEnnemy1.transform);
+        prefabIndice = Random.Range(0, 3);
+        GameObject ennemy2GO = Instantiate(prefabList[prefabIndice], placeEnnemy2.transform);
+        prefabIndice = Random.Range(0, 3);
+        GameObject ennemy3GO = Instantiate(prefabList[prefabIndice], placeEnnemy3.transform);
+        prefabIndice = Random.Range(0, 3);
+        GameObject ennemy4GO = Instantiate(prefabList[prefabIndice], placeEnnemy4.transform);
+        prefabIndice = Random.Range(0, 3);
+        GameObject ennemy5GO = Instantiate(prefabList[prefabIndice], placeEnnemy5.transform);
+        
+        Ennemy1 = ennemy1GO.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy2 = ennemy2GO.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy3 = ennemy3GO.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy4 = ennemy4GO.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy5 = ennemy5GO.GetComponent(typeof(Ennemy)) as Ennemy;
+        
+        ennemies.Add(Ennemy1);
+        ennemies.Add(Ennemy2);
+        ennemies.Add(Ennemy3);
+        ennemies.Add(Ennemy4);
+        ennemies.Add(Ennemy5);
         
         
         // Randomise l'ordre
+
+        List<int> order = new List<int>();
+        order.Add(Player1.GetHP());
+        order.Add(Player2.GetHP());
+        order.Add(Player3.GetHP());
+        order.Add(Ennemy1.HP);
+        order.Add(Ennemy2.HP);
+        order.Add(Ennemy3.HP);
+        order.Add(Ennemy4.HP);
+        order.Add(Ennemy5.HP);
         
+        System.Random rand = new System.Random();
+        int p = order.Count();
+        for (int n = p-1; n > 0 ; n--)
+        {
+            int r = rand.Next(1, n);
+            (order[r], order[n]) = (order[n], order[r]);
+        }
+
+        for (int i = 0; i < order.Count(); i++)
+        {
+            Debug.Log(order[i]);
+        }
         
         // Met à jour les points de vie affichés au démarrage
         UpdateHealthText();
