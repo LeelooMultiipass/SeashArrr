@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Fight : MonoBehaviour
 {
@@ -34,11 +36,10 @@ public class Fight : MonoBehaviour
     public static Ennemy Ennemy3;
     public static Ennemy Ennemy4;
     public static Ennemy Ennemy5;
-    
-    
 
-    public bool playerTurn = true; // Indique si c'est le tour du joueur
-    public bool monsterTurn = false;
+    private List<MonoBehaviour> order = new List<MonoBehaviour>();
+    private int turnIndex;
+    private IEnumerator turn;
 
     private void Start()
     {
@@ -84,40 +85,62 @@ public class Fight : MonoBehaviour
         
         
         // Randomise l'ordre
-
-        List<int> order = new List<int>();
-        order.Add(Player1!.GetHP());
-        order.Add(Player2!.GetHP());
-        order.Add(Player3!.GetHP());
-        order.Add(Ennemy1!.GetHP());
-        order.Add(Ennemy2!.GetHP());
-        order.Add(Ennemy3!.GetHP());
-        order.Add(Ennemy4!.GetHP());
-        order.Add(Ennemy5!.GetHP());
+        
+        order.Add(Player1!);
+        order.Add(Player2!);
+        order.Add(Player3!);
+        order.Add(Ennemy1!);
+        order.Add(Ennemy2!);
+        order.Add(Ennemy3!);
+        order.Add(Ennemy4!);
+        order.Add(Ennemy5!);
         
         System.Random rand = new System.Random();
-        int p = order.Count();
-        for (int n = p-1; n > 0 ; n--)
+        for (int n = 0; n < order.Count ; n++)
         {
-            int r = rand.Next(1, n);
+            int r = rand.Next(0, n);
             (order[r], order[n]) = (order[n], order[r]);
         }
 
+        // DEBUG Order
+        /*
         for (int i = 0; i < order.Count(); i++)
         {
             Debug.Log(order[i]);
         }
-        
-        // Met à jour les points de vie affichés au démarrage
-        UpdateHealthText();
+        */
         
         // Début du combat
-        
+        turnIndex = 0;
+        turn = NextTurn();
+        StartCoroutine(turn);
     }
 
-    private void UpdateHealthText()
+    IEnumerator NextTurn()
     {
+        Debug.Log("C'est à " + order[turnIndex] + " de jouer");
+
+        if (order[turnIndex].GetType() == typeof(Ennemy))
+        {
+            Ennemy ennemy = order[turnIndex] as Ennemy;
+            switch(ennemy!.GetEnnemyType())
+            {
+                case Ennemy.EnnemyType.Fighter:
+                    break;
+                case Ennemy.EnnemyType.Destroyer:
+                    break;
+                case Ennemy.EnnemyType.Healer:
+                    break;
+                case Ennemy.EnnemyType.AOE:
+                    break;
+                case Ennemy.EnnemyType.Boss:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
         
+        yield break;
     }
-    
+
 }

@@ -36,6 +36,8 @@ public class Ennemy : MonoBehaviour
     {
         target.SetHP(target.GetHP()-DMG);
         
+        Debug.Log("J'attaque " + target + " !!!");
+        
         if (boosted)
         {
             ATT -= BoostPower;
@@ -50,6 +52,8 @@ public class Ennemy : MonoBehaviour
             player.SetHP(player.GetHP()-DMG);
         }
         
+        Debug.Log("J'attaque tout le monde !!!");
+        
         if (boosted)
         {
             ATT -= BoostPower;
@@ -60,6 +64,7 @@ public class Ennemy : MonoBehaviour
     public void AttackBoat(int DMG)
     {
         // BoatHP - DMG
+        Debug.Log("J'attaque le bateau !!!");
         
         if (boosted)
         {
@@ -71,6 +76,7 @@ public class Ennemy : MonoBehaviour
     public void AttackCanon(int DMG)
     {
         // CanonHP - DMG
+        Debug.Log("J'attaque le canon !!!");
         
         if (boosted)
         {
@@ -81,7 +87,7 @@ public class Ennemy : MonoBehaviour
     
     public class Fighter : Ennemy
     {
-        void Action()
+        public void Action()
         {
             var playerLow = false;
             foreach (var player in listPlayers)
@@ -105,7 +111,7 @@ public class Ennemy : MonoBehaviour
 
     public class Destroyer : Ennemy
     {
-        void Action()
+        public void Action()
         {
             var focus = Random.Range(1, 4);
 
@@ -229,6 +235,11 @@ public class Ennemy : MonoBehaviour
     public int GetHPMax()
     {
         return HPMax;
+    }
+
+    public EnnemyType GetEnnemyType()
+    {
+        return Type;
     }
 
     // Update is called once per frame
