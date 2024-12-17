@@ -450,7 +450,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 130ff07c9b5e42e43b4604ef870cb07f, type: 2}
   - {fileID: 2100000, guid: 2c33558c2839e31499cbc019c966a4d5, type: 2}
   - {fileID: 2100000, guid: 425782d69875a95428097c9025c9c0f6, type: 2}
-  HPMax: 0
+  HPMax: 100
   role: 0
 --- !u!114 &543447911010556244
 MonoBehaviour:
@@ -466,3 +466,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonAtelier: {fileID: 3372353904991093382}
   PanelCuisine: {fileID: 0}
+  PanelTableIngenieur: {fileID: 0}
+  PanelPiqueNique: {fileID: 0}
+  PanelCanon: {fileID: 0}
