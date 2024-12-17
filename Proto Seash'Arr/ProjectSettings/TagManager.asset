@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cuisine
+  - PiqueNique
+  - Canon
+  - TableIngenieur
   layers:
   - Default
   - TransparentFX
