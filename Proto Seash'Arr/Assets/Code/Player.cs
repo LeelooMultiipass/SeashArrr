@@ -97,6 +97,11 @@ public class Player : MonoBehaviour
         HP = newHP;
     }
 
+    public int GetHPMax()
+    {
+        return HPMax;
+    }
+
     // Update is called once per frame
     void Update()
     {
