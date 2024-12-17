@@ -22,7 +22,7 @@ public class AtelierManager : MonoBehaviour
         {
             ButtonAtelier.SetActive(false);
         }
-
+        CloseAllPanels();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,6 +44,8 @@ public class AtelierManager : MonoBehaviour
             if (other.CompareTag("Canon")) ButtonAtelier.SetActive(false);
             if (other.CompareTag("PiqueNique")) ButtonAtelier.SetActive(false);
         }
+
+        CloseInactivePanels();
     }
 
     
@@ -73,9 +75,16 @@ public class AtelierManager : MonoBehaviour
     public void CloseTogglePanelPiqueNique() { if (PanelPiqueNique != null && PanelPiqueNique.activeSelf ) { ClosePanel(PanelPiqueNique); piqueNiqueActive = false; } }
     public void CloseTogglePanelCanon() { if (PanelCanon != null && PanelCanon.activeSelf) { ClosePanel(PanelCanon); canonActive = false; } }
 
+    public void CloseAllPanels()
+    {
+        if (PanelCuisine != null) ClosePanel(PanelCuisine);
+        if (PanelTableIngenieur != null) ClosePanel(PanelTableIngenieur);
+        if (PanelPiqueNique != null) ClosePanel(PanelPiqueNique);
+        if (PanelCanon != null) ClosePanel(PanelCanon);
+    }
 
 
-     void OpenActivePanels()
+    void OpenActivePanels()
     {
         OpenTogglePanelCuisine(); 
 
