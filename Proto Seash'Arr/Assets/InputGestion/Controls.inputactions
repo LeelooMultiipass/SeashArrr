@@ -2,7 +2,7 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "Gameplay",
+            "name": "GameplayNavigation",
             "id": "af572396-4e2d-401f-aaa9-49487163cfe0",
             "actions": [
                 {
@@ -13,6 +13,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "InteractPiqueNique",
+                    "type": "Button",
+                    "id": "c7cf6dd0-46c7-4630-a502-0de07819136b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InteractCanon",
+                    "type": "Button",
+                    "id": "1c19ab2c-0fbd-4742-a135-7389c737ffe2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InteractIngenior",
+                    "type": "Button",
+                    "id": "5aaa1421-8f3d-4f0c-9400-65b66c1d21fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InteractKitchen",
+                    "type": "Button",
+                    "id": "516ca111-8ad1-48b2-a3e9-51b339a378a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -81,6 +117,50 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "98ae8af4-dbaf-427c-a9eb-57596d6b5d34",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractPiqueNique",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "252ac331-7719-46c6-8cdc-d3f99a3f24de",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractCanon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6584c1c6-d29e-49a8-9fb2-646497a5d697",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractIngenior",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f25d9ed6-c045-4fe3-b0fd-8657e415b96f",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractKitchen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
