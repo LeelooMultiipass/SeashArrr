@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
@@ -16,9 +17,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private  Image _Ennemy4_Hp;
     [SerializeField] private  Image _Ennemy5_Hp;
     
-    [SerializeField] private  GameObject _ChoixJoueur1;
-    [SerializeField] private  GameObject _ChoixJoueur2;
-    [SerializeField] private  GameObject _ChoixJoueur3;
+    [SerializeField] private  GameObject _ChoixJoueurs;
     
     [SerializeField] private  GameObject _Confirmation;
     [SerializeField] private  GameObject _ChoixReparer;
@@ -34,14 +33,32 @@ public class UI_Manager : MonoBehaviour
     public static  Image Ennemy4_Hp;
     public static  Image Ennemy5_Hp;
     
-    public static  GameObject ChoixJoueur1;
-    public static  GameObject ChoixJoueur2;
-    public static  GameObject ChoixJoueur3;
+    public static  GameObject ChoixJoueurs;
     public static  GameObject Confirmation;
     public static  GameObject ChoixReparer;
     public static  GameObject ChoixItem;
 
     public static float testHP = 100f;
+    
+    [SerializeField] private Vector3 ChoixJoueursPos1; 
+    [SerializeField] private Vector3 ChoixJoueursPos2;
+    [SerializeField] private Vector3 ChoixJoueursPos3;
+    
+    [SerializeField] private Vector3 Ancrage_pos1;
+    [SerializeField] private Vector3 Ancrage_pos2;
+    [SerializeField] private Vector3 Ancrage_pos3;
+    
+    int CurrentPlayer = 0;
+    public bool AttackUsed = false;
+    public bool ReparerUsed = false;
+    public bool ItemUsed = false;
+    public bool CanonUsed = false;
+    public bool RagoutUsed = false;
+    public bool RhumUsed = false;
+    public bool BateauUsed = false;
+    public bool RepCanonUsed = false;
+    private bool UsedAction = false;
+   
  
     
     // Start is called before the first frame update
@@ -57,42 +74,345 @@ public class UI_Manager : MonoBehaviour
         Ennemy4_Hp = _Ennemy4_Hp;
         Ennemy5_Hp = _Ennemy5_Hp;
         
-        ChoixJoueur1 = _ChoixJoueur1;
-        ChoixJoueur2 = _ChoixJoueur2;
-        ChoixJoueur3 = _ChoixJoueur3;
+        ChoixJoueurs = _ChoixJoueurs;
         
         Confirmation = _Confirmation;
         ChoixReparer = _ChoixReparer;
         ChoixItem = _ChoixItem;
         
-        ChoixJoueur1.SetActive(false);
-        ChoixJoueur2.SetActive(false);
-        ChoixJoueur3.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        ChoixItem.SetActive(false);
+        ChoixReparer.SetActive(false);
+        Confirmation.SetActive(false);
         
+        ChoixJoueursPos1 = new Vector3(-260, 25, 0);
+        ChoixJoueursPos2 = new Vector3(-170, -30, 0);
+        ChoixJoueursPos3 = new Vector3(-70, -100, 0);
+        Ancrage_pos1 = new Vector3(0f, 0f, 0f);
+        Ancrage_pos2 = new Vector3(85f, -60f, 0f);
+        Ancrage_pos3 = new Vector3(180f, -140f, 0f);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Horizontal") > 0 && ChoixJoueur1.activeInHierarchy)
-        {
-            
-        }
+        // Choix du jouer de base quand c'est à son tour 
+        //----------------------------------------------------------
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _choixJoueur1();
         }
-
         if (Input.GetMouseButtonDown(0))
         {
             _choixJoueur2();
-         
         }
         if (Input.GetMouseButtonDown(1))
         {
             _choixJoueur3();
         }
+        //-----------------------------------------------------------
+       
+        
+        
+        
+        // Si le joueur choisi "Item" 
+        //-----------------------------------------------------------
+        if (Input.GetKeyUp(KeyCode.UpArrow) && CurrentPlayer == 1 && ChoixReparer.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _choixItem1();
+            ItemUsed = true;
+            UsedAction = true;
+        }
+        
+        if (Input.GetKeyUp(KeyCode.UpArrow) && CurrentPlayer == 2 && ChoixReparer.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _choixItem2();
+            ItemUsed = true;
+            UsedAction = true;
+        }
+        
+        if (Input.GetKeyUp(KeyCode.UpArrow) && CurrentPlayer == 3 && ChoixReparer.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _choixItem3();
+            ItemUsed = true;
+            UsedAction = true;
+        }
+        //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        
+        // SI le jouer choisi le râgout
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        {
+            _ChoixConfirmation1();
+            RagoutUsed = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        {
+            _ChoixConfirmation2();
+            RagoutUsed = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        {
+            _ChoixConfirmation3();
+            RagoutUsed = true;
+        }
+        //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // SI le jouer choisi le rhum
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        {
+            _ChoixConfirmation1();
+            RhumUsed = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        {
+            _ChoixConfirmation2();
+            RhumUsed = true; ;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        {
+            _ChoixConfirmation3();
+            RhumUsed = true;
+        }
+        //-----------------------------------------------------------
+            
+            
+            
+            
+            
+        
+        
+        
+        
+        
+        
+        
+        // Si le joueur choisi "Réparer"
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _choixReparer1();
+            ReparerUsed = true;
+            UsedAction = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _choixReparer2();
+            ReparerUsed = true;
+            UsedAction = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _choixReparer3();
+            ReparerUsed = true;
+            UsedAction = true;
+        }
+        //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // SI le jouer Répoare le Bateau 
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 1 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
+        {
+            _ChoixConfirmation1();
+            BateauUsed = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 2 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
+        {
+            _ChoixConfirmation2();
+            BateauUsed = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 3 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
+        {
+            _ChoixConfirmation3();
+            BateauUsed = true;
+        }
+        //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // SI le jouer Répoare le Canon 
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 1 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
+        {
+            _ChoixConfirmation1();
+            RepCanonUsed = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 2 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
+        {
+            _ChoixConfirmation2();
+            RepCanonUsed = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 3 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
+        {
+            _ChoixConfirmation3();
+            RepCanonUsed = true;
+        }
+        //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        // Si le joueur choisi "Attaquer"
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.RightArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _ChoixConfirmation1();
+            AttackUsed = true;
+            UsedAction = true;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _ChoixConfirmation2();
+            AttackUsed = true;
+            UsedAction = true;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _ChoixConfirmation3();
+            AttackUsed = true;
+            UsedAction = true;
+        }
+        //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        // si le joueur choisi "Canon"
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 1 && ChoixReparer.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _ChoixConfirmation1();
+            CanonUsed = true;
+            UsedAction = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 2 && ChoixReparer.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _ChoixConfirmation2();
+            CanonUsed = true;
+            UsedAction = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 3 && ChoixReparer.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        {
+            _ChoixConfirmation3();
+            CanonUsed = true;
+            UsedAction = true;
+        }
+        //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // Si le joueur valide son action
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.UpArrow) && AttackUsed == true)
+        {
+            Attack();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && BateauUsed == true)
+        {
+            Bateau();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && RepCanonUsed == true)
+        {
+            RepCanon();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && RagoutUsed == true)
+        {
+            Ragout();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && RhumUsed == true)
+        {
+            Rhum();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CanonUsed == true)
+        {
+            Canon();
+        }
+
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        // Si le joueur annule son action 
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.Tab) && UsedAction == true)
+        {
+            _Annuler();
+        }
+        //-----------------------------------------------------------
+        
+        
+        
         
         
     }
@@ -131,31 +451,182 @@ public class UI_Manager : MonoBehaviour
         Ennemy5_Hp.fillAmount = _ennemy5CurentHp / _ennemy5MaxHp;
     }
 
-    public static void _choixJoueur1()
+    public void _choixJoueur1()
     {
-        ChoixJoueur1.SetActive(true);
-        ChoixJoueur2.SetActive(false);  
-        ChoixJoueur3.SetActive(false);
+        ChoixItem.SetActive(false);
+        Confirmation.SetActive(false);
+        ChoixReparer.SetActive(false);
+        ChoixJoueurs.SetActive(true);
+        ChoixJoueurs.transform.position = transform.position + ChoixJoueursPos1;
+        CurrentPlayer = 1;
     }
     
-    public static void _choixJoueur2()
+    public void _choixJoueur2()
     {
-        ChoixJoueur2.SetActive(true);
-        ChoixJoueur1.SetActive(false);  
-        ChoixJoueur3.SetActive(false);
+        ChoixItem.SetActive(false);
+        Confirmation.SetActive(false);
+        ChoixReparer.SetActive(false);
+        ChoixJoueurs.SetActive(true);
+        ChoixJoueurs.transform.position = transform.position + ChoixJoueursPos2;
+        CurrentPlayer = 2;
     }
     
-    public static void _choixJoueur3()
+    public void _choixJoueur3()
     {
-        ChoixJoueur3.SetActive(true);
-        ChoixJoueur2.SetActive(false);  
-        ChoixJoueur1.SetActive(false);
+        ChoixItem.SetActive(false);
+        ChoixReparer.SetActive(false);
+        Confirmation.SetActive(false);
+        ChoixJoueurs.SetActive(true);
+        ChoixJoueurs.transform.position = transform.position + ChoixJoueursPos3;
+        CurrentPlayer = 3;
     }
 
-    public static void _choixReparer()
+    public void _choixItem1()
+    {
+        ChoixItem.SetActive(true);
+        Confirmation.SetActive(false);
+        ChoixReparer.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        ChoixItem.transform.position = transform.position + Ancrage_pos1;
+    }
+    public void _choixItem2()
+    {
+        ChoixItem.SetActive(true);
+        Confirmation.SetActive(false);
+        ChoixReparer.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        ChoixItem.transform.position = transform.position + Ancrage_pos2;
+    }
+    public void _choixItem3()
+    {
+        ChoixItem.SetActive(true);
+        Confirmation.SetActive(false);
+        ChoixReparer.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        ChoixItem.transform.position = transform.position + Ancrage_pos3;
+    }
+
+    public void _choixReparer1()
     {
         ChoixReparer.SetActive(true);
+        Confirmation.SetActive(false);
+        ChoixItem.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        _ChoixReparer.transform.position = transform.position + Ancrage_pos1;
+    }
+    
+    public void _choixReparer2()
+    {
+        ChoixReparer.SetActive(true);
+        Confirmation.SetActive(false);
+        ChoixItem.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        ChoixReparer.transform.position = transform.position + Ancrage_pos2;
+    }
+    
+    public void _choixReparer3()
+    {
+        ChoixReparer.SetActive(true);
+        Confirmation.SetActive(false);
+        ChoixItem.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        ChoixReparer.transform.position = transform.position + Ancrage_pos3;
+    }
+
+    public void _ChoixConfirmation1()
+    {
+        Confirmation.SetActive(true);
+        ChoixReparer.SetActive(false);
+        ChoixItem.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        Confirmation.transform.position = transform.position + Ancrage_pos1;
+    }
+    
+    public void _ChoixConfirmation2()
+    {
+        Confirmation.SetActive(true);
+        ChoixReparer.SetActive(false);
+        ChoixItem.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        Confirmation.transform.position = transform.position + Ancrage_pos2;
+    }
+    
+    public void _ChoixConfirmation3()
+    {
+        Confirmation.SetActive(true);
+        ChoixReparer.SetActive(false);
+        ChoixItem.SetActive(false);
+        ChoixJoueurs.SetActive(false);
+        Confirmation.transform.position = transform.position + Ancrage_pos3;
         
+    }
+
+    public void _Annuler()
+    {
+        ChoixJoueurs.SetActive(true);
+        ChoixReparer.SetActive(false);
+        ChoixItem.SetActive(false);
+        Confirmation.SetActive(false);
+        AttackUsed = false;
+        ReparerUsed = false;
+        ItemUsed = false;
+        CanonUsed = false;
+        RagoutUsed = false;
+        RhumUsed = false;
+        BateauUsed = false;
+        RepCanonUsed = false;
+        UsedAction = false;
+    }
+
+    public void Attack()
+    {
+        Debug.Log("J'attaque y'aaaa");
+        AttackUsed = false;
+        Confirmation.SetActive(false);
+        UsedAction = false;
+    }
+    
+    public void RepCanon()
+    {
+        Debug.Log("Je répare le canon");
+        ReparerUsed = false;
+        RepCanonUsed = false;
+        Confirmation.SetActive(false);
+        UsedAction = false;
+    }
+    
+    public void Bateau()
+    {
+        Debug.Log("LE bateau se répare");
+        ReparerUsed = false;
+        BateauUsed = false;
+        Confirmation.SetActive(false);
+        UsedAction = false;
+    }
+    public void Ragout()
+    {
+        Debug.Log("Jme Soigne");
+        ItemUsed = false;
+        RagoutUsed = false;
+        Confirmation.SetActive(false);
+        UsedAction = false;
+    }
+    
+    public void Rhum()
+    {
+        Debug.Log("GlouGlou");
+        ItemUsed = false;
+        RhumUsed = false;
+        Confirmation.SetActive(false);
+        UsedAction = false;
+    }
+    
+    public void Canon()
+    {
+        Debug.Log("Piou le canon");
+        CanonUsed = false;
+        Confirmation.SetActive(false);
+        UsedAction = false;
     }
 }
     
