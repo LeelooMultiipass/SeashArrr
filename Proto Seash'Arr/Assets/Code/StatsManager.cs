@@ -32,7 +32,7 @@ public class StatsManager : MonoBehaviour
     [Header("Objets Toggle")]
     public GameObject CameraFight;
     public GameObject CameraNavigation;
-    public GameObject UI;
+    //public GameObject UI;
     [Space(20)]
 
     [Header("Statistiques")]
@@ -48,8 +48,8 @@ public class StatsManager : MonoBehaviour
     [Space(20)]
 
     [Header("Texts")]
-    public TMP_Text boatHealthText;
-    public TMP_Text canonHealthText;
+   // public TMP_Text boatHealthText;
+   // public TMP_Text canonHealthText;
     public TMP_Text nbrWoodText;
     public TMP_Text nbrIronText;
     public TMP_Text nbrFoodText;
@@ -72,8 +72,8 @@ public class StatsManager : MonoBehaviour
 
     private void UpdateText()
     {
-        boatHealthText.text = boatHealth + " / " + boatMaxHealth;
-        canonHealthText.text = canonHealth + " / " + canonMaxHealth;
+        //boatHealthText.text = boatHealth + " / " + boatMaxHealth;
+       // canonHealthText.text = canonHealth + " / " + canonMaxHealth;
         nbrWoodText.text = nbrWood +"";
         nbrIronText.text = nbrIron + "";
         nbrFoodText.text = nbrFood + "";
@@ -94,7 +94,7 @@ public class StatsManager : MonoBehaviour
                 Fight = true;
                 CameraNavigation.SetActive(!CameraNavigation.activeSelf);
                 CameraFight.SetActive(!CameraFight.activeSelf);
-                UI.SetActive(!UI.activeSelf);
+                //UI.SetActive(!UI.activeSelf);
 
                 // Réinitialiser TempsNavigation pour arrêter le timer
                 TempsNavigation = 0;
@@ -116,7 +116,7 @@ public class StatsManager : MonoBehaviour
                 Navigation = true;
                 CameraNavigation.SetActive(!CameraNavigation.activeSelf);
                 CameraFight.SetActive(!CameraFight.activeSelf);
-                UI.SetActive(!UI.activeSelf);
+               // UI.SetActive(!UI.activeSelf);
 
                 // Réinitialiser TempsFight pour arrêter le timer
                 TempsFight = 0;
