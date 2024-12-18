@@ -32,6 +32,7 @@ public class StatsManager : MonoBehaviour
     [Header("Objets Toggle")]
     public GameObject CameraFight;
     public GameObject CameraNavigation;
+    public GameObject UIPopUpEnnemies;
     //public GameObject UI;
     [Space(20)]
 
@@ -88,16 +89,28 @@ public class StatsManager : MonoBehaviour
         if (Navigation == true)
         {
             TempsNavigation += Time.deltaTime;
+            
+            if(TempsNavigation >= LancementFight- TimerFightCooldown)
+                {
+                    UIPopUpEnnemies.SetActive(true);
+                }
+
             if (Mathf.Abs(TempsNavigation - LancementFight) < 0.1f)
             {
                 Navigation = false;
                 Fight = true;
+                
+                
+
                 CameraNavigation.SetActive(!CameraNavigation.activeSelf);
                 CameraFight.SetActive(!CameraFight.activeSelf);
+                UIPopUpEnnemies.SetActive(!UIPopUpEnnemies.activeSelf);
                 //UI.SetActive(!UI.activeSelf);
 
                 // Réinitialiser TempsNavigation pour arrêter le timer
                 TempsNavigation = 0;
+
+                
 
                 // Redéfinir Lancement pour le prochain combat aléatoire
                 LancementFight = rnd.Next(TempsMinNavigation, TempsMaxNavigation);

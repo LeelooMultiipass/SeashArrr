@@ -22,28 +22,28 @@ public class ValidationCharacter : MonoBehaviour
         Player3.GetComponent<Button>().onClick.AddListener(TogglePlayer3);
     }
 
-    void TogglePlayer1()
+    public void TogglePlayer1()
     {
         Player1Ok = !Player1Ok; // Toggle de l'état
         Debug.Log("Player 1: " + (Player1Ok ? "Selected" : "Deselected"));
         ToggleValider();
     }
 
-    void TogglePlayer2()
+    public void TogglePlayer2()
     {
         Player2Ok = !Player2Ok; // Toggle de l'état
         Debug.Log("Player 2: " + (Player2Ok ? "Selected" : "Deselected"));
         ToggleValider();
     }
 
-    void TogglePlayer3()
+    public void TogglePlayer3()
     {
         Player3Ok = !Player3Ok; // Toggle de l'état
         Debug.Log("Player 3: " + (Player3Ok ? "Selected" : "Deselected"));
         ToggleValider();
     }
 
-    void ToggleValider()
+    public void ToggleValider()
     {
         if (Player1Ok == true && Player2Ok == true && Player3Ok == true)
         {
