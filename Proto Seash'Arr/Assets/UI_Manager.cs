@@ -18,10 +18,10 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private  Image _Ennemy5_Hp;
     
     [SerializeField] private  GameObject _ChoixJoueurs;
-    
     [SerializeField] private  GameObject _Confirmation;
     [SerializeField] private  GameObject _ChoixReparer;
     [SerializeField] private  GameObject _ChoixItem;
+    [SerializeField] private  GameObject _CibleAttaque;
     
     public static  Image Player1_Hp;
     public static  Image Player2_Hp;
@@ -37,6 +37,7 @@ public class UI_Manager : MonoBehaviour
     public static  GameObject Confirmation;
     public static  GameObject ChoixReparer;
     public static  GameObject ChoixItem;
+    public static  GameObject PNG_CibleAttaque;
 
     public static float testHP = 100f;
     
@@ -48,7 +49,14 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Vector3 Ancrage_pos2;
     [SerializeField] private Vector3 Ancrage_pos3;
     
+    [SerializeField] private Vector3 Ennemy_pos1;
+    [SerializeField] private Vector3 Ennemy_pos2;
+    [SerializeField] private Vector3 Ennemy_pos3;
+    [SerializeField] private Vector3 Ennemy_pos4;
+    [SerializeField] private Vector3 Ennemy_pos5;
+    
     int CurrentPlayer = 0;
+    public int INT_CibleEnnemies = 1;
     public bool AttackUsed = false;
     public bool ReparerUsed = false;
     public bool ItemUsed = false;
@@ -75,22 +83,30 @@ public class UI_Manager : MonoBehaviour
         Ennemy5_Hp = _Ennemy5_Hp;
         
         ChoixJoueurs = _ChoixJoueurs;
-        
         Confirmation = _Confirmation;
         ChoixReparer = _ChoixReparer;
         ChoixItem = _ChoixItem;
+        PNG_CibleAttaque = _CibleAttaque;
         
         ChoixJoueurs.SetActive(false);
         ChoixItem.SetActive(false);
         ChoixReparer.SetActive(false);
         Confirmation.SetActive(false);
+        PNG_CibleAttaque.SetActive(false);
         
         ChoixJoueursPos1 = new Vector3(-260, 25, 0);
         ChoixJoueursPos2 = new Vector3(-170, -30, 0);
         ChoixJoueursPos3 = new Vector3(-70, -100, 0);
+        
         Ancrage_pos1 = new Vector3(0f, 0f, 0f);
         Ancrage_pos2 = new Vector3(85f, -60f, 0f);
         Ancrage_pos3 = new Vector3(180f, -140f, 0f);
+        
+        Ennemy_pos1 = new Vector3(-50f, 100f, 0f);
+        Ennemy_pos2 = new Vector3(20f, 90f, 0f);
+        Ennemy_pos3 = new Vector3(80f, 70f, 0f);
+        Ennemy_pos4 = new Vector3(145f, 45f, 0f);
+        Ennemy_pos5 = new Vector3(235f, 20f, 0f);
         
     }
 
@@ -183,19 +199,19 @@ public class UI_Manager : MonoBehaviour
         
         // SI le jouer choisi le rhum
         //-----------------------------------------------------------
-        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        if (Input.GetKeyUp(KeyCode.DownArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy && ItemUsed == true)
         {
             _ChoixConfirmation1();
             RhumUsed = true;
         }
         
-        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        if (Input.GetKeyUp(KeyCode.DownArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy && ItemUsed == true)
         {
             _ChoixConfirmation2();
             RhumUsed = true; ;
         }
         
-        if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        if (Input.GetKeyUp(KeyCode.DownArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy && ItemUsed == true)
         {
             _ChoixConfirmation3();
             RhumUsed = true;
@@ -301,30 +317,74 @@ public class UI_Manager : MonoBehaviour
         
         
         
+        
+        
+        
         // Si le joueur choisi "Attaquer"
         //-----------------------------------------------------------
-        if (Input.GetKeyDown(KeyCode.RightArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        if (Input.GetKeyUp(KeyCode.RightArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
         {
             _ChoixConfirmation1();
             AttackUsed = true;
             UsedAction = true;
+            PNG_CibleAttaque.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        if (Input.GetKeyUp(KeyCode.RightArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
         {
             _ChoixConfirmation2();
             AttackUsed = true;
             UsedAction = true;
+            PNG_CibleAttaque.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
+        if (Input.GetKeyUp(KeyCode.RightArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
         {
             _ChoixConfirmation3();
             AttackUsed = true;
             UsedAction = true;
+            PNG_CibleAttaque.SetActive(true);
         }
         //-----------------------------------------------------------
         
         
         
+        
+        
+        // Le Joueur choisi sa cible d'attaque
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && AttackUsed && INT_CibleEnnemies > 1)
+        {
+            INT_CibleEnnemies = INT_CibleEnnemies - 1;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.RightArrow) && AttackUsed && INT_CibleEnnemies < 5)
+        {
+            INT_CibleEnnemies = INT_CibleEnnemies + 1;
+        }
+
+        if (INT_CibleEnnemies == 1)
+        {
+            CibleEnnemy1();
+        }
+
+        if (INT_CibleEnnemies == 2)
+        {
+            CibleEnnemy2();
+        }
+
+        if (INT_CibleEnnemies == 3)
+        {
+            CibleEnnemy3();
+        }
+
+        if (INT_CibleEnnemies == 4)
+        {
+            CibleEnnemy4();
+        }
+
+        if (INT_CibleEnnemies == 5)
+        {
+            CibleEnnemy5();
+        }
         
         
         
@@ -567,6 +627,7 @@ public class UI_Manager : MonoBehaviour
         ChoixReparer.SetActive(false);
         ChoixItem.SetActive(false);
         Confirmation.SetActive(false);
+        PNG_CibleAttaque.SetActive(false);
         AttackUsed = false;
         ReparerUsed = false;
         ItemUsed = false;
@@ -584,6 +645,7 @@ public class UI_Manager : MonoBehaviour
         AttackUsed = false;
         Confirmation.SetActive(false);
         UsedAction = false;
+        PNG_CibleAttaque.SetActive(false);
     }
     
     public void RepCanon()
@@ -627,6 +689,31 @@ public class UI_Manager : MonoBehaviour
         CanonUsed = false;
         Confirmation.SetActive(false);
         UsedAction = false;
+    }
+
+    public void CibleEnnemy1()
+    {
+        PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos1;
+    }
+    
+    public void CibleEnnemy2()
+    {
+        PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos2;
+    }
+    
+    public void CibleEnnemy3()
+    {
+        PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos3;
+    }
+    
+    public void CibleEnnemy4()
+    {
+        PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos4;
+    }
+    
+    public void CibleEnnemy5()
+    {
+        PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos5;
     }
 }
     
