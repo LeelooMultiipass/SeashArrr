@@ -71,7 +71,7 @@ public class StatsManager : MonoBehaviour
         UpdateText();
     }
 
-    private void UpdateText()
+    public void UpdateText()
     {
         //boatHealthText.text = boatHealth + " / " + boatMaxHealth;
        // canonHealthText.text = canonHealth + " / " + canonMaxHealth;
