@@ -1881,6 +1881,7 @@ MonoBehaviour:
   Fight: 0
   CameraFight: {fileID: 328605295}
   CameraNavigation: {fileID: 416749031}
+  UIPopUpEnnemies: {fileID: 0}
   boatHealth: 300
   canonHealth: 100
   nbrWood: 100
