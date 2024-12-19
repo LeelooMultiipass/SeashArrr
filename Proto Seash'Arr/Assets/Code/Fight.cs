@@ -45,8 +45,12 @@ public class Fight : MonoBehaviour
 
     public static bool IsCanonUsed;
 
-    private void Start()
+
+    private void Awake()
     {
+        Players.Clear();
+        Ennemies.Clear();
+        
         // Génère la liste des players
         Player1 = player1GO.GetComponent(typeof(Player)) as Player;
         Player2 = player2GO.GetComponent(typeof(Player)) as Player;
@@ -65,29 +69,30 @@ public class Fight : MonoBehaviour
         prefabList.Add(aoeGO);
 
         var prefabIndice = Random.Range(0, 3);
-        GameObject ennemy1GO = Instantiate(prefabList[prefabIndice], placeEnnemy1.transform);
+        GameObject ennemy1Go = Instantiate(prefabList[prefabIndice], placeEnnemy1.transform);
         prefabIndice = Random.Range(0, 3);
-        GameObject ennemy2GO = Instantiate(prefabList[prefabIndice], placeEnnemy2.transform);
+        GameObject ennemy2Go = Instantiate(prefabList[prefabIndice], placeEnnemy2.transform);
         prefabIndice = Random.Range(0, 3);
-        GameObject ennemy3GO = Instantiate(prefabList[prefabIndice], placeEnnemy3.transform);
+        GameObject ennemy3Go = Instantiate(prefabList[prefabIndice], placeEnnemy3.transform);
         prefabIndice = Random.Range(0, 3);
-        GameObject ennemy4GO = Instantiate(prefabList[prefabIndice], placeEnnemy4.transform);
+        GameObject ennemy4Go = Instantiate(prefabList[prefabIndice], placeEnnemy4.transform);
         prefabIndice = Random.Range(0, 3);
-        GameObject ennemy5GO = Instantiate(prefabList[prefabIndice], placeEnnemy5.transform);
+        GameObject ennemy5Go = Instantiate(prefabList[prefabIndice], placeEnnemy5.transform);
         
-        Ennemy1 = ennemy1GO.GetComponent(typeof(Ennemy)) as Ennemy;
-        Ennemy2 = ennemy2GO.GetComponent(typeof(Ennemy)) as Ennemy;
-        Ennemy3 = ennemy3GO.GetComponent(typeof(Ennemy)) as Ennemy;
-        Ennemy4 = ennemy4GO.GetComponent(typeof(Ennemy)) as Ennemy;
-        Ennemy5 = ennemy5GO.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy1 = ennemy1Go.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy2 = ennemy2Go.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy3 = ennemy3Go.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy4 = ennemy4Go.GetComponent(typeof(Ennemy)) as Ennemy;
+        Ennemy5 = ennemy5Go.GetComponent(typeof(Ennemy)) as Ennemy;
         
         Ennemies.Add(Ennemy1);
         Ennemies.Add(Ennemy2);
         Ennemies.Add(Ennemy3);
         Ennemies.Add(Ennemy4);
         Ennemies.Add(Ennemy5);
-        
-        
+    }
+    private void Start()
+    {
         // Randomise l'ordre
         
         order.Add(Player1!);
@@ -122,6 +127,7 @@ public class Fight : MonoBehaviour
             isTurnOver = false;
             StartCoroutine(turn);
         }
+        
     }
 
     IEnumerator NextTurn()
@@ -158,7 +164,8 @@ public class Fight : MonoBehaviour
             StartCoroutine(player!.Action());
         }
         
-        yield break;
+        while(!isTurnOver)
+            yield return null;
     }
 
 }

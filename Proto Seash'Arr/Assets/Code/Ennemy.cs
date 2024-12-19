@@ -8,13 +8,13 @@ using Random = UnityEngine.Random;
 public class Ennemy : MonoBehaviour
 {
     [SerializeField] private int HPMax;
-    [SerializeField] private int ATT;
-    [SerializeField] private int HealPower;
-    [SerializeField] private int BoostPower;
-    private bool boosted = false;
+    [SerializeField] private static int ATT;
+    [SerializeField] private static int HealPower;
+    [SerializeField] private static int BoostPower;
+    private static bool boosted = false;
 
     
-    [SerializeField] private EnnemyType Type;
+    [SerializeField] private static EnnemyType Type;
     private int HP;
 
     private List<Player> listPlayers = Fight.Players;
@@ -29,7 +29,7 @@ public class Ennemy : MonoBehaviour
         Boss
     }
     
-    public void AttackPlayer(Player target, int DMG)
+    public static void AttackPlayer(Player target, int DMG)
     {
         target.SetHP(target.GetHP()-DMG);
         
@@ -44,9 +44,9 @@ public class Ennemy : MonoBehaviour
         UI_Manager.UiUpdateHealthBar();
     }
 
-    public void AttackAll(int DMG)
+    public static void AttackAll(int DMG)
     {
-        foreach (var player in listPlayers)
+        foreach (var player in Fight.Players)
         {
             player.SetHP(player.GetHP()-DMG);
         }
@@ -60,7 +60,7 @@ public class Ennemy : MonoBehaviour
         }
     }
 
-    public void AttackBoat(int DMG)
+    public static void AttackBoat(int DMG)
     {
         // BoatHP - DMG
         Debug.Log("J'attaque le bateau !!!");
@@ -72,7 +72,7 @@ public class Ennemy : MonoBehaviour
         }
     }
 
-    public void AttackCanon(int DMG)
+    public static void AttackCanon(int DMG)
     {
         // CanonHP - DMG
         Debug.Log("J'attaque le canon !!!");
@@ -86,13 +86,14 @@ public class Ennemy : MonoBehaviour
     
     public class Fighter : Ennemy
     {
-        public IEnumerator Action()
+        public static IEnumerator Action()
         {
             Debug.Log("Je joue");
             
             var playerLow = false;
-            foreach (var player in listPlayers)
+            foreach (var player in Fight.Players)
             {
+                Debug.Log("player : " + player);
                 if (player.GetHP() <= ATT)
                 {
                     AttackPlayer(player, ATT);
@@ -103,7 +104,7 @@ public class Ennemy : MonoBehaviour
 
             if (!playerLow)
             {
-                AttackPlayer(listPlayers[Random.Range(0, listPlayers.Count)], ATT);
+                AttackPlayer(Fight.Players[Random.Range(0, Fight.Players.Count)], ATT);
             }
             
             UI_Manager.UiUpdateHealthBar();
@@ -113,7 +114,7 @@ public class Ennemy : MonoBehaviour
 
     public class Destroyer : Ennemy
     {
-        public IEnumerator Action()
+        public static IEnumerator Action()
         {
             Debug.Log("Je joue");
             var focus = Random.Range(1, 4);
@@ -134,23 +135,23 @@ public class Ennemy : MonoBehaviour
 
     public class Healer : Ennemy
     {
-        public IEnumerator Action()
+        public static IEnumerator Action()
         {
             Debug.Log("Je joue");
             Ennemy target = new Ennemy();
             int treshold = HealPower;
             bool ennemyLow = false;
 
-            var tempList = listEnnemies;
+            var tempList = Fight.Players;
             foreach (var ennemy in tempList.ToList())
             {
                 if (Type == EnnemyType.Healer)
                     tempList.Remove(ennemy);
             }
             
-            if(listEnnemies.Count > 1)
+            if(Fight.Players.Count > 1)
             {
-                foreach (var ennemy in listEnnemies)
+                foreach (var ennemy in Fight.Ennemies)
                 {
                     var diff = ennemy.HPMax - ennemy.HP;
                     if (diff >= treshold)
@@ -167,32 +168,32 @@ public class Ennemy : MonoBehaviour
                 }
                 else
                 {
-                    Boost(listEnnemies[Random.Range(0, listEnnemies.Count)]);
+                    Boost(Fight.Ennemies[Random.Range(0, Fight.Ennemies.Count)]);
                 }
             }
             else
             {
-                AttackPlayer(listPlayers[Random.Range(0,listPlayers.Count)], ATT);
+                AttackPlayer(Fight.Players[Random.Range(0,Fight.Players.Count)], ATT);
             }
 
             yield return null;
         }
 
-        public void Heal(Ennemy target)
+        public static void Heal(Ennemy target)
         {
             target.HP += HealPower;
         }
 
-        public void Boost(Ennemy target)
+        public static void Boost(Ennemy target)
         {
-            target.ATT += BoostPower;
+            ATT += BoostPower;
         }
         
     }
 
     public class AOE : Ennemy
     {
-        public IEnumerator Action()
+        public static IEnumerator Action()
         {
             Debug.Log("Je joue");
             var chance = Random.Range(1, 100);

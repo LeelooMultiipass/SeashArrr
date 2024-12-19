@@ -100,7 +100,8 @@ public class Player : MonoBehaviour
         (int, int) choice = UI_Manager.Starter(this);
         int action = choice.Item1;
         int target = choice.Item2;
-
+        
+        Debug.Log(action +"," +target);
         switch (action)
         {
             case 0: // Attaquer
@@ -126,8 +127,10 @@ public class Player : MonoBehaviour
 
     private void Attack(int target)
     {
-        Ennemy ennemy = Fight.Ennemies[target];
-        ennemy.SetHP(ennemy.GetHP()-ATT);
+       /* Ennemy ennemy = Fight.Ennemies[target];
+        ennemy.SetHP(ennemy.GetHP()-ATT);*/
+       Debug.Log(Fight.Ennemies[target]);
+       Fight.Ennemies[target].SetHP(Fight.Ennemies[target].GetHP()-ATT);
     }
     
     private void Canon()
