@@ -83,8 +83,8 @@ public class UI_Manager : MonoBehaviour
     private bool BateauUsed = false;
     private bool RepCanonUsed = false;
     private bool UsedAction = false;
-    public int _actionUsed = 0;
-    public int _target = 0;
+    public static int _actionUsed = 0;
+    public static int _target = 0;
     
     
    
@@ -834,7 +834,7 @@ public class UI_Manager : MonoBehaviour
         PNG_CibleSoin.transform.position = transform.position + Ancrage_pos3;
     }
     
-    public (int, int) Starter(Player player)
+    public static (int, int) Starter(Player player)
     {
         return (_actionUsed, _target);
     }

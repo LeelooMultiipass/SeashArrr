@@ -40,6 +40,10 @@ public class Fight : MonoBehaviour
     private List<MonoBehaviour> order = new List<MonoBehaviour>();
     private int turnIndex;
     private IEnumerator turn;
+    private bool isTurnOver = true;
+    private bool isFightOver = false;
+
+    public static bool IsCanonUsed;
 
     private void Start()
     {
@@ -113,7 +117,11 @@ public class Fight : MonoBehaviour
         // Début du combat
         turnIndex = 0;
         turn = NextTurn();
-        StartCoroutine(turn);
+        while (isTurnOver && !isFightOver)
+        {
+            isTurnOver = false;
+            StartCoroutine(turn);
+        }
     }
 
     IEnumerator NextTurn()
@@ -123,21 +131,31 @@ public class Fight : MonoBehaviour
         if (order[turnIndex].GetType() == typeof(Ennemy))
         {
             Ennemy ennemy = order[turnIndex] as Ennemy;
-            switch(ennemy!.GetEnnemyType())
+            
+            switch (ennemy!.GetEnnemyType())
             {
                 case Ennemy.EnnemyType.Fighter:
+                    StartCoroutine(Ennemy.Fighter.Action());
                     break;
                 case Ennemy.EnnemyType.Destroyer:
+                    StartCoroutine(Ennemy.Destroyer.Action());
                     break;
                 case Ennemy.EnnemyType.Healer:
+                    StartCoroutine(Ennemy.Healer.Action());
                     break;
                 case Ennemy.EnnemyType.AOE:
+                    StartCoroutine(Ennemy.AOE.Action());
                     break;
                 case Ennemy.EnnemyType.Boss:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+        else
+        {
+            Player player = order[turnIndex] as Player;
+            StartCoroutine(player!.Action());
         }
         
         yield break;

@@ -21,6 +21,13 @@ public class Player : MonoBehaviour
     private static int roleIndex = 0;
 
     [SerializeField] private int HPMax;
+    [SerializeField] private int ATT;
+    [SerializeField] private int CanonPower;
+    [SerializeField] private int HealPower;
+    [SerializeField] private int BoostPower;
+    [SerializeField] private int FixPower;
+
+    private bool isBoosted;
     public Role role;
 
     private int HP { get; set; }
@@ -87,6 +94,81 @@ public class Player : MonoBehaviour
         }
     }
 
+    
+    public IEnumerator Action()
+    {
+        (int, int) choice = UI_Manager.Starter(this);
+        int action = choice.Item1;
+        int target = choice.Item2;
+
+        switch (action)
+        {
+            case 0: // Attaquer
+                Attack(target);
+                break;
+            case 1: // Canon
+                Canon();
+                break;
+            case 2: // Réparer
+                Fix(target);
+                break;
+            case 3: // Soigner
+                Heal(target);
+                break;
+            case 4: // Booster
+                Boost(target);
+                break;
+        }
+
+        yield return null;
+    }
+    
+
+    private void Attack(int target)
+    {
+        Ennemy ennemy = Fight.Ennemies[target];
+        ennemy.SetHP(ennemy.GetHP()-ATT);
+    }
+    
+    private void Canon()
+    {
+        if (!Fight.IsCanonUsed)
+        {
+            Fight.IsCanonUsed = true;
+        }
+        else
+        {
+            foreach (var ennemy in Fight.Ennemies)
+            {
+                ennemy.SetHP(ennemy.GetHP()-CanonPower);
+            }
+        }
+    }
+
+    private void Fix(int target)
+    {
+        switch (target)
+        {
+            case 0:
+                // HEal bateau
+                break;
+            case 1:
+                // Heal canon
+                break;
+        }
+    }
+
+    private void Heal(int target)
+    {
+        Player player = Fight.Players[target];
+        player.SetHP(player.GetHP()+HealPower);
+    }
+
+    private void Boost(int target)
+    {
+        Fight.Players[target].isBoosted = true;
+    }
+
     public int GetHP()
     {
         return HP;
@@ -100,6 +182,11 @@ public class Player : MonoBehaviour
     public int GetHPMax()
     {
         return HPMax;
+    }
+
+    public int GetRoleIndex()
+    {
+        return roleIndex;
     }
 
     // Update is called once per frame

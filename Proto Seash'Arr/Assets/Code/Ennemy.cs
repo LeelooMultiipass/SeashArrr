@@ -2,10 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Timeline;
 using Random = UnityEngine.Random;
 
 public class Ennemy : MonoBehaviour
@@ -43,6 +40,8 @@ public class Ennemy : MonoBehaviour
             ATT -= BoostPower;
             boosted = false;
         }
+
+        UI_Manager.UiUpdateHealthBar();
     }
 
     public void AttackAll(int DMG)
@@ -87,8 +86,10 @@ public class Ennemy : MonoBehaviour
     
     public class Fighter : Ennemy
     {
-        public void Action()
+        public IEnumerator Action()
         {
+            Debug.Log("Je joue");
+            
             var playerLow = false;
             foreach (var player in listPlayers)
             {
@@ -105,14 +106,16 @@ public class Ennemy : MonoBehaviour
                 AttackPlayer(listPlayers[Random.Range(0, listPlayers.Count)], ATT);
             }
             
-            //MAJ UI
+            UI_Manager.UiUpdateHealthBar();
+            yield return null;
         }
     }
 
     public class Destroyer : Ennemy
     {
-        public void Action()
+        public IEnumerator Action()
         {
+            Debug.Log("Je joue");
             var focus = Random.Range(1, 4);
 
             if (focus <= 3)
@@ -123,14 +126,17 @@ public class Ennemy : MonoBehaviour
             {
                 AttackCanon(ATT);
             }
+
+            yield return null;
         }
         
     }
 
     public class Healer : Ennemy
     {
-        public void Action()
+        public IEnumerator Action()
         {
+            Debug.Log("Je joue");
             Ennemy target = new Ennemy();
             int treshold = HealPower;
             bool ennemyLow = false;
@@ -168,7 +174,8 @@ public class Ennemy : MonoBehaviour
             {
                 AttackPlayer(listPlayers[Random.Range(0,listPlayers.Count)], ATT);
             }
-                
+
+            yield return null;
         }
 
         public void Heal(Ennemy target)
@@ -185,8 +192,9 @@ public class Ennemy : MonoBehaviour
 
     public class AOE : Ennemy
     {
-        public void Action()
+        public IEnumerator Action()
         {
+            Debug.Log("Je joue");
             var chance = Random.Range(1, 100);
 
             if (chance <= 15)
@@ -207,6 +215,8 @@ public class Ennemy : MonoBehaviour
             }
             
             AttackAll(ATT);
+
+            yield return null;
         }
     }
 
@@ -214,7 +224,6 @@ public class Ennemy : MonoBehaviour
     {
 
     }
-
     
     // Start is called before the first frame update
     void Start()
