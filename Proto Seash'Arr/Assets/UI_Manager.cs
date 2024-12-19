@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
 
+    [Header ("Les Barres d'Hp")]
+    
     [SerializeField] private Image  _Player1_Hp;
     [SerializeField] private  Image _Player2_Hp;
     [SerializeField] private  Image _Player3_Hp;
@@ -17,11 +20,14 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private  Image _Ennemy4_Hp;
     [SerializeField] private  Image _Ennemy5_Hp;
     
+    [Header ("Buttons Choix")]
+    
     [SerializeField] private  GameObject _ChoixJoueurs;
     [SerializeField] private  GameObject _Confirmation;
     [SerializeField] private  GameObject _ChoixReparer;
     [SerializeField] private  GameObject _ChoixItem;
     [SerializeField] private  GameObject _CibleAttaque;
+    [SerializeField] private  GameObject _CibleSoin;
     
     public static  Image Player1_Hp;
     public static  Image Player2_Hp;
@@ -33,21 +39,31 @@ public class UI_Manager : MonoBehaviour
     public static  Image Ennemy4_Hp;
     public static  Image Ennemy5_Hp;
     
+    
+    
     public static  GameObject ChoixJoueurs;
     public static  GameObject Confirmation;
     public static  GameObject ChoixReparer;
     public static  GameObject ChoixItem;
     public static  GameObject PNG_CibleAttaque;
+    public static  GameObject PNG_CibleSoin;
+    
 
     public static float testHP = 100f;
+    
+    [Header ("La position des choix Allié")]
     
     [SerializeField] private Vector3 ChoixJoueursPos1; 
     [SerializeField] private Vector3 ChoixJoueursPos2;
     [SerializeField] private Vector3 ChoixJoueursPos3;
     
+    [Header ("La position des choix Allié")]
+    
     [SerializeField] private Vector3 Ancrage_pos1;
     [SerializeField] private Vector3 Ancrage_pos2;
     [SerializeField] private Vector3 Ancrage_pos3;
+    
+    [Header ("La position des ennemies")]
     
     [SerializeField] private Vector3 Ennemy_pos1;
     [SerializeField] private Vector3 Ennemy_pos2;
@@ -56,16 +72,21 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Vector3 Ennemy_pos5;
     
     int CurrentPlayer = 0;
-    public int INT_CibleEnnemies = 1;
-    public bool AttackUsed = false;
-    public bool ReparerUsed = false;
-    public bool ItemUsed = false;
-    public bool CanonUsed = false;
-    public bool RagoutUsed = false;
-    public bool RhumUsed = false;
-    public bool BateauUsed = false;
-    public bool RepCanonUsed = false;
+    private int INT_CibleEnnemies = 1;
+    private int INT_CibleSoin = 1;
+    private bool AttackUsed = false;
+    private bool ReparerUsed = false;
+    private bool ItemUsed = false;
+    private bool CanonUsed = false;
+    private bool RagoutUsed = false;
+    private bool RhumUsed = false;
+    private bool BateauUsed = false;
+    private bool RepCanonUsed = false;
     private bool UsedAction = false;
+    public int _actionUsed = 0;
+    public int _target = 0;
+    
+    
    
  
     
@@ -87,12 +108,14 @@ public class UI_Manager : MonoBehaviour
         ChoixReparer = _ChoixReparer;
         ChoixItem = _ChoixItem;
         PNG_CibleAttaque = _CibleAttaque;
+        PNG_CibleSoin = _CibleSoin;
         
         ChoixJoueurs.SetActive(false);
         ChoixItem.SetActive(false);
         ChoixReparer.SetActive(false);
         Confirmation.SetActive(false);
         PNG_CibleAttaque.SetActive(false);
+        PNG_CibleSoin.SetActive(false);
         
         ChoixJoueursPos1 = new Vector3(-260, 25, 0);
         ChoixJoueursPos2 = new Vector3(-170, -30, 0);
@@ -101,6 +124,7 @@ public class UI_Manager : MonoBehaviour
         Ancrage_pos1 = new Vector3(0f, 0f, 0f);
         Ancrage_pos2 = new Vector3(85f, -60f, 0f);
         Ancrage_pos3 = new Vector3(180f, -140f, 0f);
+        
         
         Ennemy_pos1 = new Vector3(-50f, 100f, 0f);
         Ennemy_pos2 = new Vector3(20f, 90f, 0f);
@@ -163,24 +187,30 @@ public class UI_Manager : MonoBehaviour
         
         
         
-        // SI le jouer choisi le râgout
+        // Si le jouer choisi le râgout
         //-----------------------------------------------------------
-        if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy && ItemUsed == true)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && CurrentPlayer == 1 && ChoixItem.activeInHierarchy && ItemUsed == true)
         {
             _ChoixConfirmation1();
             RagoutUsed = true;
+            PNG_CibleSoin.SetActive(true);
+            _actionUsed = 3;
         }
         
         if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy && ItemUsed == true)
         {
             _ChoixConfirmation2();
             RagoutUsed = true;
+            PNG_CibleSoin.SetActive(true);
+            _actionUsed = 3;
         }
         
         if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy && ItemUsed == true)
         {
             _ChoixConfirmation3();
             RagoutUsed = true;
+            PNG_CibleSoin.SetActive(true);
+            _actionUsed = 3;
         }
         //-----------------------------------------------------------
         
@@ -203,29 +233,63 @@ public class UI_Manager : MonoBehaviour
         {
             _ChoixConfirmation1();
             RhumUsed = true;
+            PNG_CibleSoin.SetActive(true);
+            _actionUsed = 4;
         }
         
         if (Input.GetKeyUp(KeyCode.DownArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy && ItemUsed == true)
         {
             _ChoixConfirmation2();
-            RhumUsed = true; ;
+            RhumUsed = true; 
+            PNG_CibleSoin.SetActive(true);
+            _actionUsed = 4;
         }
         
         if (Input.GetKeyUp(KeyCode.DownArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy && ItemUsed == true)
         {
             _ChoixConfirmation3();
             RhumUsed = true;
+            PNG_CibleSoin.SetActive(true);
+            _actionUsed = 4;
         }
         //-----------------------------------------------------------
             
             
             
             
-            
         
         
         
         
+        // Le joueur choisi sa cible pour le soin/boost 
+        //-----------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && ItemUsed == true && INT_CibleSoin > 1)
+        {
+            INT_CibleSoin = INT_CibleSoin - 1;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.RightArrow) && ItemUsed == true && INT_CibleSoin < 3)
+        {
+            INT_CibleSoin = INT_CibleSoin + 1;
+        }
+
+        if (INT_CibleSoin == 1)
+        {
+            CibleSoin1();
+            _target = 0;
+        }
+
+        if (INT_CibleSoin == 2)
+        {
+            CibleSoin2();
+            _target = 1;
+        }
+
+        if (INT_CibleSoin == 3)
+        {
+            CibleSoin3();
+            _target = 2;
+        }
         
         
         
@@ -236,6 +300,7 @@ public class UI_Manager : MonoBehaviour
             _choixReparer1();
             ReparerUsed = true;
             UsedAction = true;
+            _actionUsed = 2;
         }
         
         if (Input.GetKeyDown(KeyCode.LeftArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
@@ -243,6 +308,7 @@ public class UI_Manager : MonoBehaviour
             _choixReparer2();
             ReparerUsed = true;
             UsedAction = true;
+            _actionUsed = 2;
         }
         
         if (Input.GetKeyDown(KeyCode.LeftArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
@@ -250,6 +316,7 @@ public class UI_Manager : MonoBehaviour
             _choixReparer3();
             ReparerUsed = true;
             UsedAction = true;
+            _actionUsed = 2;
         }
         //-----------------------------------------------------------
         
@@ -268,18 +335,21 @@ public class UI_Manager : MonoBehaviour
         {
             _ChoixConfirmation1();
             BateauUsed = true;
+            _target = 0;
         }
         
         if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 2 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
         {
             _ChoixConfirmation2();
             BateauUsed = true;
+            _target = 0;
         }
         
         if (Input.GetKeyDown(KeyCode.UpArrow) && CurrentPlayer == 3 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
         {
             _ChoixConfirmation3();
             BateauUsed = true;
+            _target = 0;
         }
         //-----------------------------------------------------------
         
@@ -292,24 +362,27 @@ public class UI_Manager : MonoBehaviour
         
         
         
-        // SI le jouer Répoare le Canon 
+        // SI le joueur Répoare le Canon 
         //-----------------------------------------------------------
         if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 1 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
         {
             _ChoixConfirmation1();
             RepCanonUsed = true;
+            _target = 1;
         }
         
         if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 2 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
         {
             _ChoixConfirmation2();
             RepCanonUsed = true;
+            _target = 1;
         }
         
         if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 3 && ChoixReparer.activeInHierarchy && ReparerUsed == true)
         {
             _ChoixConfirmation3();
             RepCanonUsed = true;
+            _target = 1;
         }
         //-----------------------------------------------------------
         
@@ -328,6 +401,7 @@ public class UI_Manager : MonoBehaviour
             AttackUsed = true;
             UsedAction = true;
             PNG_CibleAttaque.SetActive(true);
+            _actionUsed = 0;
         }
         if (Input.GetKeyUp(KeyCode.RightArrow) && CurrentPlayer == 2 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
         {
@@ -335,6 +409,7 @@ public class UI_Manager : MonoBehaviour
             AttackUsed = true;
             UsedAction = true;
             PNG_CibleAttaque.SetActive(true);
+            _actionUsed = 0;
         }
         if (Input.GetKeyUp(KeyCode.RightArrow) && CurrentPlayer == 3 && ChoixItem.activeInHierarchy == false && ChoixReparer.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
         {
@@ -342,8 +417,16 @@ public class UI_Manager : MonoBehaviour
             AttackUsed = true;
             UsedAction = true;
             PNG_CibleAttaque.SetActive(true);
+            _actionUsed = 0;
         }
         //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -385,6 +468,13 @@ public class UI_Manager : MonoBehaviour
         {
             CibleEnnemy5();
         }
+        //-----------------------------------------------------------
+        
+        
+        
+        
+        
+        
         
         
         
@@ -396,6 +486,8 @@ public class UI_Manager : MonoBehaviour
             _ChoixConfirmation1();
             CanonUsed = true;
             UsedAction = true;
+            _actionUsed = 1;
+            _target = 0;
         }
         
         if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 2 && ChoixReparer.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
@@ -403,6 +495,8 @@ public class UI_Manager : MonoBehaviour
             _ChoixConfirmation2();
             CanonUsed = true;
             UsedAction = true;
+            _actionUsed = 1;
+            _target = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && CurrentPlayer == 3 && ChoixReparer.activeInHierarchy == false && Confirmation.activeInHierarchy == false && ChoixJoueurs.activeInHierarchy)
@@ -410,6 +504,8 @@ public class UI_Manager : MonoBehaviour
             _ChoixConfirmation3();
             CanonUsed = true;
             UsedAction = true;
+            _actionUsed = 1;
+            _target = 0;
         }
         //-----------------------------------------------------------
         
@@ -672,6 +768,7 @@ public class UI_Manager : MonoBehaviour
         RagoutUsed = false;
         Confirmation.SetActive(false);
         UsedAction = false;
+        PNG_CibleSoin.SetActive(false);
     }
     
     public void Rhum()
@@ -681,6 +778,7 @@ public class UI_Manager : MonoBehaviour
         RhumUsed = false;
         Confirmation.SetActive(false);
         UsedAction = false;
+        PNG_CibleSoin.SetActive(false);
     }
     
     public void Canon()
@@ -694,26 +792,51 @@ public class UI_Manager : MonoBehaviour
     public void CibleEnnemy1()
     {
         PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos1;
+        _target = 0;
     }
     
     public void CibleEnnemy2()
     {
         PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos2;
+        _target = 1;
     }
     
     public void CibleEnnemy3()
     {
         PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos3;
+        _target = 2;
     }
     
     public void CibleEnnemy4()
     {
         PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos4;
+        _target = 3;
     }
     
     public void CibleEnnemy5()
     {
         PNG_CibleAttaque.transform.position = transform.position + Ennemy_pos5;
+        _target = 4;
+    }
+
+    public void CibleSoin1()
+    {
+        PNG_CibleSoin.transform.position = transform.position + Ancrage_pos1;
+    }
+
+    public void CibleSoin2()
+    {
+        PNG_CibleSoin.transform.position = transform.position + Ancrage_pos2;
+    }
+
+    public void CibleSoin3()
+    {
+        PNG_CibleSoin.transform.position = transform.position + Ancrage_pos3;
+    }
+    
+    public (int, int) Starter(Player player)
+    {
+        return (_actionUsed, _target);
     }
 }
     
