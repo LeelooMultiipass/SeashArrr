@@ -47,6 +47,8 @@ public class UI_Manager : MonoBehaviour
     public static  GameObject ChoixItem;
     public static  GameObject PNG_CibleAttaque;
     public static  GameObject PNG_CibleSoin;
+
+    private bool _choiceMade = false;
     
 
     public static float testHP = 100f;
@@ -137,6 +139,7 @@ public class UI_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         // Choix du jouer de base quand c'est à son tour 
         //----------------------------------------------------------
         if (Input.GetKeyDown(KeyCode.Space))
@@ -152,7 +155,7 @@ public class UI_Manager : MonoBehaviour
             _choixJoueur3();
         }
         //-----------------------------------------------------------
-       
+       */
         
         
         
@@ -265,18 +268,19 @@ public class UI_Manager : MonoBehaviour
         //-----------------------------------------------------------
         if (Input.GetKeyDown(KeyCode.LeftArrow) && ItemUsed == true && INT_CibleSoin > 1)
         {
-            INT_CibleSoin = INT_CibleSoin - 1;
+            INT_CibleSoin -= 1;
         }
         
         if (Input.GetKeyDown(KeyCode.RightArrow) && ItemUsed == true && INT_CibleSoin < 3)
         {
-            INT_CibleSoin = INT_CibleSoin + 1;
+            INT_CibleSoin += 1;
         }
 
         if (INT_CibleSoin == 1)
         {
             CibleSoin1();
             _target = 0;
+            
         }
 
         if (INT_CibleSoin == 2)
@@ -607,7 +611,7 @@ public class UI_Manager : MonoBehaviour
         Ennemy5_Hp.fillAmount = _ennemy5CurentHp / _ennemy5MaxHp;
     }
 
-    public void _choixJoueur1()
+    public IEnumerator _choixJoueur1()
     {
         ChoixItem.SetActive(false);
         Confirmation.SetActive(false);
@@ -615,9 +619,13 @@ public class UI_Manager : MonoBehaviour
         ChoixJoueurs.SetActive(true);
         ChoixJoueurs.transform.position = transform.position + ChoixJoueursPos1;
         CurrentPlayer = 1;
+        while (!_choiceMade)
+        {
+            yield return null;
+        }
     }
     
-    public void _choixJoueur2()
+    public IEnumerator _choixJoueur2()
     {
         ChoixItem.SetActive(false);
         Confirmation.SetActive(false);
@@ -625,9 +633,13 @@ public class UI_Manager : MonoBehaviour
         ChoixJoueurs.SetActive(true);
         ChoixJoueurs.transform.position = transform.position + ChoixJoueursPos2;
         CurrentPlayer = 2;
+        while (!_choiceMade)
+        {
+            yield return null;
+        }
     }
     
-    public void _choixJoueur3()
+    public IEnumerator _choixJoueur3()
     {
         ChoixItem.SetActive(false);
         ChoixReparer.SetActive(false);
@@ -635,6 +647,10 @@ public class UI_Manager : MonoBehaviour
         ChoixJoueurs.SetActive(true);
         ChoixJoueurs.transform.position = transform.position + ChoixJoueursPos3;
         CurrentPlayer = 3;
+        while (!_choiceMade)
+        {
+            yield return null;
+        }
     }
 
     public void _choixItem1()
@@ -742,6 +758,8 @@ public class UI_Manager : MonoBehaviour
         Confirmation.SetActive(false);
         UsedAction = false;
         PNG_CibleAttaque.SetActive(false);
+
+        _choiceMade = true;
     }
     
     public void RepCanon()
@@ -751,6 +769,8 @@ public class UI_Manager : MonoBehaviour
         RepCanonUsed = false;
         Confirmation.SetActive(false);
         UsedAction = false;
+        
+        _choiceMade = true;
     }
     
     public void Bateau()
@@ -760,6 +780,8 @@ public class UI_Manager : MonoBehaviour
         BateauUsed = false;
         Confirmation.SetActive(false);
         UsedAction = false;
+        
+        _choiceMade = true;
     }
     public void Ragout()
     {
@@ -769,6 +791,8 @@ public class UI_Manager : MonoBehaviour
         Confirmation.SetActive(false);
         UsedAction = false;
         PNG_CibleSoin.SetActive(false);
+        
+        _choiceMade = true;
     }
     
     public void Rhum()
@@ -779,6 +803,8 @@ public class UI_Manager : MonoBehaviour
         Confirmation.SetActive(false);
         UsedAction = false;
         PNG_CibleSoin.SetActive(false);
+        
+        _choiceMade = true;
     }
     
     public void Canon()
@@ -787,6 +813,8 @@ public class UI_Manager : MonoBehaviour
         CanonUsed = false;
         Confirmation.SetActive(false);
         UsedAction = false;
+        
+        _choiceMade = true;
     }
 
     public void CibleEnnemy1()
@@ -839,15 +867,17 @@ public class UI_Manager : MonoBehaviour
         switch (player.GetRoleIndex())
         {
             case 0:
-                _choixJoueur1();
+                StartCoroutine("_choixJoueur1");
                 break;
             case 1:
-                _choixJoueur2();
+                StartCoroutine("_choixJoueur2");
                 break;
             case 2: 
-                _choixJoueur3();
+                StartCoroutine("_choixJoueur3");
                 break;
         }
+
+        Fight.isTurnOver = true;
         return (_actionUsed, _target);
     }
 }

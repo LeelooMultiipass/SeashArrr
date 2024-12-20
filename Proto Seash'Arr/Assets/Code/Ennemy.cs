@@ -113,6 +113,7 @@ public class Ennemy : MonoBehaviour
             }
             
             UI_Manager.UiUpdateHealthBar();
+            Fight.isTurnOver = true;
             yield return null;
         }
     }
@@ -133,6 +134,7 @@ public class Ennemy : MonoBehaviour
                 AttackCanon(att);
             }
 
+            Fight.isTurnOver = true;
             yield return null;
         }
         
@@ -184,6 +186,7 @@ public class Ennemy : MonoBehaviour
                 Debug.Log("J'attaque un joueur");
             }
 
+            Fight.isTurnOver = true;
             yield return null;
         }
 
@@ -224,6 +227,7 @@ public class Ennemy : MonoBehaviour
             }
             
             AttackAll(att);
+            Fight.isTurnOver = true;
 
             yield return null;
         }

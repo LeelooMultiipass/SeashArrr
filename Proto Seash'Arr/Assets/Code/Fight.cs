@@ -40,7 +40,7 @@ public class Fight : MonoBehaviour
     private List<MonoBehaviour> order = new List<MonoBehaviour>();
     private int turnIndex;
     private IEnumerator turn;
-    private bool isTurnOver = true;
+    public static bool isTurnOver = true;
     private bool isFightOver = false;
 
     public static bool IsCanonUsed;
@@ -122,11 +122,10 @@ public class Fight : MonoBehaviour
         // Début du combat
         turnIndex = 0;
         turn = NextTurn();
-        while (isTurnOver && !isFightOver)
-        {
-            isTurnOver = false;
-            StartCoroutine(turn);
-        }
+       
+        isTurnOver = false;
+        StartCoroutine(turn);
+        
         
     }
 
@@ -166,6 +165,9 @@ public class Fight : MonoBehaviour
         
         while(!isTurnOver)
             yield return null;
+
+        isTurnOver = false;
+        StartCoroutine(turn);
     }
 
 }
