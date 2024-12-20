@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int HealPower;
     [SerializeField] private int BoostPower;
     [SerializeField] private int FixPower;
+    [SerializeField] private UI_Manager UIManager;
 
     private bool isBoosted;
     public Role role;
@@ -97,7 +98,7 @@ public class Player : MonoBehaviour
     
     public IEnumerator Action()
     {
-        (int, int) choice = UI_Manager.Starter(this);
+        (int, int) choice = UIManager.Starter(this);
         int action = choice.Item1;
         int target = choice.Item2;
         

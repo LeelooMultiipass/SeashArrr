@@ -8,13 +8,19 @@ using Random = UnityEngine.Random;
 public class Ennemy : MonoBehaviour
 {
     [SerializeField] private int HPMax;
-    [SerializeField] private static int ATT;
-    [SerializeField] private static int HealPower;
-    [SerializeField] private static int BoostPower;
-    private static bool boosted = false;
+    [SerializeField] private int ATT;
+    [SerializeField] private int HealPower;
+    [SerializeField] private int BoostPower;
+    private bool boosted = false;
+
+    private static int att;
+    private static int heal;
+    private static int boost;
+    private static bool isBoosted;
+    
 
     
-    [SerializeField] private static EnnemyType Type;
+    [SerializeField] private EnnemyType Type;
     private int HP;
 
     private List<Player> listPlayers = Fight.Players;
@@ -35,10 +41,10 @@ public class Ennemy : MonoBehaviour
         
         Debug.Log("J'attaque " + target + " !!!");
         
-        if (boosted)
+        if (isBoosted)
         {
-            ATT -= BoostPower;
-            boosted = false;
+            att -= boost;
+            isBoosted = false;
         }
 
         UI_Manager.UiUpdateHealthBar();
@@ -53,10 +59,10 @@ public class Ennemy : MonoBehaviour
         
         Debug.Log("J'attaque tout le monde !!!");
         
-        if (boosted)
+        if (isBoosted)
         {
-            ATT -= BoostPower;
-            boosted = false;
+            att -= boost;
+            isBoosted = false;
         }
     }
 
@@ -65,10 +71,10 @@ public class Ennemy : MonoBehaviour
         // BoatHP - DMG
         Debug.Log("J'attaque le bateau !!!");
         
-        if (boosted)
+        if (isBoosted)
         {
-            ATT -= BoostPower;
-            boosted = false;
+            att -= boost;
+            isBoosted = false;
         }
     }
 
@@ -77,10 +83,10 @@ public class Ennemy : MonoBehaviour
         // CanonHP - DMG
         Debug.Log("J'attaque le canon !!!");
         
-        if (boosted)
+        if (isBoosted)
         {
-            ATT -= BoostPower;
-            boosted = false;
+            att -= boost;
+            isBoosted = false;
         }
     }
     
@@ -93,10 +99,9 @@ public class Ennemy : MonoBehaviour
             var playerLow = false;
             foreach (var player in Fight.Players)
             {
-                Debug.Log("player : " + player);
-                if (player.GetHP() <= ATT)
+                if (player.GetHP() <= att)
                 {
-                    AttackPlayer(player, ATT);
+                    AttackPlayer(player, att);
                     playerLow = true;
                     break;
                 }
@@ -104,7 +109,7 @@ public class Ennemy : MonoBehaviour
 
             if (!playerLow)
             {
-                AttackPlayer(Fight.Players[Random.Range(0, Fight.Players.Count)], ATT);
+                AttackPlayer(Fight.Players[Random.Range(0, Fight.Players.Count)], att);
             }
             
             UI_Manager.UiUpdateHealthBar();
@@ -121,11 +126,11 @@ public class Ennemy : MonoBehaviour
 
             if (focus <= 3)
             {
-                AttackBoat(ATT);
+                AttackBoat(att);
             }
             else
             {
-                AttackCanon(ATT);
+                AttackCanon(att);
             }
 
             yield return null;
@@ -138,18 +143,18 @@ public class Ennemy : MonoBehaviour
         public static IEnumerator Action()
         {
             Debug.Log("Je joue");
-            Ennemy target = new Ennemy();
-            int treshold = HealPower;
+            Ennemy target = null;
+            int treshold = heal;
             bool ennemyLow = false;
 
-            var tempList = Fight.Players;
+            var tempList = Fight.Ennemies;
             foreach (var ennemy in tempList.ToList())
             {
-                if (Type == EnnemyType.Healer)
+                if (ennemy.Type == EnnemyType.Healer)
                     tempList.Remove(ennemy);
             }
             
-            if(Fight.Players.Count > 1)
+            if(Fight.Ennemies.Count > 1)
             {
                 foreach (var ennemy in Fight.Ennemies)
                 {
@@ -165,15 +170,18 @@ public class Ennemy : MonoBehaviour
                 if (ennemyLow)
                 {
                     Heal(target);
+                    Debug.Log("Je heal " + target);
                 }
                 else
                 {
                     Boost(Fight.Ennemies[Random.Range(0, Fight.Ennemies.Count)]);
+                    Debug.Log("Je boost " + target);
                 }
             }
             else
             {
-                AttackPlayer(Fight.Players[Random.Range(0,Fight.Players.Count)], ATT);
+                AttackPlayer(Fight.Players[Random.Range(0,Fight.Players.Count)], att);
+                Debug.Log("J'attaque un joueur");
             }
 
             yield return null;
@@ -181,12 +189,12 @@ public class Ennemy : MonoBehaviour
 
         public static void Heal(Ennemy target)
         {
-            target.HP += HealPower;
+            target.HP += heal;
         }
 
         public static void Boost(Ennemy target)
         {
-            ATT += BoostPower;
+            att += boost;
         }
         
     }
@@ -200,22 +208,22 @@ public class Ennemy : MonoBehaviour
 
             if (chance <= 15)
             {
-                ATT = 5;
+                att = 5;
             }
             else if (chance <= 50)
             {
-                ATT = 10;
+                att = 10;
             }
             else if (chance <= 85)
             {
-                ATT = 15;
+                att = 15;
             }
             else
             {
-                ATT = 20;
+                att = 20;
             }
             
-            AttackAll(ATT);
+            AttackAll(att);
 
             yield return null;
         }
@@ -230,6 +238,10 @@ public class Ennemy : MonoBehaviour
     void Start()
     {
         HP = HPMax;
+        att = ATT;
+        heal = HealPower;
+        boost = BoostPower;
+        isBoosted = boosted;
     }
     
     public int GetHP()

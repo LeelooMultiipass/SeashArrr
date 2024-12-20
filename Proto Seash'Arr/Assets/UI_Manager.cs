@@ -834,8 +834,20 @@ public class UI_Manager : MonoBehaviour
         PNG_CibleSoin.transform.position = transform.position + Ancrage_pos3;
     }
     
-    public static (int, int) Starter(Player player)
+    public (int, int) Starter(Player player)
     {
+        switch (player.GetRoleIndex())
+        {
+            case 0:
+                _choixJoueur1();
+                break;
+            case 1:
+                _choixJoueur2();
+                break;
+            case 2: 
+                _choixJoueur3();
+                break;
+        }
         return (_actionUsed, _target);
     }
 }
