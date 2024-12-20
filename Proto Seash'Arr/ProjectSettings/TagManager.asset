@@ -8,6 +8,7 @@ TagManager:
   - PiqueNique
   - Canon
   - TableIngenieur
+  - StatsManager
   layers:
   - Default
   - TransparentFX

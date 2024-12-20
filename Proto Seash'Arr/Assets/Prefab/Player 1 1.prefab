@@ -134,6 +134,50 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &437927815960677280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4139379268519359797}
+  - component: {fileID: 6295686238540195214}
+  m_Layer: 0
+  m_Name: LiaisonPrefabScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4139379268519359797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437927815960677280}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 342.27783, y: 247.67958, z: 299.49832}
+  m_LocalScale: {x: 0.6255012, y: 0.6255012, z: 0.6255012}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5264540753904008202}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6295686238540195214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437927815960677280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d2b7122a86c8f43bf0271f787dbd04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &679373104114018234
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,7 +912,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6205141541170568208}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6295686238540195214}
+        m_TargetAssemblyTypeName: liaisonStatsManager, Assembly-CSharp
+        m_MethodName: TriggerUseAtelierRepCanon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1871333788064956298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,7 +1419,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8020296742392050832}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6295686238540195214}
+        m_TargetAssemblyTypeName: liaisonStatsManager, Assembly-CSharp
+        m_MethodName: TriggerUseAtelierManger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2736869626680205337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,7 +1724,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2261939021847169464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6295686238540195214}
+        m_TargetAssemblyTypeName: liaisonStatsManager, Assembly-CSharp
+        m_MethodName: TriggerUseAtelierCuisinerRhum
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3748114201821290165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,7 +2654,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4648174021628520844}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6295686238540195214}
+        m_TargetAssemblyTypeName: liaisonStatsManager, Assembly-CSharp
+        m_MethodName: TriggerUseAtelierAmeBateau
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4976326805998656702
 GameObject:
   m_ObjectHideFlags: 0
@@ -3026,7 +3118,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3030856734558676564}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6295686238540195214}
+        m_TargetAssemblyTypeName: liaisonStatsManager, Assembly-CSharp
+        m_MethodName: TriggerUseAtelierCuisineRagout
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6543057051188739880
 GameObject:
   m_ObjectHideFlags: 0
@@ -4389,6 +4493,7 @@ Transform:
   m_Children:
   - {fileID: 6411603205258374146}
   - {fileID: 4945889534848727061}
+  - {fileID: 4139379268519359797}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &689815961732842566
@@ -4569,6 +4674,30 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5aaa1421-8f3d-4f0c-9400-65b66c1d21fa
     m_ActionName: GameplayNavigation/InteractIngenior[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f3e1458-6446-48d2-a4ce-87a572a0ab1f
+    m_ActionName: CharacterChoice/ValiderCap
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f02757d-92ab-47ce-a14e-d4de7e0d0c01
+    m_ActionName: CharacterChoice/Annuler
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 70b0f449-7df3-47a1-88b2-53a1ed472513
+    m_ActionName: CharacterChoice/Valider2
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ace6184f-8c3c-45b7-8245-e9ac8af70bd2
+    m_ActionName: CharacterChoice/Valider3
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6d239d96-c8be-4a96-a3e8-bce9152b056f
+    m_ActionName: CharacterChoice/ValiderJouer
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: be3e8ace-2e98-4ea7-ae6e-61e70d878978
+    m_ActionName: MenuPrincipal/Jouer
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameplayNavigation
@@ -4632,6 +4761,11 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 2c33558c2839e31499cbc019c966a4d5, type: 2}
   - {fileID: 2100000, guid: 425782d69875a95428097c9025c9c0f6, type: 2}
   HPMax: 100
+  ATT: 0
+  CanonPower: 0
+  HealPower: 0
+  BoostPower: 0
+  FixPower: 0
   role: 0
 --- !u!114 &2068031864871419638
 MonoBehaviour:
@@ -4774,7 +4908,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 876755156975180353}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6295686238540195214}
+        m_TargetAssemblyTypeName: liaisonStatsManager, Assembly-CSharp
+        m_MethodName: TriggerUseAtelierAmeCanon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9125156051652315424
 GameObject:
   m_ObjectHideFlags: 0

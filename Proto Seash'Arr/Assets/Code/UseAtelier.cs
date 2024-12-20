@@ -25,7 +25,7 @@ public class UseAtelier : MonoBehaviour
 
     public void ReparerCanon()
     {
-        StatsManager.nbrIron = StatsManager.nbrIron - 20;
+        StatsManager.nbrWood = StatsManager.nbrWood - 20;
         StatsManager.UpdateText();
     }
 
