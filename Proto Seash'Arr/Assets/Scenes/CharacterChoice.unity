@@ -2101,38 +2101,6 @@ MonoBehaviour:
     m_ActionId: 6d239d96-c8be-4a96-a3e8-bce9152b056f
     m_ActionName: CharacterChoice/New action
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 364504731}
-        m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
-        m_MethodName: ChangeCharacterUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f310114a-0639-44e8-844c-e2d281e7a890
-    m_ActionName: CharacterChoice/SwipeRight[/XInputControllerWindows/rightTrigger]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 361808193}
-        m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
-        m_MethodName: ChangeCharacterDown
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a94d6d17-6d61-45ce-b65a-923c2f324803
-    m_ActionName: CharacterChoice/SwipeLeft[/XInputControllerWindows/leftTrigger]
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: be3e8ace-2e98-4ea7-ae6e-61e70d878978
     m_ActionName: MenuPrincipal/Jouer[/XInputControllerWindows/buttonSouth]
@@ -2160,6 +2128,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e009ccda-e0fe-41c1-8678-e5fbabd6b09c
     m_ActionName: Ingenior/AmeCanon[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 361808193}
+        m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
+        m_MethodName: ChangeCharacterDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1ee90518-5156-4f84-a5de-6716b5312f3b
+    m_ActionName: CharacterChoice/Left[/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 364504731}
+        m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
+        m_MethodName: ChangeCharacterUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e82ec69a-989f-4ab2-ab15-38edbdce56dc
+    m_ActionName: CharacterChoice/Right[/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterChoice
@@ -3744,6 +3744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1626284142}
   - component: {fileID: 1626284141}
+  - component: {fileID: 1626284143}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3781,6 +3782,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1626284143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626284139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!1 &1635575974
 GameObject:
   m_ObjectHideFlags: 0
