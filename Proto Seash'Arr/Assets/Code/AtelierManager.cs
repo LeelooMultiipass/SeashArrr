@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AtelierManager : MonoBehaviour
 {
@@ -16,6 +17,14 @@ public class AtelierManager : MonoBehaviour
     public bool canonActive;
     public bool piqueNiqueActive;
 
+    public InputActionAsset inputActionAsset;
+
+    private InputActionMap NavigationMap;
+    private InputActionMap CuisineMap;
+    private InputActionMap CanonMap;
+    private InputActionMap PiqueNiqueMap;
+    private InputActionMap IngeniorMap;
+
     private void Start()
     {
         if (ButtonAtelier != null)
@@ -23,6 +32,14 @@ public class AtelierManager : MonoBehaviour
             ButtonAtelier.SetActive(false);
         }
         CloseAllPanels();
+
+        NavigationMap = inputActionAsset.FindActionMap("GameplayNavigation");
+        CuisineMap = inputActionAsset.FindActionMap("Cuisine");
+        CanonMap = inputActionAsset.FindActionMap("Canon");
+        PiqueNiqueMap = inputActionAsset.FindActionMap("PiqueNique");
+        IngeniorMap = inputActionAsset.FindActionMap("Ingenior");
+
+        SwitchtoGameplay();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -33,93 +50,138 @@ public class AtelierManager : MonoBehaviour
             {
                 ButtonAtelier.SetActive(true);
                 cuisineActive = true;
+                SwitchToCuisine();
             }
-
-            if (other.CompareTag("TableIngenieur"))
+            else if (other.CompareTag("TableIngenieur"))
             {
                 ButtonAtelier.SetActive(true);
                 tableIngenieurActive = true;
+                SwitchToIngenior();
             }
-
-            if (other.CompareTag("Canon"))
+            else if (other.CompareTag("Canon"))
             {
                 ButtonAtelier.SetActive(true);
                 canonActive = true;
+                SwitchToCanon();
             }
-
-            if (other.CompareTag("PiqueNique"))
+            else if (other.CompareTag("PiqueNique"))
             {
                 ButtonAtelier.SetActive(true);
                 piqueNiqueActive = true;
+                SwitchToPiqueNique();
             }
         }
     }
+
     public void OnTriggerExit(Collider other)
     {
         if (ButtonAtelier != null)
         {
+            ButtonAtelier.SetActive(false);
+
             if (other.CompareTag("Cuisine"))
             {
-                ButtonAtelier.SetActive(false);
                 cuisineActive = false;
+                PanelCuisine.SetActive(false);
             }
-
-            if (other.CompareTag("TableIngenieur"))
+            else if (other.CompareTag("TableIngenieur"))
             {
-                ButtonAtelier.SetActive(false);
                 tableIngenieurActive = false;
+                PanelTableIngenieur.SetActive(false);
             }
-
-            if (other.CompareTag("Canon"))
+            else if (other.CompareTag("Canon"))
             {
-                ButtonAtelier.SetActive(false);
                 canonActive = false;
+                PanelCanon.SetActive(false);
             }
-
-            if (other.CompareTag("PiqueNique"))
+            else if (other.CompareTag("PiqueNique"))
             {
-                ButtonAtelier.SetActive(false);
                 piqueNiqueActive = false;
+                PanelPiqueNique.SetActive(false);
             }
-        }
 
-        CloseInactivePanels();
+            // Revert to navigation controls when leaving
+            SwitchtoGameplay();
+        }
     }
 
-    
+
+    private void SwitchtoGameplay()
+    {
+        DisableAllActionMaps();
+        NavigationMap.Enable();
+        Debug.Log("Switched to GameplayNavigation map");
+    }
+
+    private void SwitchToCuisine()
+    {
+        DisableAllActionMaps();
+        CuisineMap.Enable();
+        Debug.Log("Switched to Cuisine map");
+    }
+
+    private void SwitchToCanon()
+    {
+        DisableAllActionMaps();
+        CanonMap.Enable();
+        Debug.Log("Switched to Canon map");
+    }
+
+    private void SwitchToPiqueNique()
+    {
+        DisableAllActionMaps();
+        PiqueNiqueMap.Enable();
+        Debug.Log("Switched to PiqueNique map");
+    }
+
+    private void SwitchToIngenior()
+    {
+        DisableAllActionMaps();
+        IngeniorMap.Enable();
+        Debug.Log("Switched to Ingenior map");
+    }
+
+    private void DisableAllActionMaps()
+    {
+        CuisineMap?.Disable();
+        CanonMap?.Disable();
+        PiqueNiqueMap?.Disable();
+        IngeniorMap?.Disable();
+    }
+
 
     // Méthode générique pour ouvrir un panel
-    public void OpenPanel(GameObject panel)
+    void OpenPanel(GameObject panel)
     {
         panel.SetActive(true);
     }
 
     // Méthode générique pour fermer un panel
-    public void ClosePanel(GameObject panel)
+    void ClosePanel(GameObject panel)
     {
         panel.SetActive(false);
     }
 
     // ouvrir un panel spécifique
-    public void OpenTogglePanelCuisine() 
+    void OpenTogglePanelCuisine() 
     { 
         if (PanelCuisine != null && !PanelCuisine.activeSelf && cuisineActive) 
         { 
             OpenPanel(PanelCuisine); 
         } 
     }
-    public void OpenTogglePanelTableIngenieur() { if (PanelTableIngenieur != null && !PanelTableIngenieur.activeSelf && tableIngenieurActive) { OpenPanel(PanelTableIngenieur);  } }
-    public void OpenTogglePanelPiqueNique() { if (PanelPiqueNique != null && !PanelPiqueNique.activeSelf && piqueNiqueActive) { OpenPanel(PanelPiqueNique);  } }
-    public void OpenTogglePanelCanon() { if (PanelCanon != null && !PanelCanon.activeSelf && canonActive) { OpenPanel(PanelCanon);  } }
+    void OpenTogglePanelTableIngenieur() { if (PanelTableIngenieur != null && !PanelTableIngenieur.activeSelf && tableIngenieurActive) { OpenPanel(PanelTableIngenieur);  } }
+    void OpenTogglePanelPiqueNique() { if (PanelPiqueNique != null && !PanelPiqueNique.activeSelf && piqueNiqueActive) { OpenPanel(PanelPiqueNique);  } }
+    void OpenTogglePanelCanon() { if (PanelCanon != null && !PanelCanon.activeSelf && canonActive) { OpenPanel(PanelCanon);  } }
 
 
     // fermer un panel spécifique 
-    public void CloseTogglePanelCuisine() { if (PanelCuisine != null && PanelCuisine.activeSelf ) { ClosePanel(PanelCuisine); cuisineActive = false; } }
-    public void CloseTogglePanelTableIngenieur() { if (PanelTableIngenieur != null && PanelTableIngenieur.activeSelf ) { ClosePanel(PanelTableIngenieur); tableIngenieurActive = false; } }
-    public void CloseTogglePanelPiqueNique() { if (PanelPiqueNique != null && PanelPiqueNique.activeSelf ) { ClosePanel(PanelPiqueNique); piqueNiqueActive = false; } }
-    public void CloseTogglePanelCanon() { if (PanelCanon != null && PanelCanon.activeSelf) { ClosePanel(PanelCanon); canonActive = false; } }
+    void CloseTogglePanelCuisine() { if (PanelCuisine != null && PanelCuisine.activeSelf ) { ClosePanel(PanelCuisine); cuisineActive = false; } }
+    void CloseTogglePanelTableIngenieur() { if (PanelTableIngenieur != null && PanelTableIngenieur.activeSelf ) { ClosePanel(PanelTableIngenieur); tableIngenieurActive = false; } }
+    void CloseTogglePanelPiqueNique() { if (PanelPiqueNique != null && PanelPiqueNique.activeSelf ) { ClosePanel(PanelPiqueNique); piqueNiqueActive = false; } }
+    void CloseTogglePanelCanon() { if (PanelCanon != null && PanelCanon.activeSelf) { ClosePanel(PanelCanon); canonActive = false; } }
 
-    public void CloseAllPanels()
+    void CloseAllPanels()
     {
         if (PanelCuisine != null) ClosePanel(PanelCuisine);
         if (PanelTableIngenieur != null) ClosePanel(PanelTableIngenieur);
@@ -149,4 +211,5 @@ public class AtelierManager : MonoBehaviour
 
         CloseTogglePanelCanon(); 
     }
+
 }

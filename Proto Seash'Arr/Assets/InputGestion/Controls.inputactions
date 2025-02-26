@@ -121,7 +121,7 @@
                 {
                     "name": "",
                     "id": "98ae8af4-dbaf-427c-a9eb-57596d6b5d34",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -132,7 +132,7 @@
                 {
                     "name": "",
                     "id": "252ac331-7719-46c6-8cdc-d3f99a3f24de",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -143,8 +143,8 @@
                 {
                     "name": "",
                     "id": "6584c1c6-d29e-49a8-9fb2-646497a5d697",
-                    "path": "<XInputController>/buttonWest",
-                    "interactions": "",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "InteractIngenior",
@@ -154,7 +154,7 @@
                 {
                     "name": "",
                     "id": "f25d9ed6-c045-4fe3-b0fd-8657e415b96f",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -295,6 +295,158 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jouer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Cuisine",
+            "id": "16ef3cb5-bb36-4b58-aaa2-e8b7af01c40c",
+            "actions": [
+                {
+                    "name": "CuisinerRagout",
+                    "type": "Button",
+                    "id": "50d8c247-7dcc-40bb-aa0c-15a84ab464c4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CuisinerRhum",
+                    "type": "Button",
+                    "id": "851a40b2-d92b-4808-9ed1-d07f5a1979e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "89c3d4c4-ea19-46c6-b80f-332dd81f179e",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CuisinerRagout",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b253371c-58f0-4c87-a82e-2218bbf82c0e",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CuisinerRhum",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PiqueNique",
+            "id": "94ff8af2-c831-45d3-8c8a-4636e1b55c5b",
+            "actions": [
+                {
+                    "name": "Manger",
+                    "type": "Button",
+                    "id": "730f50e5-f0f0-4b02-b16c-6b341a3ffeb5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6ff15f21-3471-4d5a-be1a-a3367fb224a4",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Manger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Canon",
+            "id": "d5bbb7d4-aad9-4369-a081-c2ff5be0af3c",
+            "actions": [
+                {
+                    "name": "RepCanon",
+                    "type": "Button",
+                    "id": "fb9a845c-135a-43e5-a038-8c6098986e16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "160b0b71-c754-42ca-b591-ac1ddcca084b",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RepCanon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Ingenior",
+            "id": "b15088c0-4c62-4121-accd-5d60cd39aecd",
+            "actions": [
+                {
+                    "name": "AmeBateau",
+                    "type": "Button",
+                    "id": "2214f55f-cb23-49e1-9d6f-07df7e5e2a8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AmeCanon",
+                    "type": "Button",
+                    "id": "e009ccda-e0fe-41c1-8678-e5fbabd6b09c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8b2f1c1e-6aea-4daa-a91b-6e5463ba730c",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AmeBateau",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ae73bc9f-fd79-4711-b5ea-9ba6740eef87",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AmeCanon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class StatsManager : MonoBehaviour
 {
@@ -105,6 +106,7 @@ public class StatsManager : MonoBehaviour
                 CameraNavigation.SetActive(!CameraNavigation.activeSelf);
                 CameraFight.SetActive(!CameraFight.activeSelf);
                 UIPopUpEnnemies.SetActive(!UIPopUpEnnemies.activeSelf);
+                //SceneManager.LoadScene("FightTest"); // Remplacez "FightScene" par le nom de votre scène de combat
                 //UI.SetActive(!UI.activeSelf);
 
                 // Réinitialiser TempsNavigation pour arrêter le timer

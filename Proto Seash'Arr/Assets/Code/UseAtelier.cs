@@ -5,54 +5,125 @@ using UnityEngine;
 public class UseAtelier : MonoBehaviour
 {
     public StatsManager StatsManager;
+    public AtelierManager AtelierManager;
+    public int tempsAvantInteraction = 1; // Délai avant l'action
+    public int tempsApresInteraction = 3; // Délai après l'action
 
     public void AmeliorationBateau()
     {
-        StatsManager.nbrWood = StatsManager.nbrWood - 100;
-        StatsManager.nbrIron = StatsManager.nbrIron - 50;
-
-        StatsManager.UpdateText();
+        if (AtelierManager.PanelTableIngenieur.activeSelf)
+        {
+            if (StatsManager.nbrWood >= 100 && StatsManager.nbrIron >= 50)
+            {
+                StartCoroutine(EffectuerActionAvecDelais(() =>
+            {
+                StatsManager.nbrWood -= 100;
+                StatsManager.nbrIron -= 50;
+                StatsManager.UpdateText();
+            }));
+            }
+        }
     }
-
 
     public void AmeliorationCanon()
     {
-        StatsManager.nbrWood = StatsManager.nbrWood - 70;
-        StatsManager.nbrIron = StatsManager.nbrIron - 30; 
-
-        StatsManager.UpdateText();
+        if (AtelierManager.PanelTableIngenieur.activeSelf)
+        {
+            if (StatsManager.nbrWood >= 70 && StatsManager.nbrIron >= 30)
+            {
+                StartCoroutine(EffectuerActionAvecDelais(() =>
+            {
+                StatsManager.nbrWood -= 70;
+                StatsManager.nbrIron -= 30;
+                StatsManager.UpdateText();
+            }));
+            }
+        }
     }
 
     public void ReparerCanon()
     {
-        StatsManager.nbrWood = StatsManager.nbrWood - 20;
-        StatsManager.UpdateText();
+        if (AtelierManager.PanelCanon.activeSelf)
+        {
+            if (StatsManager.nbrWood >= 20)
+            {
+                StartCoroutine(EffectuerActionAvecDelais(() =>
+            {
+                StatsManager.nbrWood -= 20;
+                StatsManager.UpdateText();
+            }));
+            }
+        }
     }
 
     public void ReparerBateau()
     {
-        StatsManager.nbrIron = StatsManager.nbrIron - 20;
-        StatsManager.UpdateText();
+        if (StatsManager.nbrIron >= 20)
+        {
+            StartCoroutine(EffectuerActionAvecDelais(() =>
+        {
+            StatsManager.nbrIron -= 20;
+            StatsManager.UpdateText();
+        }));
+        }
     }
 
     public void CuisinerRhum()
     {
-        StatsManager.nbrFood = StatsManager.nbrFood - 20;
-        StatsManager.nbrRhum = StatsManager.nbrRhum + 1;
-        StatsManager.UpdateText();
+        if (AtelierManager.PanelCuisine.activeSelf)
+        {
+            if (StatsManager.nbrFood >= 20)
+            {
+                StartCoroutine(EffectuerActionAvecDelais(() =>
+            {
+                StatsManager.nbrFood -= 20;
+                StatsManager.nbrRhum += 1;
+                StatsManager.UpdateText();
+            }));
+            }
+        }
     }
 
-    public void CuisinerRagout() 
+    public void CuisinerRagout()
     {
-        StatsManager.nbrFood = StatsManager.nbrFood - 20;
-        StatsManager.nbrRagout = StatsManager.nbrRagout + 1;
-        StatsManager.UpdateText();
+        if (AtelierManager.PanelCuisine.activeSelf)
+        {
+            if (StatsManager.nbrFood >= 20)
+            {
+                StartCoroutine(EffectuerActionAvecDelais(() =>
+                {
+                    StatsManager.nbrFood -= 20;
+                    StatsManager.nbrRagout += 1;
+                    StatsManager.UpdateText();
+                }));
+            }
+        }
     }
-
 
     public void Manger()
     {
-       StatsManager.nbrRagout = StatsManager.nbrRagout - 1;
-        StatsManager.UpdateText();
+        if (AtelierManager.PanelPiqueNique.activeSelf)
+        {
+            if (StatsManager.nbrRagout > 0)
+            {
+                StartCoroutine(EffectuerActionAvecDelais(() =>
+            {
+                StatsManager.nbrRagout -= 1;
+                StatsManager.UpdateText();
+            }));
+            }
+        }
+    }
+
+    private IEnumerator EffectuerActionAvecDelais(System.Action action)
+    {
+        // Délai avant l'action
+        yield return new WaitForSeconds(tempsAvantInteraction);
+
+        // Exécution de l'action
+        action?.Invoke();
+
+        // Délai après l'action
+        yield return new WaitForSeconds(tempsApresInteraction);
     }
 }

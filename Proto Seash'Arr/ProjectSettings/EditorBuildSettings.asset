@@ -14,10 +14,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Navigation.unity
     guid: 2f1ea2878f8e8b047bd626f8d8de21c8
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/FightTest.unity
     guid: cc56af89375b5084995e465f60be31e6
   - enabled: 1
     path: Assets/Scenes/Test proto/Test Lylou.unity
     guid: 203608c23f8b7484c9bcd4040e4dde01
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 9b8ba3076a56c2849ab35d1540936e42, type: 2}
