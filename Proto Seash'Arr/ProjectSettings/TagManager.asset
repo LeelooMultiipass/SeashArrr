@@ -9,6 +9,7 @@ TagManager:
   - Canon
   - TableIngenieur
   - StatsManager
+  - Ancre
   layers:
   - Default
   - TransparentFX

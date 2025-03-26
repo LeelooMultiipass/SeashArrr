@@ -995,7 +995,6 @@ GameObject:
   - component: {fileID: 361808196}
   - component: {fileID: 361808195}
   - component: {fileID: 361808194}
-  - component: {fileID: 361808193}
   m_Layer: 5
   m_Name: SwipeRight (3)
   m_TagString: Untagged
@@ -1023,25 +1022,6 @@ RectTransform:
   m_AnchoredPosition: {x: -504.41003, y: 49}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &361808193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361808191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706510ba249ccd54491f0ea775f95622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters:
-  - {fileID: 1529274259}
-  - {fileID: 1845371384}
-  - {fileID: 1000439002}
-  - {fileID: 92058494}
-  - {fileID: 933860538}
-  - {fileID: 1841789380}
 --- !u!114 &361808194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,7 +1066,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361808193}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
         m_MethodName: ChangeCharacterDown
         m_Mode: 1
@@ -1148,7 +1128,6 @@ GameObject:
   - component: {fileID: 364504734}
   - component: {fileID: 364504733}
   - component: {fileID: 364504732}
-  - component: {fileID: 364504731}
   m_Layer: 5
   m_Name: SwipeRight (1)
   m_TagString: Untagged
@@ -1176,25 +1155,6 @@ RectTransform:
   m_AnchoredPosition: {x: -504.41003, y: 119.29}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &364504731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364504729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706510ba249ccd54491f0ea775f95622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters:
-  - {fileID: 1529274259}
-  - {fileID: 1845371384}
-  - {fileID: 1000439002}
-  - {fileID: 92058494}
-  - {fileID: 933860538}
-  - {fileID: 1841789380}
 --- !u!114 &364504732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1239,7 +1199,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 364504731}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
         m_MethodName: ChangeCharacterUp
         m_Mode: 1
@@ -1876,6 +1836,24 @@ MonoBehaviour:
   - {fileID: 1921962910}
   - {fileID: 1595841484}
   - {fileID: 1662801628}
+  Left:
+    m_Name: Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 69657a70-b27e-436c-9283-b1925a2b6094
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Right:
+    m_Name: Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 99069a29-c0ee-47d8-b375-5bd8d28d4101
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &767256001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,6 +1958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 808155844}
   - component: {fileID: 808155843}
+  - component: {fileID: 808155845}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -2000,7 +1979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -2130,7 +2109,7 @@ MonoBehaviour:
     m_ActionName: Ingenior/AmeCanon[/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361808193}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
         m_MethodName: ChangeCharacterDown
         m_Mode: 1
@@ -2146,7 +2125,7 @@ MonoBehaviour:
     m_ActionName: CharacterChoice/Left[/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 364504731}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
         m_MethodName: ChangeCharacterUp
         m_Mode: 1
@@ -2160,6 +2139,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e82ec69a-989f-4ab2-ab15-38edbdce56dc
     m_ActionName: CharacterChoice/Right[/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d4189bdb-4bc1-41af-9840-f947eea51cd0
+    m_ActionName: "MenuPrincipal/Cr\xE9dits"
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c828e635-97e6-4e22-8a55-0832407328e8
+    m_ActionName: MenuPrincipal/Tuto
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 14827c9f-ebb3-47f1-9e50-6cafc6552370
+    m_ActionName: "MenuPrincipal/Param\xE8tres"
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterChoice
@@ -2180,6 +2171,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &808155845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808155842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706510ba249ccd54491f0ea775f95622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characters:
+  - {fileID: 522369891}
+  - {fileID: 1757255436}
+  - {fileID: 1555712903}
+  - {fileID: 1921962910}
+  - {fileID: 1595841484}
+  - {fileID: 1662801628}
+  Left:
+    m_Name: Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 69657a70-b27e-436c-9283-b1925a2b6094
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c0bbb389-13dc-4ba9-8f80-45c39d27ebdc
+      m_Path: <XInputController>/leftTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Left
+      m_Flags: 0
+    m_Flags: 0
+  Right:
+    m_Name: Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 99069a29-c0ee-47d8-b375-5bd8d28d4101
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3530d662-d955-47ff-8081-f4046b6ecbe8
+      m_Path: <XInputController>/rightTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Right
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &809346768
 GameObject:
   m_ObjectHideFlags: 0
@@ -4114,7 +4158,6 @@ GameObject:
   - component: {fileID: 1817123462}
   - component: {fileID: 1817123461}
   - component: {fileID: 1817123460}
-  - component: {fileID: 1817123459}
   m_Layer: 5
   m_Name: SwipeRight (2)
   m_TagString: Untagged
@@ -4142,25 +4185,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1255, y: 119.29}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1817123459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817123457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706510ba249ccd54491f0ea775f95622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters:
-  - {fileID: 1529274259}
-  - {fileID: 1000439002}
-  - {fileID: 1845371384}
-  - {fileID: 933860538}
-  - {fileID: 92058494}
-  - {fileID: 1841789380}
 --- !u!114 &1817123460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4205,7 +4229,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1817123459}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SwipeCharacter, Assembly-CSharp
         m_MethodName: ChangeCharacterUp
         m_Mode: 1

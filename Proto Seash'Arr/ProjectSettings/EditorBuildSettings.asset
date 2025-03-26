@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
+    path: "Assets/Scenes/Sc\xE8nesMenusTutosCredits/Menu.unity"
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/CharacterChoice.unity
+    path: "Assets/Scenes/Sc\xE8nesJeu/CharacterChoice.unity"
     guid: a1e2d7413369df24d977e2513306efbb
   - enabled: 0
     path: Assets/Scenes/Navigation.unity
@@ -20,5 +20,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test proto/Test Lylou.unity
     guid: 203608c23f8b7484c9bcd4040e4dde01
+  - enabled: 1
+    path: "Assets/Scenes/Sc\xE8nesMenusTutosCredits/Tuto.unity"
+    guid: 09e8eede28c8e6847ba04d08102bc42b
+  - enabled: 1
+    path: "Assets/Scenes/Sc\xE8nesMenusTutosCredits/Credits.unity"
+    guid: cdca41ad27c8afc489a8b093ae286fd7
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9b8ba3076a56c2849ab35d1540936e42, type: 2}

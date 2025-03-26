@@ -5,19 +5,33 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5;
+    public float speed = 5f;
     private Vector2 movementInput;
-    public float health = 100;
+    public float health = 100f;
+    public InputAction onMove;
 
-    public void Start()
+    private void OnEnable()
     {
-  
+        onMove.Enable();
+        onMove.performed += Move;  // Se déclenche quand l'input change
+        onMove.canceled += Move;   // Réinitialise à 0 quand le joueur relâche la touche
     }
 
-    public void Update()
+    private void OnDisable()
     {
-        transform.Translate(new Vector3(movementInput.x, 0, movementInput.y) * speed * Time.deltaTime);
+        onMove.performed -= Move;
+        onMove.canceled -= Move;
+        onMove.Disable();
     }
-    public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
-    
+
+    private void Update()
+    {
+        Vector3 moveVector = new Vector3(movementInput.x, 0, movementInput.y) * speed * Time.deltaTime;
+        transform.Translate(moveVector, Space.World); // Utilisation de Space.World pour éviter les problèmes de rotation
+    }
+
+    private void Move(InputAction.CallbackContext ctx)
+    {
+        movementInput = ctx.ReadValue<Vector2>();
+    }
 }

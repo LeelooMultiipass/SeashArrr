@@ -1,11 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class liaisonStatsManager : MonoBehaviour
 {
     private StatsManager statsManager;
     private UseAtelier useAtelier; // Reference to the UseAtelier script
+    public AtelierManager atelierManager;
+
+    public InputAction CuisinerRagout;
+    public InputAction CuisinerRhum;
+    public InputAction Manger;
+    public InputAction RepCanon;
+    public InputAction AmeBateau;
+    public InputAction AmeCanon;
 
     // Start is called before the first frame update
     void Start()
@@ -49,46 +59,88 @@ public class liaisonStatsManager : MonoBehaviour
         
     }
 
-    public void TriggerUseAtelierAmeBateau()
+    private void OnEnable()
     {
-        if (useAtelier != null)
+        CuisinerRagout.Enable();
+        CuisinerRhum.Enable();
+        Manger.Enable();
+        RepCanon.Enable();
+        AmeBateau.Enable();
+        AmeCanon.Enable();
+        CuisinerRagout.started += TriggerUseAtelierCuisineRagout;
+        CuisinerRhum.started += TriggerUseAtelierCuisinerRhum;
+        Manger.started += TriggerUseAtelierManger;
+        RepCanon.started += TriggerUseAtelierRepCanon;
+        AmeBateau.started += TriggerUseAtelierAmeBateau;
+        AmeCanon.started += TriggerUseAtelierAmeCanon;
+
+    }
+
+    private void OnDisable()
+    {
+        CuisinerRagout.started -= TriggerUseAtelierCuisineRagout;
+        CuisinerRhum.started -= TriggerUseAtelierCuisinerRhum;
+        Manger.started -= TriggerUseAtelierManger;
+        RepCanon.started -= TriggerUseAtelierRepCanon;
+        AmeBateau.started -= TriggerUseAtelierAmeBateau;
+        AmeCanon.started -= TriggerUseAtelierAmeCanon;
+        CuisinerRagout.Disable();
+        CuisinerRhum.Disable();
+        Manger.Disable();
+        RepCanon.Disable();
+        AmeBateau.Disable();
+        AmeCanon.Disable();
+    }
+
+    public void TriggerUseAtelierAmeBateau(InputAction.CallbackContext context)
+    {
+        if (atelierManager.PanelTableIngenieur.activeSelf)
         {
-            useAtelier.AmeliorationBateau();  // Call method from UseAtelier
-            Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
-        }
-        else
-        {
-            Debug.LogError("UseAtelier not found!");
+            if (useAtelier != null)
+            {
+                useAtelier.AmeliorationBateau();  // Call method from UseAtelier
+                Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
+            }
+            else
+            {
+                Debug.LogError("UseAtelier not found!");
+            }
         }
     }
 
-    public void TriggerUseAtelierAmeCanon()
+    public void TriggerUseAtelierAmeCanon(InputAction.CallbackContext context)
     {
-        if (useAtelier != null)
+        if (atelierManager.PanelTableIngenieur.activeSelf)
         {
-            useAtelier.AmeliorationCanon();  // Call method from UseAtelier
-            Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
-        }
-        else
-        {
-            Debug.LogError("UseAtelier not found!");
+            if (useAtelier != null)
+            {
+                useAtelier.AmeliorationCanon();  // Call method from UseAtelier
+                Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
+            }
+            else
+            {
+                Debug.LogError("UseAtelier not found!");
+            }
         }
     }
 
-    public void TriggerUseAtelierManger()
+    public void TriggerUseAtelierManger(InputAction.CallbackContext context)
     {
-        if (useAtelier != null)
+        if (atelierManager.PanelPiqueNique.activeSelf)
         {
-            useAtelier.Manger();  // Call method from UseAtelier
-            Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
-        }
-        else
-        {
-            Debug.LogError("UseAtelier not found!");
+            if (useAtelier != null)
+            {
+                useAtelier.Manger();  // Call method from UseAtelier
+                Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
+            }
+            else
+            {
+                Debug.LogError("UseAtelier not found!");
+            }
         }
     }
 
-    public void TriggerUseAtelierRepBateau()
+    public void TriggerUseAtelierRepBateau(InputAction.CallbackContext context)
     {
         if (useAtelier != null)
         {
@@ -101,42 +153,51 @@ public class liaisonStatsManager : MonoBehaviour
         }
     }
 
-    public void TriggerUseAtelierRepCanon()
+    public void TriggerUseAtelierRepCanon(InputAction.CallbackContext context)
     {
-        if (useAtelier != null)
+        if (atelierManager.PanelCanon.activeSelf)
         {
-            useAtelier.ReparerCanon();  // Call method from UseAtelier
-            Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
-        }
-        else
-        {
-            Debug.LogError("UseAtelier not found!");
+            if (useAtelier != null)
+            {
+                useAtelier.ReparerCanon();  // Call method from UseAtelier
+                Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
+            }
+            else
+            {
+                Debug.LogError("UseAtelier not found!");
+            }
         }
     }
 
-    public void TriggerUseAtelierCuisineRagout()
+    public void TriggerUseAtelierCuisineRagout(InputAction.CallbackContext context)
     {
-        if (useAtelier != null)
+        if (atelierManager.PanelCuisine.activeSelf)
         {
-            useAtelier.CuisinerRagout();  // Call method from UseAtelier
-            Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
-        }
-        else
-        {
-            Debug.LogError("UseAtelier not found!");
+            if (useAtelier != null)
+            {
+                useAtelier.CuisinerRagout();  // Call method from UseAtelier
+                Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
+            }
+            else
+            {
+                Debug.LogError("UseAtelier not found!");
+            }
         }
     }
 
-    public void TriggerUseAtelierCuisinerRhum()
+    public void TriggerUseAtelierCuisinerRhum(InputAction.CallbackContext context)
     {
-        if (useAtelier != null)
+        if (atelierManager.PanelCuisine.activeSelf)
         {
-            useAtelier.CuisinerRhum();  // Call method from UseAtelier
-            Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
-        }
-        else
-        {
-            Debug.LogError("UseAtelier not found!");
+            if (useAtelier != null)
+            {
+                useAtelier.CuisinerRhum();  // Call method from UseAtelier
+                Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
+            }
+            else
+            {
+                Debug.LogError("UseAtelier not found!");
+            }
         }
     }
 }

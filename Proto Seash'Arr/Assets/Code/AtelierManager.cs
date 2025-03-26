@@ -11,11 +11,15 @@ public class AtelierManager : MonoBehaviour
     public GameObject PanelTableIngenieur;
     public GameObject PanelPiqueNique;
     public GameObject PanelCanon;
+    //public GameObject PanelAncre;
 
     public bool cuisineActive; 
     public bool tableIngenieurActive;
     public bool canonActive;
     public bool piqueNiqueActive;
+    public bool ancreActive;
+
+    [Header ("Inputs")]
 
     public InputActionAsset inputActionAsset;
 
@@ -24,6 +28,12 @@ public class AtelierManager : MonoBehaviour
     private InputActionMap CanonMap;
     private InputActionMap PiqueNiqueMap;
     private InputActionMap IngeniorMap;
+
+    public InputAction InteractKitchen;
+    public InputAction CanonToggle; 
+    public InputAction IngeniorToggle; 
+    public InputAction PiqueNiqueToggle;
+
 
     private void Start()
     {
@@ -70,6 +80,12 @@ public class AtelierManager : MonoBehaviour
                 piqueNiqueActive = true;
                 SwitchToPiqueNique();
             }
+            else if (other.CompareTag("Ancre"))
+            {
+                ButtonAtelier.SetActive(true);
+                ancreActive = true;
+                //SwitchToPiqueNique();
+            }
         }
     }
 
@@ -98,6 +114,11 @@ public class AtelierManager : MonoBehaviour
             {
                 piqueNiqueActive = false;
                 PanelPiqueNique.SetActive(false);
+            }
+            else if (other.CompareTag("Ancre"))
+            {
+                ancreActive = false;
+               // PanelAncre.SetActive(false);
             }
 
             // Revert to navigation controls when leaving
@@ -162,24 +183,50 @@ public class AtelierManager : MonoBehaviour
         panel.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        InteractKitchen.Enable();
+        IngeniorToggle.Enable();
+        PiqueNiqueToggle.Enable();
+        CanonToggle.Enable();
+
+        InteractKitchen.started +=OpenTogglePanelCuisine;
+        IngeniorToggle.started += OpenTogglePanelTableIngenieur;
+        PiqueNiqueToggle.started += OpenTogglePanelPiqueNique;
+        CanonToggle.started += OpenTogglePanelCanon;
+    }
+
+    private void OnDisable()
+    {
+        InteractKitchen.Disable();
+        IngeniorToggle.Disable();
+        PiqueNiqueToggle.Disable();
+        CanonToggle.Disable();
+
+        InteractKitchen.started -= OpenTogglePanelCuisine;
+        IngeniorToggle.started -= OpenTogglePanelTableIngenieur;
+        PiqueNiqueToggle.started -= OpenTogglePanelPiqueNique;
+        CanonToggle.started -= OpenTogglePanelCanon;
+    }
+
     // ouvrir un panel spécifique
-    void OpenTogglePanelCuisine() 
+    void OpenTogglePanelCuisine(InputAction.CallbackContext context) 
     { 
         if (PanelCuisine != null && !PanelCuisine.activeSelf && cuisineActive) 
         { 
             OpenPanel(PanelCuisine); 
         } 
     }
-    void OpenTogglePanelTableIngenieur() { if (PanelTableIngenieur != null && !PanelTableIngenieur.activeSelf && tableIngenieurActive) { OpenPanel(PanelTableIngenieur);  } }
-    void OpenTogglePanelPiqueNique() { if (PanelPiqueNique != null && !PanelPiqueNique.activeSelf && piqueNiqueActive) { OpenPanel(PanelPiqueNique);  } }
-    void OpenTogglePanelCanon() { if (PanelCanon != null && !PanelCanon.activeSelf && canonActive) { OpenPanel(PanelCanon);  } }
+    void OpenTogglePanelTableIngenieur(InputAction.CallbackContext context) { if (PanelTableIngenieur != null && !PanelTableIngenieur.activeSelf && tableIngenieurActive) { OpenPanel(PanelTableIngenieur);  } }
+    void OpenTogglePanelPiqueNique(InputAction.CallbackContext context) { if (PanelPiqueNique != null && !PanelPiqueNique.activeSelf && piqueNiqueActive) { OpenPanel(PanelPiqueNique);  } }
+    void OpenTogglePanelCanon(InputAction.CallbackContext context) { if (PanelCanon != null && !PanelCanon.activeSelf && canonActive) { OpenPanel(PanelCanon);  } }
 
 
     // fermer un panel spécifique 
-    void CloseTogglePanelCuisine() { if (PanelCuisine != null && PanelCuisine.activeSelf ) { ClosePanel(PanelCuisine); cuisineActive = false; } }
-    void CloseTogglePanelTableIngenieur() { if (PanelTableIngenieur != null && PanelTableIngenieur.activeSelf ) { ClosePanel(PanelTableIngenieur); tableIngenieurActive = false; } }
-    void CloseTogglePanelPiqueNique() { if (PanelPiqueNique != null && PanelPiqueNique.activeSelf ) { ClosePanel(PanelPiqueNique); piqueNiqueActive = false; } }
-    void CloseTogglePanelCanon() { if (PanelCanon != null && PanelCanon.activeSelf) { ClosePanel(PanelCanon); canonActive = false; } }
+    void CloseTogglePanelCuisine(InputAction.CallbackContext context) { if (PanelCuisine != null && PanelCuisine.activeSelf ) { ClosePanel(PanelCuisine); cuisineActive = false; } }
+    void CloseTogglePanelTableIngenieur(InputAction.CallbackContext context) { if (PanelTableIngenieur != null && PanelTableIngenieur.activeSelf ) { ClosePanel(PanelTableIngenieur); tableIngenieurActive = false; } }
+    void CloseTogglePanelPiqueNique(InputAction.CallbackContext context) { if (PanelPiqueNique != null && PanelPiqueNique.activeSelf ) { ClosePanel(PanelPiqueNique); piqueNiqueActive = false; } }
+    void CloseTogglePanelCanon(InputAction.CallbackContext context) { if (PanelCanon != null && PanelCanon.activeSelf) { ClosePanel(PanelCanon); canonActive = false; } }
 
     void CloseAllPanels()
     {
@@ -190,26 +237,26 @@ public class AtelierManager : MonoBehaviour
     }
 
 
-    void OpenActivePanels()
-    {
-        OpenTogglePanelCuisine(); 
+    //void OpenActivePanels()
+    //{
+    //    OpenTogglePanelCuisine(); 
 
-        OpenTogglePanelTableIngenieur(); 
+    //    OpenTogglePanelTableIngenieur(); 
 
-        OpenTogglePanelPiqueNique(); 
+    //    OpenTogglePanelPiqueNique(); 
 
-        OpenTogglePanelCanon(); 
-    }
+    //    OpenTogglePanelCanon(); 
+    //}
 
-     void CloseInactivePanels()
-    {
-        CloseTogglePanelCuisine(); 
+    // void CloseInactivePanels()
+    //{
+    //    CloseTogglePanelCuisine(); 
 
-        CloseTogglePanelTableIngenieur();
+    //    CloseTogglePanelTableIngenieur();
 
-        CloseTogglePanelPiqueNique(); 
+    //    CloseTogglePanelPiqueNique(); 
 
-        CloseTogglePanelCanon(); 
-    }
+    //    CloseTogglePanelCanon(); 
+    //}
 
 }

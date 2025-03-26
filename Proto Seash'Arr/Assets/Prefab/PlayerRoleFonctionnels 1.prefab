@@ -375,6 +375,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d2b7122a86c8f43bf0271f787dbd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atelierManager: {fileID: 0}
+  CuisinerRagout:
+    m_Name: Cuisiner Ragout
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8a9a9171-68c6-4ad0-9cb8-d236b9169307
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CuisinerRhum:
+    m_Name: Cuisiner Rhum
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2904bca5-83fe-4a92-be64-b9166cb4e3c8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Manger:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f55c1cde-c491-4428-b4fe-9bf7b79ff776
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  RepCanon:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b9e1fb35-275d-4c31-8526-6c552f67e010
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AmeBateau:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 42fa1aa8-9a2b-4656-83fe-8f16b02fb45a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AmeCanon:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 92d4a27b-f4ea-4355-8705-63353a90c83f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &120360514453912282
 GameObject:
   m_ObjectHideFlags: 0
@@ -7837,6 +7892,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d2b7122a86c8f43bf0271f787dbd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atelierManager: {fileID: 2683630604255985676}
+  CuisinerRagout:
+    m_Name: Cuisiner Ragout
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c7a9f9ae-1fd9-41dd-9a4a-9b47d7f1dd6e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b49970db-2c38-4e14-93d9-02afdb317035
+      m_Path: <XInputController>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Cuisiner Ragout
+      m_Flags: 0
+    m_Flags: 0
+  CuisinerRhum:
+    m_Name: Cuisiner Rhum
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ed47dbd0-4e7b-49ee-8095-de044a9a4979
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4b158142-cce5-48f7-924c-44ca6087d6a1
+      m_Path: <XInputController>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Cuisiner Rhum
+      m_Flags: 0
+    m_Flags: 0
+  Manger:
+    m_Name: Manger
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 76ddb4ca-8bef-4e9e-b52d-14de362b0564
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6003e469-7fbe-463a-bf6e-c8e234849938
+      m_Path: <XInputController>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Manger
+      m_Flags: 0
+    m_Flags: 0
+  RepCanon:
+    m_Name: Rep Canon
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a3851cb3-2473-48d9-ad1f-bcf90b2b38bf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1ada3e2e-f6bd-4801-a3cb-206441f0fadc
+      m_Path: <XInputController>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Rep Canon
+      m_Flags: 0
+    m_Flags: 0
+  AmeBateau:
+    m_Name: Ame Bateau
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b82eb1cf-203f-4bae-8325-38262e374edb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9b3236a3-7837-4c3e-be98-d53417902815
+      m_Path: <XInputController>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Ame Bateau
+      m_Flags: 0
+    m_Flags: 0
+  AmeCanon:
+    m_Name: Ame Canon
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8305c279-4122-4d9e-aaf4-17b92b2afe78
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 31327433-28c6-406b-abaf-11a093e9d62a
+      m_Path: <XInputController>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Ame Canon
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &7139021188211854803
 GameObject:
   m_ObjectHideFlags: 0
@@ -8630,6 +8788,42 @@ MonoBehaviour:
   canonActive: 0
   piqueNiqueActive: 0
   inputActionAsset: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
+  InteractKitchen:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ff6b8b57-8239-44a2-80da-de298644b38c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: fbe8879a-f329-4c3f-aedd-9afb91bbce5b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  IngeniorToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0db90dbe-11ee-44b2-8a12-8c1bdf30f69d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  PiqueNiqueToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8b9495cb-0fb7-4e9a-9226-2af8748dfb68
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &7818337187715275130
 GameObject:
   m_ObjectHideFlags: 0
@@ -9646,7 +9840,7 @@ GameObject:
   - component: {fileID: 4792752599182146172}
   - component: {fileID: 3747999045882221587}
   m_Layer: 0
-  m_Name: PlayerRoleFonctionnels
+  m_Name: PlayerRoleFonctionnels 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9732,7 +9926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -9762,9 +9956,9 @@ MonoBehaviour:
     m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2683630604255985676}
         m_TargetAssemblyTypeName: AtelierManager, Assembly-CSharp
-        m_MethodName: OpenTogglePanelCuisine
+        m_MethodName: 
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9911,6 +10105,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   health: 100
+  onMove:
+    m_Name: On Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 09c62c88-5d4a-44bb-82e9-ccfa44d8fd10
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5618607d-ac80-4d56-a364-d28d9f60193d
+      m_Path: <Gamepad>/leftStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 0
+    m_Flags: 0
 --- !u!54 &4792752599182146172
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10121,6 +10332,74 @@ MonoBehaviour:
   canonActive: 0
   piqueNiqueActive: 0
   inputActionAsset: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
+  InteractKitchen:
+    m_Name: Interact Kitchen
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c0417625-8201-4d05-8b80-1afb79e58236
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7252b3b6-d6ed-4294-a1bc-0cea2bf7321d
+      m_Path: <XInputController>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact Kitchen
+      m_Flags: 0
+    m_Flags: 0
+  CanonToggle:
+    m_Name: Canon Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 29592dac-202e-4454-aaae-329dba80c1b3
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 349cf7da-8c1e-4452-9223-e7c10eecf495
+      m_Path: <XInputController>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Canon Toggle
+      m_Flags: 0
+    m_Flags: 0
+  IngeniorToggle:
+    m_Name: Ingenior Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 13c24b66-984c-47c5-815b-ffc4625a7407
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 622faf1a-b521-4a64-8cef-9fb3927217f0
+      m_Path: <XInputController>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Ingenior Toggle
+      m_Flags: 0
+    m_Flags: 0
+  PiqueNiqueToggle:
+    m_Name: Pique Nique Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6a9e555f-b550-4421-bbcb-75897f3e7107
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: de8e53db-67de-46cd-8ec3-43dd03370ee5
+      m_Path: <XInputController>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pique Nique Toggle
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &8968446856689318024
 GameObject:
   m_ObjectHideFlags: 0

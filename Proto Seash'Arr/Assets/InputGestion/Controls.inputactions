@@ -54,7 +54,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "67df5648-48dd-46fa-9df2-ce2056836941",
+                    "id": "a6511529-9d0d-4f9d-b4fc-d5004f799140",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
@@ -117,50 +117,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "98ae8af4-dbaf-427c-a9eb-57596d6b5d34",
-                    "path": "<XInputController>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "InteractPiqueNique",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "252ac331-7719-46c6-8cdc-d3f99a3f24de",
-                    "path": "<XInputController>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "InteractCanon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6584c1c6-d29e-49a8-9fb2-646497a5d697",
-                    "path": "<XInputController>/buttonNorth",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "InteractIngenior",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f25d9ed6-c045-4fe3-b0fd-8657e415b96f",
-                    "path": "<XInputController>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "InteractKitchen",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -292,7 +248,7 @@
                     "name": "",
                     "id": "40e72ecb-adb2-479c-b9ed-78a92d243914",
                     "path": "<XInputController>/leftTrigger",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Left",
@@ -303,7 +259,7 @@
                     "name": "",
                     "id": "dbdec7f3-eb68-429b-9f52-f480b5d8ed86",
                     "path": "<XInputController>/rightTrigger",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Right",
@@ -324,6 +280,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Crédits",
+                    "type": "Button",
+                    "id": "d4189bdb-4bc1-41af-9840-f947eea51cd0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Tuto",
+                    "type": "Button",
+                    "id": "c828e635-97e6-4e22-8a55-0832407328e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Paramètres",
+                    "type": "Button",
+                    "id": "14827c9f-ebb3-47f1-9e50-6cafc6552370",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -335,6 +318,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jouer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d525879-4d1d-439e-83c7-64dfabe2c6c7",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crédits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a73f1c65-9e3c-40ee-b8c5-42037201a852",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tuto",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "738d6977-adfd-45cc-bebf-1cfcbcc044d7",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Paramètres",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
