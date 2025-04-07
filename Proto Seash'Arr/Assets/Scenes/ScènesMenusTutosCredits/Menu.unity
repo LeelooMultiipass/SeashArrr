@@ -774,6 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4878760c91696bb42b47779888756d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActionAsset: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
 --- !u!4 &1132545261
 Transform:
   m_ObjectHideFlags: 0
@@ -1616,12 +1617,36 @@ MonoBehaviour:
     m_ActionName: Ingenior/AmeCanon[/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 5358f82b-4a5d-4ca7-a5af-43b929a388f1
-    m_ActionName: CharacterChoice/Left Click[/XInputControllerWindows/leftTrigger]
+    m_ActionId: 1ee90518-5156-4f84-a5de-6716b5312f3b
+    m_ActionName: CharacterChoice/Left[/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 73458b4f-75b8-4b79-b4d5-8bd3098a7c98
-    m_ActionName: CharacterChoice/Right Click[/XInputControllerWindows/rightTrigger]
+    m_ActionId: e82ec69a-989f-4ab2-ab15-38edbdce56dc
+    m_ActionName: CharacterChoice/Right[/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1132545259}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Credits
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d4189bdb-4bc1-41af-9840-f947eea51cd0
+    m_ActionName: "MenuPrincipal/Cr\xE9dits[/XInputControllerWindows/buttonEast]"
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c828e635-97e6-4e22-8a55-0832407328e8
+    m_ActionName: MenuPrincipal/Tuto[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 14827c9f-ebb3-47f1-9e50-6cafc6552370
+    m_ActionName: "MenuPrincipal/Param\xE8tres[/XInputControllerWindows/buttonWest]"
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MenuPrincipal
