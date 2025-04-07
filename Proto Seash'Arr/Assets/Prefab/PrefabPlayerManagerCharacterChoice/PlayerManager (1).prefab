@@ -258,10 +258,6 @@ MonoBehaviour:
     m_ActionName: GameplayNavigation/InteractKitchen
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: be3e8ace-2e98-4ea7-ae6e-61e70d878978
-    m_ActionName: MenuPrincipal/Jouer[/XInputControllerWindows/buttonSouth]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 50d8c247-7dcc-40bb-aa0c-15a84ab464c4
     m_ActionName: Cuisine/CuisinerRagout[/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
@@ -298,7 +294,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1ee90518-5156-4f84-a5de-6716b5312f3b
+    m_ActionId: 2d98e412-a4d7-4039-9a83-62b144bb1850
     m_ActionName: CharacterChoice/Left[/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
@@ -314,20 +310,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e82ec69a-989f-4ab2-ab15-38edbdce56dc
+    m_ActionId: 77de6216-5287-4932-b06f-5a19d2e2226b
     m_ActionName: CharacterChoice/Right[/XInputControllerWindows/rightTrigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d4189bdb-4bc1-41af-9840-f947eea51cd0
-    m_ActionName: "MenuPrincipal/Cr\xE9dits"
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c828e635-97e6-4e22-8a55-0832407328e8
-    m_ActionName: MenuPrincipal/Tuto
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 14827c9f-ebb3-47f1-9e50-6cafc6552370
-    m_ActionName: "MenuPrincipal/Param\xE8tres"
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterChoice

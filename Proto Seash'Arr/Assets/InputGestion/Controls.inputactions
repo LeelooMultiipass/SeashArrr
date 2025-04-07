@@ -123,8 +123,50 @@
         {
             "name": "CharacterChoice",
             "id": "741c1436-458c-4611-82ed-e77cc534ebd6",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "Left",
+                    "type": "Button",
+                    "id": "2d98e412-a4d7-4039-9a83-62b144bb1850",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right",
+                    "type": "Button",
+                    "id": "77de6216-5287-4932-b06f-5a19d2e2226b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d24bc8f8-4726-416e-8d04-eb384d423aeb",
+                    "path": "<XInputController>/leftTrigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a21226c-f973-4857-aa9a-50299b8c28a6",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         },
         {
             "name": "Cuisine",
