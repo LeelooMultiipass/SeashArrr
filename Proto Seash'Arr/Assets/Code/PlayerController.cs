@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,30 +6,42 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     private Vector2 movementInput;
     public float health = 100f;
-    public InputAction onMove;
+    private PlayerInput playerInput;
 
     private void OnEnable()
     {
-        onMove.Enable();
-        onMove.performed += Move;  // Se déclenche quand l'input change
-        onMove.canceled += Move;   // Réinitialise à 0 quand le joueur relâche la touche
+        playerInput = GetComponent<PlayerInput>();  // On obtient le PlayerInput attaché au clone
+
+        // Le système d'input est activé pour ce joueur spécifique
+        playerInput.actions.Enable();  // Assurer que les actions de ce joueur soient activées
+
+        // L'action de déplacement est assignée spécifiquement à ce joueur
+        playerInput.actions["Move"].performed += Move;
+        playerInput.actions["Move"].canceled += StopMoving;
     }
 
     private void OnDisable()
     {
-        onMove.performed -= Move;
-        onMove.canceled -= Move;
-        onMove.Disable();
+        playerInput.actions["Move"].performed -= Move;
+        playerInput.actions["Move"].canceled -= StopMoving;
+
+        playerInput.actions.Disable();
     }
 
     private void Update()
     {
+        // Appliquer les mouvements seulement sur l'axe X et Y
         Vector3 moveVector = new Vector3(movementInput.x, 0, movementInput.y) * speed * Time.deltaTime;
-        transform.Translate(moveVector, Space.World); // Utilisation de Space.World pour éviter les problèmes de rotation
+        transform.Translate(moveVector, Space.World);
     }
 
-    private void Move(InputAction.CallbackContext ctx)
+    private void Move(InputAction.CallbackContext context)
     {
-        movementInput = ctx.ReadValue<Vector2>();
+        movementInput = context.ReadValue<Vector2>();  // Lire les inputs pour le mouvement
+    }
+
+    private void StopMoving(InputAction.CallbackContext context)
+    {
+        movementInput = Vector2.zero;  // Réinitialiser à zéro quand le joueur arrête de bouger
     }
 }

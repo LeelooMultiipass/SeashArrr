@@ -236,27 +236,4 @@ public class AtelierManager : MonoBehaviour
         if (PanelCanon != null) ClosePanel(PanelCanon);
     }
 
-
-    //void OpenActivePanels()
-    //{
-    //    OpenTogglePanelCuisine(); 
-
-    //    OpenTogglePanelTableIngenieur(); 
-
-    //    OpenTogglePanelPiqueNique(); 
-
-    //    OpenTogglePanelCanon(); 
-    //}
-
-    // void CloseInactivePanels()
-    //{
-    //    CloseTogglePanelCuisine(); 
-
-    //    CloseTogglePanelTableIngenieur();
-
-    //    CloseTogglePanelPiqueNique(); 
-
-    //    CloseTogglePanelCanon(); 
-    //}
-
 }

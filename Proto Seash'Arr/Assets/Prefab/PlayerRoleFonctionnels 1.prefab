@@ -8787,9 +8787,10 @@ MonoBehaviour:
   tableIngenieurActive: 0
   canonActive: 0
   piqueNiqueActive: 0
+  ancreActive: 0
   inputActionAsset: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
   InteractKitchen:
-    m_Name: 
+    m_Name: Interact Kitchen
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: ff6b8b57-8239-44a2-80da-de298644b38c
@@ -8798,7 +8799,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   CanonToggle:
-    m_Name: 
+    m_Name: Canon Toggle
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: fbe8879a-f329-4c3f-aedd-9afb91bbce5b
@@ -8807,7 +8808,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   IngeniorToggle:
-    m_Name: 
+    m_Name: Ingenior Toggle
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 0db90dbe-11ee-44b2-8a12-8c1bdf30f69d
@@ -8816,7 +8817,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   PiqueNiqueToggle:
-    m_Name: 
+    m_Name: Pique Nique Toggle
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 8b9495cb-0fb7-4e9a-9226-2af8748dfb68
@@ -9833,7 +9834,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5264540753904008202}
-  - component: {fileID: 689815961732842566}
   - component: {fileID: 7924426878478412379}
   - component: {fileID: 843079959580613214}
   - component: {fileID: 2230420616738248933}
@@ -9863,14 +9863,6 @@ Transform:
   - {fileID: 5146468606790725325}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &689815961732842566
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8644401243069310239}
-  m_Mesh: {fileID: 0}
 --- !u!23 &7924426878478412379
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10168,7 +10160,7 @@ MonoBehaviour:
   BoostPower: 0
   FixPower: 0
   UIManager: {fileID: 0}
-  role: 0
+  role: 1
   CaptainPrefab: {fileID: 8675310550896121796}
   DoctorPrefab: {fileID: 7745219684697470710}
 --- !u!1 &8675310550896121796
@@ -10331,6 +10323,7 @@ MonoBehaviour:
   tableIngenieurActive: 0
   canonActive: 0
   piqueNiqueActive: 0
+  ancreActive: 0
   inputActionAsset: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
   InteractKitchen:
     m_Name: Interact Kitchen

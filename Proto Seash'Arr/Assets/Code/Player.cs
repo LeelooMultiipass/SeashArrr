@@ -75,28 +75,6 @@ public class Player : MonoBehaviour
         roleIndex = (roleIndex + 1) % Enum.GetValues(typeof(Role)).Length;
     }
 
-    //private void AssignMaterial()
-    //{
-    //    // Vérifier que la liste des matériaux contient suffisamment d'éléments
-    //    if (CharactersRoles.Count > 0 && TryGetComponent<Renderer>(out Renderer renderer))
-    //    {
-    //        int roleMaterialIndex = (int)role;
-
-    //        if (roleMaterialIndex >= 0 && roleMaterialIndex < CharactersRoles.Count)
-    //        {
-    //            // Appliquer le matériau correspondant au rôle
-    //            renderer.material = CharactersRoles[roleMaterialIndex];
-    //        }
-    //        else
-    //        {
-    //            Debug.LogWarning("Pas de matériau disponible pour ce rôle.");
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Pas de matériaux ou Renderer non trouvé.");
-    //    }
-    //}
         
     public void ChangePrefab()
     {

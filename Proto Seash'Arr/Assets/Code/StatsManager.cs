@@ -50,8 +50,8 @@ public class StatsManager : MonoBehaviour
     [Space(20)]
 
     [Header("Texts")]
-   // public TMP_Text boatHealthText;
-   // public TMP_Text canonHealthText;
+    public TMP_Text boatHealthText;
+    public TMP_Text canonHealthText;
     public TMP_Text nbrWoodText;
     public TMP_Text nbrIronText;
     public TMP_Text nbrFoodText;
@@ -74,8 +74,8 @@ public class StatsManager : MonoBehaviour
 
     public void UpdateText()
     {
-        //boatHealthText.text = boatHealth + " / " + boatMaxHealth;
-       // canonHealthText.text = canonHealth + " / " + canonMaxHealth;
+        boatHealthText.text = boatHealth + " / " + boatMaxHealth;
+        canonHealthText.text = canonHealth + " / " + canonMaxHealth;
         nbrWoodText.text = nbrWood +"";
         nbrIronText.text = nbrIron + "";
         nbrFoodText.text = nbrFood + "";

@@ -99,6 +99,7 @@ public class liaisonStatsManager : MonoBehaviour
             if (useAtelier != null)
             {
                 useAtelier.AmeliorationBateau();  // Call method from UseAtelier
+                statsManager.boatMaxHealth += 100;
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
@@ -115,6 +116,7 @@ public class liaisonStatsManager : MonoBehaviour
             if (useAtelier != null)
             {
                 useAtelier.AmeliorationCanon();  // Call method from UseAtelier
+                statsManager.canonMaxHealth += 100;
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
@@ -159,8 +161,12 @@ public class liaisonStatsManager : MonoBehaviour
         {
             if (useAtelier != null)
             {
-                useAtelier.ReparerCanon();  // Call method from UseAtelier
-                Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
+                if (statsManager.canonHealth < statsManager.canonMaxHealth)
+                {
+                    useAtelier.ReparerCanon();  // Call method from UseAtelier
+                    statsManager.canonHealth += (int)(statsManager.canonMaxHealth * 0.2f);
+                    Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
+                }
             }
             else
             {
