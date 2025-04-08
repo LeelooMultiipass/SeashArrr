@@ -10,9 +10,11 @@ public class StatsManager : MonoBehaviour
    // Temps de jeu
     [Header("Temps globaux")]
     public float TempsNavigation = 0;
+    public float TempsCombat = 0;
     public float TempsFight = 0;
-    public int TempsMinNavigation = 50;
-    public int TempsMaxNavigation = 75;
+    public int TempsMinBeforeFight = 50;
+    public int TempsMaxBeforeFight = 75;
+    public int TempsBeforeIsland = 90;
     public float TimerFightCooldown = 5;
 
     [Space(20)]
@@ -34,7 +36,8 @@ public class StatsManager : MonoBehaviour
     public GameObject CameraFight;
     public GameObject CameraNavigation;
     public GameObject UIPopUpEnnemies;
-    //public GameObject UI;
+    public Slider slider;
+    
     [Space(20)]
 
     [Header("Statistiques")]
@@ -66,7 +69,9 @@ public class StatsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LancementFight = rnd.Next(TempsMinNavigation, TempsMaxNavigation); //Randomise automatiquement le premier lancement de combat
+        LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight); //Randomise automatiquement le premier lancement de combat
+        slider.maxValue = TempsBeforeIsland;
+        slider.value = 0;
         boatHealth = boatMaxHealth;
         canonHealth = canonMaxHealth;
         UpdateText();
@@ -90,33 +95,41 @@ public class StatsManager : MonoBehaviour
         if (Navigation == true)
         {
             TempsNavigation += Time.deltaTime;
-            
-            if(TempsNavigation >= LancementFight- TimerFightCooldown)
+            TempsCombat += Time.deltaTime;
+            slider.value = TempsNavigation;
+
+            if (TempsCombat >= LancementFight- TimerFightCooldown)
                 {
                     UIPopUpEnnemies.SetActive(true);
                 }
 
-            if (Mathf.Abs(TempsNavigation - LancementFight) < 0.1f)
+            if (Mathf.Abs(TempsCombat - LancementFight) < 0.1f)
             {
                 Navigation = false;
                 Fight = true;
                 
                 
+               
+
 
                 CameraNavigation.SetActive(!CameraNavigation.activeSelf);
+                slider.maxValue = TempsBeforeIsland;
+                slider.value = LancementFight;
+                TempsNavigation = LancementFight;
                 CameraFight.SetActive(!CameraFight.activeSelf);
                 UIPopUpEnnemies.SetActive(!UIPopUpEnnemies.activeSelf);
+                
                 //SceneManager.LoadScene("FightTest"); // Remplacez "FightScene" par le nom de votre scène de combat
                 //UI.SetActive(!UI.activeSelf);
 
                 // Réinitialiser TempsNavigation pour arrêter le timer
-                TempsNavigation = 0;
+                TempsNavigation += Time.deltaTime;
+                slider.value = TempsNavigation;
 
-                
 
                 // Redéfinir Lancement pour le prochain combat aléatoire
-                LancementFight = rnd.Next(TempsMinNavigation, TempsMaxNavigation);
-
+                LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
+                TempsCombat = 0;
             }
         }
 
