@@ -521,6 +521,162 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1897023929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897023932}
+  - component: {fileID: 1897023931}
+  - component: {fileID: 1897023930}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1897023930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897023929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4878760c91696bb42b47779888756d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputActionAsset: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
+--- !u!114 &1897023931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897023929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 42ab8c5a-669b-4f9c-a268-4bd1e48c2588
+    m_ActionName: GameplayNavigation/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7cf6dd0-46c7-4630-a502-0de07819136b
+    m_ActionName: GameplayNavigation/InteractPiqueNique
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1c19ab2c-0fbd-4742-a135-7389c737ffe2
+    m_ActionName: GameplayNavigation/InteractCanon
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5aaa1421-8f3d-4f0c-9400-65b66c1d21fa
+    m_ActionName: GameplayNavigation/InteractIngenior
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 516ca111-8ad1-48b2-a3e9-51b339a378a2
+    m_ActionName: GameplayNavigation/InteractKitchen
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2d98e412-a4d7-4039-9a83-62b144bb1850
+    m_ActionName: CharacterChoice/Left[/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 77de6216-5287-4932-b06f-5a19d2e2226b
+    m_ActionName: CharacterChoice/Right[/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 028552dd-14cf-4ff0-a0ce-77c19cd7ee2c
+    m_ActionName: CharacterChoice/Valider[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a548bdf6-e7d2-4ac0-bc7a-78a1b0bb3d66
+    m_ActionName: CharacterChoice/Annuler[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e1c08d01-7443-444e-b734-0e58e9016200
+    m_ActionName: CharacterChoice/ValiderFinal[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 50d8c247-7dcc-40bb-aa0c-15a84ab464c4
+    m_ActionName: Cuisine/CuisinerRagout[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 851a40b2-d92b-4808-9ed1-d07f5a1979e1
+    m_ActionName: Cuisine/CuisinerRhum[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 730f50e5-f0f0-4b02-b16c-6b341a3ffeb5
+    m_ActionName: PiqueNique/Manger[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fb9a845c-135a-43e5-a038-8c6098986e16
+    m_ActionName: Canon/RepCanon[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2214f55f-cb23-49e1-9d6f-07df7e5e2a8d
+    m_ActionName: Ingenior/AmeBateau[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e009ccda-e0fe-41c1-8678-e5fbabd6b09c
+    m_ActionName: Ingenior/AmeCanon[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1897023930}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Menu
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 58a35a5e-2152-4515-953d-ed09260dc7d2
+    m_ActionName: Parameters/Retour[/XInputControllerWindows/buttonEast]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Parameters
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &1897023932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897023929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -54.114788, y: -6.703385, z: 27.865402}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1901300334
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,3 +853,4 @@ SceneRoots:
   - {fileID: 1785337676}
   - {fileID: 1771396279}
   - {fileID: 1879718801}
+  - {fileID: 1897023932}

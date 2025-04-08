@@ -141,6 +141,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Valider",
+                    "type": "Button",
+                    "id": "028552dd-14cf-4ff0-a0ce-77c19cd7ee2c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Annuler",
+                    "type": "Button",
+                    "id": "a548bdf6-e7d2-4ac0-bc7a-78a1b0bb3d66",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ValiderFinal",
+                    "type": "Button",
+                    "id": "e1c08d01-7443-444e-b734-0e58e9016200",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -148,7 +175,7 @@
                     "name": "",
                     "id": "d24bc8f8-4726-416e-8d04-eb384d423aeb",
                     "path": "<XInputController>/leftTrigger",
-                    "interactions": "Press",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Left",
@@ -159,10 +186,43 @@
                     "name": "",
                     "id": "7a21226c-f973-4857-aa9a-50299b8c28a6",
                     "path": "<XInputController>/rightTrigger",
-                    "interactions": "Press",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea0db1fb-be4e-48dd-b2dc-ade748b37d18",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Valider",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a8bf561-802f-4d4d-b279-4a5b040b360c",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Annuler",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f0dd063-986e-48bf-8d60-e2191714cc08",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ValiderFinal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -315,6 +375,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "AmeCanon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Parameters",
+            "id": "ce25c58b-1825-4bd8-aa61-5fa9cc826b27",
+            "actions": [
+                {
+                    "name": "Retour",
+                    "type": "Button",
+                    "id": "58a35a5e-2152-4515-953d-ed09260dc7d2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a65faf48-4102-4f85-a09e-89e49b24c4ed",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Retour",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
