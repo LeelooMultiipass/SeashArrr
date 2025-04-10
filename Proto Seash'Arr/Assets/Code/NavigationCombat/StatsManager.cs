@@ -29,6 +29,7 @@ public class StatsManager : MonoBehaviour
     [Header("Etat des phases")]
     public bool Navigation = true;
     public bool Fight = false;
+    public bool Ressources = false;
     [Space(20)]
 
     // Objets à toggle
@@ -108,10 +109,6 @@ public class StatsManager : MonoBehaviour
                 Navigation = false;
                 Fight = true;
                 
-                
-               
-
-
                 CameraNavigation.SetActive(!CameraNavigation.activeSelf);
                 slider.maxValue = TempsBeforeIsland;
                 slider.value = LancementFight;
@@ -122,7 +119,6 @@ public class StatsManager : MonoBehaviour
                 //SceneManager.LoadScene("FightTest"); // Remplacez "FightScene" par le nom de votre scène de combat
                 //UI.SetActive(!UI.activeSelf);
 
-                // Réinitialiser TempsNavigation pour arrêter le timer
                 TempsNavigation += Time.deltaTime;
                 slider.value = TempsNavigation;
 
@@ -130,7 +126,15 @@ public class StatsManager : MonoBehaviour
                 // Redéfinir Lancement pour le prochain combat aléatoire
                 LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
                 TempsCombat = 0;
-            }
+
+               
+            } 
+            
+            if(Mathf.Abs(TempsNavigation - TempsBeforeIsland) < 0.1f)
+                {
+                    Navigation = false; 
+                    Ressources = true;
+                }
         }
 
         if (Fight == true)
@@ -149,6 +153,19 @@ public class StatsManager : MonoBehaviour
                 // Réinitialiser TempsFight pour arrêter le timer
                 TempsFight = 0;
             }
+        }
+
+        if(Ressources == true)
+        {
+            TempsNavigation = 0;
+            TempsCombat = TempsCombat;
+            nbrFood += 60;
+            nbrWood += 90;
+            nbrIron += 30;
+            UpdateText();
+            Ressources = false;
+            Navigation = true;
+            TempsCombat += Time.deltaTime;
         }
     }
 }

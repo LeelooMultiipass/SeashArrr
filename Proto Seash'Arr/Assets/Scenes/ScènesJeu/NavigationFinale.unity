@@ -4072,6 +4072,7 @@ MonoBehaviour:
   LancementNavig: 10
   Navigation: 1
   Fight: 0
+  Ressources: 0
   CameraFight: {fileID: 4698288069239188497}
   CameraNavigation: {fileID: 6933764799586937339}
   UIPopUpEnnemies: {fileID: 811162128552143284}
