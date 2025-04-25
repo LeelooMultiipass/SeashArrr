@@ -1401,7 +1401,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 8644401243069310239, guid: 38b0d7e65ea8d9c4e9097bcc776d5964, type: 3}
+  m_PlayerPrefab: {fileID: 9129638340439077407, guid: 38b0d7e65ea8d9c4e9097bcc776d5964, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -1951,7 +1951,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 90
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 48.7
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2560,7 +2560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.6543069, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3202,7 +3202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8914263, g: 1, b: 0.4575472, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3664,8 +3664,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatsManager: {fileID: 4359715218010467453}
   AtelierManager: {fileID: 2068031864871419638, guid: c7fd55c25ca65cf4bb3a4216db62a525, type: 3}
-  tempsAvantInteraction: 1
-  tempsApresInteraction: 3
+  tempsAction: 0
+  timer: 0
+  isBusy: 0
 --- !u!222 &2820318890678403613
 CanvasRenderer:
   m_ObjectHideFlags: 0

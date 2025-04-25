@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class AtelierManager : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class AtelierManager : MonoBehaviour
     public GameObject PanelTableIngenieur;
     public GameObject PanelPiqueNique;
     public GameObject PanelCanon;
+
+    public Slider CuisineSlider;
+    public Slider IngeniorSlider;
+    public Slider PiqueNiqueSlider;
+    public Slider CanonSlider;
+
     //public GameObject PanelAncre;
 
     public bool cuisineActive; 
@@ -42,6 +49,10 @@ public class AtelierManager : MonoBehaviour
             ButtonAtelier.SetActive(false);
         }
         CloseAllPanels();
+        if (CuisineSlider != null) CuisineSlider.gameObject.SetActive(false);
+        if (IngeniorSlider != null) IngeniorSlider.gameObject.SetActive(false);
+        if (PiqueNiqueSlider != null) PiqueNiqueSlider.gameObject.SetActive(false);
+        if (CanonSlider != null) CanonSlider.gameObject.SetActive(false);
 
         NavigationMap = inputActionAsset.FindActionMap("GameplayNavigation");
         CuisineMap = inputActionAsset.FindActionMap("Cuisine");

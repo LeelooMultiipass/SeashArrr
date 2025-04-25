@@ -17,14 +17,13 @@ public class Player : MonoBehaviour
         //Cannonier
     }
 
-    //public List<Material> CharactersRoles;
     private static int roleIndex = 0;
 
     [SerializeField] private int HPMax;
     [SerializeField] private int ATT;
     [SerializeField] private int CanonPower;
     [SerializeField] private int HealPower;
-    [SerializeField] private int BoostPower;
+    [SerializeField] private float BoostPower;
     [SerializeField] private int FixPower;
     [SerializeField] private UI_Manager UIManager;
 
@@ -62,7 +61,6 @@ public class Player : MonoBehaviour
         HP = HPMax;
         AssignRole();
         ChangePrefab();
-        ////AssignMaterial();
 
     }
 
@@ -81,10 +79,20 @@ public class Player : MonoBehaviour
         if (roleIndex == 1)
             {
             CaptainPrefab.SetActive(true);
+            ATT = 25;
+            CanonPower = 10;
+            HealPower = 50;
+            BoostPower = 0.5f;
+            FixPower = 100;
             }
         if (roleIndex == 2)
         {
             DoctorPrefab.SetActive(true);
+            ATT = 25;
+            CanonPower = 10;
+            HealPower = 100;
+            BoostPower = 0f;
+            FixPower = 100;
         }
     }
 

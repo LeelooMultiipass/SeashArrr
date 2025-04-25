@@ -100,6 +100,7 @@ public class liaisonStatsManager : MonoBehaviour
             {
                 useAtelier.AmeliorationBateau();  // Call method from UseAtelier
                 statsManager.boatMaxHealth += 100;
+                statsManager.UpdateText();
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
@@ -117,6 +118,7 @@ public class liaisonStatsManager : MonoBehaviour
             {
                 useAtelier.AmeliorationCanon();  // Call method from UseAtelier
                 statsManager.canonMaxHealth += 100;
+                statsManager.UpdateText();
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
@@ -165,6 +167,7 @@ public class liaisonStatsManager : MonoBehaviour
                 {
                     useAtelier.ReparerCanon();  // Call method from UseAtelier
                     statsManager.canonHealth += (int)(statsManager.canonMaxHealth * 0.2f);
+                    statsManager.UpdateText();
                     Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
                 }
             }
@@ -182,6 +185,8 @@ public class liaisonStatsManager : MonoBehaviour
             if (useAtelier != null)
             {
                 useAtelier.CuisinerRagout();  // Call method from UseAtelier
+                statsManager.nbrRagout += 1;
+                statsManager.UpdateText();
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
@@ -198,6 +203,13 @@ public class liaisonStatsManager : MonoBehaviour
             if (useAtelier != null)
             {
                 useAtelier.CuisinerRhum();  // Call method from UseAtelier
+                statsManager.nbrRhum += 1;
+                if(useAtelier.isBusy == false)
+                {
+                    statsManager.UpdateText();
+                }
+                
+
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else

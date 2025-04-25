@@ -3084,6 +3084,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 543447911010556244, guid: 26c3d6a195f7f9545a34da6ba6149395, type: 3}
+      propertyPath: CanonToggle.m_Name
+      value: Canon Toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 543447911010556244, guid: 26c3d6a195f7f9545a34da6ba6149395, type: 3}
+      propertyPath: IngeniorToggle.m_Name
+      value: Ingenior Toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 543447911010556244, guid: 26c3d6a195f7f9545a34da6ba6149395, type: 3}
+      propertyPath: InteractKitchen.m_Name
+      value: Interact Kitchen
+      objectReference: {fileID: 0}
+    - target: {fileID: 543447911010556244, guid: 26c3d6a195f7f9545a34da6ba6149395, type: 3}
+      propertyPath: PiqueNiqueToggle.m_Name
+      value: Pique Nique Toggle
+      objectReference: {fileID: 0}
     - target: {fileID: 6781142666424084146, guid: 26c3d6a195f7f9545a34da6ba6149395, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
