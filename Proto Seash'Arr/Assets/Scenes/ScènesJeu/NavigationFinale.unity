@@ -3663,7 +3663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatsManager: {fileID: 4359715218010467453}
-  AtelierManager: {fileID: 2068031864871419638, guid: c7fd55c25ca65cf4bb3a4216db62a525, type: 3}
+  AtelierManager: {fileID: 1845849116676902247, guid: c7fd55c25ca65cf4bb3a4216db62a525, type: 3}
   tempsAction: 0
   timer: 0
   isBusy: 0

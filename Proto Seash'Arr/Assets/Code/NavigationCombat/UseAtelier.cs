@@ -6,24 +6,46 @@ using UnityEngine.UI;
 public class UseAtelier : MonoBehaviour
 {
     public StatsManager StatsManager;
-    public AtelierManager AtelierManager;
+    private List<AtelierManager> ateliers = new List<AtelierManager>();
     public float tempsAction;
     public float timer;
-
     public bool isBusy = false;
-    private AtelierManager[] allAteliers;
+
+    [SerializeField] private float refreshRate = 0.5f; // Temps entre chaque mise à jour (en secondes)
 
     private void Start()
     {
-        allAteliers = FindObjectsOfType<AtelierManager>();
-        Debug.Log("Nombre d'ateliers trouvés : " + allAteliers.Length);
+        StartCoroutine(RefreshAtelierList());
     }
 
-    private void TryAction(string actionName, System.Action action)
+    private IEnumerator RefreshAtelierList()
+    {
+        while (true)
+        {
+            ateliers = new List<AtelierManager>(FindObjectsOfType<AtelierManager>());
+            Debug.Log("Nombre total de scripts AtelierManager dans la scène : " + ateliers.Count);
+            yield return new WaitForSeconds(refreshRate);
+        }
+    }
+
+    private AtelierManager GetActiveAtelier()
+    {
+        foreach (var atelier in ateliers)
+        {
+            if (atelier.PanelCuisine.activeSelf || atelier.PanelTableIngenieur.activeSelf ||
+                atelier.PanelCanon.activeSelf || atelier.PanelPiqueNique.activeSelf)
+            {
+                return atelier;
+            }
+        }
+        return null;
+    }
+
+    private void TryAction(string actionName, System.Action<AtelierManager> action, System.Action onActionCompleted = null)
     {
         if (!isBusy)
         {
-            StartCoroutine(ActionRoutine(actionName, action));
+            StartCoroutine(ActionRoutine(actionName, action, onActionCompleted));
         }
         else
         {
@@ -31,37 +53,37 @@ public class UseAtelier : MonoBehaviour
         }
     }
 
-    private IEnumerator ActionRoutine(string actionName, System.Action action)
+    private IEnumerator ActionRoutine(string actionName, System.Action<AtelierManager> action, System.Action onActionCompleted)
     {
         isBusy = true;
         Debug.Log("Début de l'action : " + actionName);
 
-        // Trouver le slider actif correspondant
+        AtelierManager activeAtelier = GetActiveAtelier();
         Slider activeSlider = null;
 
-        if (AtelierManager.PanelCuisine.activeSelf) activeSlider = AtelierManager.CuisineSlider;
-        else if (AtelierManager.PanelTableIngenieur.activeSelf) activeSlider = AtelierManager.IngeniorSlider;
-        else if (AtelierManager.PanelCanon.activeSelf) activeSlider = AtelierManager.CanonSlider;
-        else if (AtelierManager.PanelPiqueNique.activeSelf) activeSlider = AtelierManager.PiqueNiqueSlider;
+        if (activeAtelier != null)
+        {
+            activeAtelier.CuisineSlider?.gameObject.SetActive(false);
+            activeAtelier.IngeniorSlider?.gameObject.SetActive(false);
+            activeAtelier.CanonSlider?.gameObject.SetActive(false);
+            activeAtelier.PiqueNiqueSlider?.gameObject.SetActive(false);
+
+            if (activeAtelier.PanelCuisine.activeSelf) activeSlider = activeAtelier.CuisineSlider;
+            else if (activeAtelier.PanelTableIngenieur.activeSelf) activeSlider = activeAtelier.IngeniorSlider;
+            else if (activeAtelier.PanelCanon.activeSelf) activeSlider = activeAtelier.CanonSlider;
+            else if (activeAtelier.PanelPiqueNique.activeSelf) activeSlider = activeAtelier.PiqueNiqueSlider;
+        }
 
         if (activeSlider != null)
         {
             activeSlider.gameObject.SetActive(true);
             activeSlider.maxValue = tempsAction;
-            activeSlider.value = tempsAction;
-        }
-
-        action?.Invoke();
-
-        Debug.Log("Action exécutée, temps de blocage (" + tempsAction + "s)");
-
-        timer = 0f;
-        if (activeSlider != null)
-        {
-            activeSlider.maxValue = tempsAction;
             activeSlider.value = 0;
         }
 
+        action?.Invoke(activeAtelier); // Phase 1 : début immédiat
+
+        timer = 0f;
         while (timer < tempsAction)
         {
             timer += Time.deltaTime;
@@ -74,102 +96,141 @@ public class UseAtelier : MonoBehaviour
         if (activeSlider != null)
             activeSlider.gameObject.SetActive(false);
 
+        onActionCompleted?.Invoke(); // Phase 2 : effet post-slider
+
         isBusy = false;
         Debug.Log("Fin de l'action : " + actionName);
     }
 
+    // Actions (identiques à avant, inchangées)
     public void AmeliorationBateau()
     {
         tempsAction = 20;
-        TryAction("Amélioration Bateau", () =>
+        TryAction("Amélioration Bateau", (atelier) =>
         {
-            if (AtelierManager.PanelTableIngenieur.activeSelf &&
+            if (atelier != null && atelier.PanelTableIngenieur.activeSelf &&
                 StatsManager.nbrWood >= 100 && StatsManager.nbrIron >= 50)
             {
                 StatsManager.nbrWood -= 100;
                 StatsManager.nbrIron -= 50;
                 StatsManager.UpdateText();
             }
+        },
+        () =>
+        {
+            StatsManager.boatMaxHealth += 100;
+            StatsManager.UpdateText();
         });
     }
 
     public void AmeliorationCanon()
     {
         tempsAction = 16;
-        TryAction("AmeCanon",() =>
+        TryAction("AmeCanon", (atelier) =>
         {
-            if (AtelierManager.PanelTableIngenieur.activeSelf &&
+            if (atelier != null && atelier.PanelTableIngenieur.activeSelf &&
                 StatsManager.nbrWood >= 70 && StatsManager.nbrIron >= 30)
             {
                 StatsManager.nbrWood -= 70;
                 StatsManager.nbrIron -= 30;
                 StatsManager.UpdateText();
             }
+        },
+        () =>
+        {
+            StatsManager.canonMaxHealth += 100;
+            StatsManager.UpdateText();
         });
     }
 
     public void ReparerCanon()
     {
         tempsAction = 10;
-        TryAction("RepCanon", () =>
+        TryAction("RepCanon", (atelier) =>
         {
-            if (AtelierManager.PanelCanon.activeSelf && StatsManager.nbrWood >= 20)
+            if (atelier != null && atelier.PanelCanon.activeSelf && StatsManager.nbrWood >= 20)
             {
                 StatsManager.nbrWood -= 20;
                 StatsManager.UpdateText();
             }
+        },
+        () =>
+        {
+            StatsManager.canonHealth += (int)(0.2f * StatsManager.canonMaxHealth);
+            StatsManager.UpdateText();
         });
     }
 
     public void ReparerBateau()
     {
         tempsAction = 10;
-        TryAction("RepBateau", () =>
+        TryAction("RepBateau", (atelier) =>
         {
             if (StatsManager.nbrIron >= 20)
             {
                 StatsManager.nbrIron -= 20;
                 StatsManager.UpdateText();
             }
+        },
+        () =>
+        {
+            StatsManager.boatHealth += (int)(0.2f * StatsManager.boatMaxHealth);
+            StatsManager.UpdateText();
         });
     }
 
     public void CuisinerRhum()
     {
         tempsAction = 10;
-        TryAction("Rhum", () =>
+        TryAction("Rhum", (atelier) =>
         {
-            if (AtelierManager.PanelCuisine.activeSelf && StatsManager.nbrFood >= 20)
+            if (atelier != null && atelier.PanelCuisine.activeSelf && StatsManager.nbrFood >= 20)
             {
                 StatsManager.nbrFood -= 20;
                 StatsManager.UpdateText();
             }
+        },
+        () =>
+        {
+            StatsManager.nbrRhum += 1;
+            StatsManager.UpdateText();
         });
     }
 
     public void CuisinerRagout()
     {
         tempsAction = 10;
-        TryAction("Ragout", () =>
+        TryAction("Ragout", (atelier) =>
         {
-            if (AtelierManager.PanelCuisine.activeSelf && StatsManager.nbrFood >= 20)
+            if (atelier != null && atelier.PanelCuisine.activeSelf && StatsManager.nbrFood >= 20)
             {
                 StatsManager.nbrFood -= 20;
                 StatsManager.UpdateText();
             }
+        },
+        () =>
+        {
+            StatsManager.nbrRagout += 1;
+            StatsManager.UpdateText();
         });
     }
 
     public void Manger()
     {
         tempsAction = 5;
-        TryAction("Manger", () =>
+        TryAction("Manger", (atelier) =>
         {
-            if (AtelierManager.PanelPiqueNique.activeSelf && StatsManager.nbrRagout > 0)
+            if (atelier != null && atelier.PanelPiqueNique.activeSelf && StatsManager.nbrRagout > 0)
             {
                 StatsManager.nbrRagout -= 1;
                 StatsManager.UpdateText();
             }
+        },
+        () =>
+        {
+            StatsManager.boatHealth += 30;
+            StatsManager.canonHealth += 30;
+            StatsManager.UpdateText();
         });
     }
 }

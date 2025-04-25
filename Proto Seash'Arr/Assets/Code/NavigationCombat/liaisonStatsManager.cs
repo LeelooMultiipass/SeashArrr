@@ -99,8 +99,13 @@ public class liaisonStatsManager : MonoBehaviour
             if (useAtelier != null)
             {
                 useAtelier.AmeliorationBateau();  // Call method from UseAtelier
-                statsManager.boatMaxHealth += 100;
-                statsManager.UpdateText();
+
+                if (useAtelier.timer >= useAtelier.tempsAction)
+                {
+                    statsManager.boatMaxHealth += 100;
+                    statsManager.UpdateText();
+                }
+
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
@@ -117,8 +122,12 @@ public class liaisonStatsManager : MonoBehaviour
             if (useAtelier != null)
             {
                 useAtelier.AmeliorationCanon();  // Call method from UseAtelier
-                statsManager.canonMaxHealth += 100;
-                statsManager.UpdateText();
+                if(useAtelier.timer >= useAtelier.tempsAction)
+                {
+                    statsManager.canonMaxHealth += 100;
+                    statsManager.UpdateText();
+                }
+                
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
@@ -166,8 +175,14 @@ public class liaisonStatsManager : MonoBehaviour
                 if (statsManager.canonHealth < statsManager.canonMaxHealth)
                 {
                     useAtelier.ReparerCanon();  // Call method from UseAtelier
-                    statsManager.canonHealth += (int)(statsManager.canonMaxHealth * 0.2f);
-                    statsManager.UpdateText();
+
+                    if (useAtelier.timer >= useAtelier.tempsAction)
+                    {
+                        statsManager.canonHealth += (int)(statsManager.canonMaxHealth * 0.2f);
+                        statsManager.UpdateText();
+                    }
+
+                    
                     Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
                 }
             }
@@ -185,8 +200,13 @@ public class liaisonStatsManager : MonoBehaviour
             if (useAtelier != null)
             {
                 useAtelier.CuisinerRagout();  // Call method from UseAtelier
-                statsManager.nbrRagout += 1;
-                statsManager.UpdateText();
+
+                if (useAtelier.timer >= useAtelier.tempsAction)
+                {
+                    statsManager.nbrRagout += 1;
+                    statsManager.UpdateText();
+                }
+
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
@@ -203,13 +223,14 @@ public class liaisonStatsManager : MonoBehaviour
             if (useAtelier != null)
             {
                 useAtelier.CuisinerRhum();  // Call method from UseAtelier
-                statsManager.nbrRhum += 1;
-                if(useAtelier.isBusy == false)
+
+                if (useAtelier.timer >= useAtelier.tempsAction)
                 {
+                    statsManager.nbrRhum += 1;
                     statsManager.UpdateText();
                 }
-                
 
+                
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
             }
             else
