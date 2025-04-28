@@ -96,7 +96,7 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelTableIngenieur.activeSelf)
         {
-            if (useAtelier != null)
+            if (useAtelier != null && statsManager.nbrWood>=100 && statsManager.nbrIron>=50)
             {
                 useAtelier.AmeliorationBateau();  // Call method from UseAtelier
 
@@ -119,7 +119,7 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelTableIngenieur.activeSelf)
         {
-            if (useAtelier != null)
+            if (useAtelier != null && statsManager.nbrWood >= 70 && statsManager.nbrIron >= 30)
             {
                 useAtelier.AmeliorationCanon();  // Call method from UseAtelier
                 if(useAtelier.timer >= useAtelier.tempsAction)
@@ -141,7 +141,7 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelPiqueNique.activeSelf)
         {
-            if (useAtelier != null)
+            if (useAtelier != null && statsManager.nbrRagout>0)
             {
                 useAtelier.Manger();  // Call method from UseAtelier
                 Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
@@ -155,7 +155,7 @@ public class liaisonStatsManager : MonoBehaviour
 
     public void TriggerUseAtelierRepBateau(InputAction.CallbackContext context)
     {
-        if (useAtelier != null)
+        if (useAtelier != null && statsManager.nbrIron >= 20)
         {
             useAtelier.ReparerBateau();  // Call method from UseAtelier
             Debug.Log("TriggerUseAtelierAction called from liaisonStatsManager.");
@@ -170,7 +170,7 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelCanon.activeSelf)
         {
-            if (useAtelier != null)
+            if (useAtelier != null && statsManager.nbrWood >= 20)
             {
                 if (statsManager.canonHealth < statsManager.canonMaxHealth)
                 {
@@ -195,9 +195,9 @@ public class liaisonStatsManager : MonoBehaviour
 
     public void TriggerUseAtelierCuisineRagout(InputAction.CallbackContext context)
     {
-        if (atelierManager.PanelCuisine.activeSelf)
+        if (atelierManager.PanelCuisine.activeSelf )
         {
-            if (useAtelier != null)
+            if (useAtelier != null && statsManager.nbrFood>=20)
             {
                 useAtelier.CuisinerRagout();  // Call method from UseAtelier
 
@@ -220,7 +220,7 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelCuisine.activeSelf)
         {
-            if (useAtelier != null)
+            if (useAtelier != null && statsManager.nbrFood >= 20)
             {
                 useAtelier.CuisinerRhum();  // Call method from UseAtelier
 

@@ -11,7 +11,8 @@ public class UseAtelier : MonoBehaviour
     public float timer;
     public bool isBusy = false;
 
-    [SerializeField] private float refreshRate = 0.5f; // Temps entre chaque mise à jour (en secondes)
+    [SerializeField] private float refreshRate = 2f; // Temps entre chaque mise à jour (en secondes)
+
 
     private void Start()
     {
@@ -157,6 +158,10 @@ public class UseAtelier : MonoBehaviour
         () =>
         {
             StatsManager.canonHealth += (int)(0.2f * StatsManager.canonMaxHealth);
+            if(StatsManager.canonHealth > StatsManager.canonMaxHealth)
+            {
+                StatsManager.canonHealth=StatsManager.canonMaxHealth;
+            }
             StatsManager.UpdateText();
         });
     }
@@ -232,5 +237,10 @@ public class UseAtelier : MonoBehaviour
             StatsManager.canonHealth += 30;
             StatsManager.UpdateText();
         });
+    }
+
+    public void Ancre()
+    {
+
     }
 }

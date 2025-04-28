@@ -12,6 +12,7 @@ public class AtelierManager : MonoBehaviour
     public GameObject PanelTableIngenieur;
     public GameObject PanelPiqueNique;
     public GameObject PanelCanon;
+    public GameObject PanelAncre;
 
     public Slider CuisineSlider;
     public Slider IngeniorSlider;
@@ -40,6 +41,7 @@ public class AtelierManager : MonoBehaviour
     public InputAction CanonToggle; 
     public InputAction IngeniorToggle; 
     public InputAction PiqueNiqueToggle;
+    public InputAction AncreToggle;
 
 
     private void Start()
@@ -95,7 +97,6 @@ public class AtelierManager : MonoBehaviour
             {
                 ButtonAtelier.SetActive(true);
                 ancreActive = true;
-                //SwitchToPiqueNique();
             }
         }
     }
@@ -128,8 +129,8 @@ public class AtelierManager : MonoBehaviour
             }
             else if (other.CompareTag("Ancre"))
             {
-                ancreActive = false;
-               // PanelAncre.SetActive(false);
+               ancreActive = false;
+               PanelAncre.SetActive(false);
             }
 
             // Revert to navigation controls when leaving
@@ -200,11 +201,13 @@ public class AtelierManager : MonoBehaviour
         IngeniorToggle.Enable();
         PiqueNiqueToggle.Enable();
         CanonToggle.Enable();
+        AncreToggle.Enable();
 
         InteractKitchen.started +=OpenTogglePanelCuisine;
         IngeniorToggle.started += OpenTogglePanelTableIngenieur;
         PiqueNiqueToggle.started += OpenTogglePanelPiqueNique;
         CanonToggle.started += OpenTogglePanelCanon;
+        AncreToggle.started += OpenTogglePanelAncre;
     }
 
     private void OnDisable()
@@ -213,11 +216,13 @@ public class AtelierManager : MonoBehaviour
         IngeniorToggle.Disable();
         PiqueNiqueToggle.Disable();
         CanonToggle.Disable();
+        AncreToggle.Disable();
 
         InteractKitchen.started -= OpenTogglePanelCuisine;
         IngeniorToggle.started -= OpenTogglePanelTableIngenieur;
         PiqueNiqueToggle.started -= OpenTogglePanelPiqueNique;
         CanonToggle.started -= OpenTogglePanelCanon;
+        AncreToggle.started -= OpenTogglePanelAncre;
     }
 
     // ouvrir un panel spécifique
@@ -231,6 +236,7 @@ public class AtelierManager : MonoBehaviour
     void OpenTogglePanelTableIngenieur(InputAction.CallbackContext context) { if (PanelTableIngenieur != null && !PanelTableIngenieur.activeSelf && tableIngenieurActive) { OpenPanel(PanelTableIngenieur);  } }
     void OpenTogglePanelPiqueNique(InputAction.CallbackContext context) { if (PanelPiqueNique != null && !PanelPiqueNique.activeSelf && piqueNiqueActive) { OpenPanel(PanelPiqueNique);  } }
     void OpenTogglePanelCanon(InputAction.CallbackContext context) { if (PanelCanon != null && !PanelCanon.activeSelf && canonActive) { OpenPanel(PanelCanon);  } }
+    void OpenTogglePanelAncre(InputAction.CallbackContext context) { if (PanelAncre != null && !PanelAncre.activeSelf && canonActive) { OpenPanel(PanelAncre); } }
 
 
     // fermer un panel spécifique 
@@ -238,6 +244,7 @@ public class AtelierManager : MonoBehaviour
     void CloseTogglePanelTableIngenieur(InputAction.CallbackContext context) { if (PanelTableIngenieur != null && PanelTableIngenieur.activeSelf ) { ClosePanel(PanelTableIngenieur); tableIngenieurActive = false; } }
     void CloseTogglePanelPiqueNique(InputAction.CallbackContext context) { if (PanelPiqueNique != null && PanelPiqueNique.activeSelf ) { ClosePanel(PanelPiqueNique); piqueNiqueActive = false; } }
     void CloseTogglePanelCanon(InputAction.CallbackContext context) { if (PanelCanon != null && PanelCanon.activeSelf) { ClosePanel(PanelCanon); canonActive = false; } }
+    void CloseTogglePanelAncre(InputAction.CallbackContext context) { if (PanelAncre != null && PanelAncre.activeSelf) { ClosePanel(PanelAncre); ancreActive = false; } }
 
     void CloseAllPanels()
     {
@@ -245,6 +252,7 @@ public class AtelierManager : MonoBehaviour
         if (PanelTableIngenieur != null) ClosePanel(PanelTableIngenieur);
         if (PanelPiqueNique != null) ClosePanel(PanelPiqueNique);
         if (PanelCanon != null) ClosePanel(PanelCanon);
+        if (PanelAncre != null) ClosePanel(PanelAncre);
     }
 
 }

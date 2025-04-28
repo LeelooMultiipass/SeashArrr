@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class StatsManager : MonoBehaviour
 {
@@ -62,6 +63,8 @@ public class StatsManager : MonoBehaviour
     public TMP_Text nbrRhumText;
     public TMP_Text nbrRagoutText;
     [Space(20)]
+
+    private PlayerInput playerInput;
     
     // Le random
     System.Random rnd = new System.Random();
@@ -157,6 +160,7 @@ public class StatsManager : MonoBehaviour
 
         if(Ressources == true)
         {
+            //if()
             TempsNavigation = 0;
             TempsCombat = TempsCombat;
             nbrFood += 60;
@@ -167,5 +171,10 @@ public class StatsManager : MonoBehaviour
             Navigation = true;
             TempsCombat += Time.deltaTime;
         }
+    }
+
+    public void Ancre()
+    {
+
     }
 }
