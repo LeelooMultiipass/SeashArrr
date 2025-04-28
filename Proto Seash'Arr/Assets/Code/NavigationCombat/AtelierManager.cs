@@ -46,6 +46,7 @@ public class AtelierManager : MonoBehaviour
 
     private void Start()
     {
+        
         if (ButtonAtelier != null)
         {
             ButtonAtelier.SetActive(false);
@@ -64,7 +65,7 @@ public class AtelierManager : MonoBehaviour
 
         SwitchtoGameplay();
     }
-
+   
     public void OnTriggerEnter(Collider other)
     {
         if (ButtonAtelier != null)
@@ -230,13 +231,14 @@ public class AtelierManager : MonoBehaviour
     { 
         if (PanelCuisine != null && !PanelCuisine.activeSelf && cuisineActive) 
         { 
-            OpenPanel(PanelCuisine); 
+            OpenPanel(PanelCuisine);
+            ButtonAtelier.SetActive(false);
         } 
     }
-    void OpenTogglePanelTableIngenieur(InputAction.CallbackContext context) { if (PanelTableIngenieur != null && !PanelTableIngenieur.activeSelf && tableIngenieurActive) { OpenPanel(PanelTableIngenieur);  } }
-    void OpenTogglePanelPiqueNique(InputAction.CallbackContext context) { if (PanelPiqueNique != null && !PanelPiqueNique.activeSelf && piqueNiqueActive) { OpenPanel(PanelPiqueNique);  } }
-    void OpenTogglePanelCanon(InputAction.CallbackContext context) { if (PanelCanon != null && !PanelCanon.activeSelf && canonActive) { OpenPanel(PanelCanon);  } }
-    void OpenTogglePanelAncre(InputAction.CallbackContext context) { if (PanelAncre != null && !PanelAncre.activeSelf && canonActive) { OpenPanel(PanelAncre); } }
+    void OpenTogglePanelTableIngenieur(InputAction.CallbackContext context) { if (PanelTableIngenieur != null && !PanelTableIngenieur.activeSelf && tableIngenieurActive) { OpenPanel(PanelTableIngenieur); ButtonAtelier.SetActive(false); } }
+    void OpenTogglePanelPiqueNique(InputAction.CallbackContext context) { if (PanelPiqueNique != null && !PanelPiqueNique.activeSelf && piqueNiqueActive) { OpenPanel(PanelPiqueNique); ButtonAtelier.SetActive(false); } }
+    void OpenTogglePanelCanon(InputAction.CallbackContext context) { if (PanelCanon != null && !PanelCanon.activeSelf && canonActive) { OpenPanel(PanelCanon); ButtonAtelier.SetActive(false); } }
+    void OpenTogglePanelAncre(InputAction.CallbackContext context) { if (PanelAncre != null && !PanelAncre.activeSelf && ancreActive) { OpenPanel(PanelAncre);ButtonAtelier.SetActive(false); } }
 
 
     // fermer un panel spécifique 

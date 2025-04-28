@@ -1401,7 +1401,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 9129638340439077407, guid: 38b0d7e65ea8d9c4e9097bcc776d5964, type: 3}
+  m_PlayerPrefab: {fileID: 5846948216655518270, guid: 38b0d7e65ea8d9c4e9097bcc776d5964, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -3663,10 +3663,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatsManager: {fileID: 4359715218010467453}
-  AtelierManager: {fileID: 1845849116676902247, guid: c7fd55c25ca65cf4bb3a4216db62a525, type: 3}
   tempsAction: 0
   timer: 0
   isBusy: 0
+  refreshRate: 0.5
 --- !u!222 &2820318890678403613
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -172,9 +172,4 @@ public class StatsManager : MonoBehaviour
             TempsCombat += Time.deltaTime;
         }
     }
-
-    public void Ancre()
-    {
-
-    }
 }

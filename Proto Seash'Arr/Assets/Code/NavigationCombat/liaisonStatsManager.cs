@@ -20,6 +20,7 @@ public class liaisonStatsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         // Find the GameObject with the "StatsManager" tag
         GameObject statsManagerObject = GameObject.FindGameObjectWithTag("StatsManager");
 
