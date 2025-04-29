@@ -238,9 +238,4 @@ public class UseAtelier : MonoBehaviour
             StatsManager.UpdateText();
         });
     }
-
-    public void Ancre()
-    {
-
-    }
 }

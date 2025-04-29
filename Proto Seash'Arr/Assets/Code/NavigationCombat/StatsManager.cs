@@ -64,8 +64,9 @@ public class StatsManager : MonoBehaviour
     public TMP_Text nbrRagoutText;
     [Space(20)]
 
-    private PlayerInput playerInput;
-    
+    private List<AtelierManager> ateliers = new List<AtelierManager>();
+    private float refreshRate = 2f;
+
     // Le random
     System.Random rnd = new System.Random();
 
@@ -79,6 +80,17 @@ public class StatsManager : MonoBehaviour
         boatHealth = boatMaxHealth;
         canonHealth = canonMaxHealth;
         UpdateText();
+        StartCoroutine(RefreshAtelierList());
+    }
+
+    private IEnumerator RefreshAtelierList()
+    {
+        while (true)
+        {
+            ateliers = new List<AtelierManager>(FindObjectsOfType<AtelierManager>());
+            Debug.Log("Nombre total de scripts AtelierManager dans la scène : " + ateliers.Count);
+            yield return new WaitForSeconds(refreshRate);
+        }
     }
 
     public void UpdateText()
@@ -131,13 +143,25 @@ public class StatsManager : MonoBehaviour
                 TempsCombat = 0;
 
                
-            } 
-            
-            if(Mathf.Abs(TempsNavigation - TempsBeforeIsland) < 0.1f)
+            }
+
+            if (Mathf.Abs(TempsNavigation - TempsBeforeIsland) < 0.1f || TempsNavigation > TempsBeforeIsland)
+            {
+                int ancreActives = 0;
+                foreach (AtelierManager atelier in ateliers)
                 {
-                    Navigation = false; 
+                    if (atelier.PanelAncre != null && atelier.PanelAncre.activeInHierarchy)
+                    {
+                        ancreActives++;
+                    }
+                }
+
+                if (ancreActives == 2)
+                {
+                    Navigation = false;
                     Ressources = true;
                 }
+            }
         }
 
         if (Fight == true)
