@@ -32,6 +32,7 @@ public class Battle_Handler : MonoBehaviour
         turnOrder.AddRange(Players);
         turnOrder.AddRange(Ennemies);
         ShuffleList(turnOrder);
+        Debug.Log("L'ordre de jeu est" + turnOrder);
     }
 
     // Méthode pour mélanger une liste de manière aléatoire

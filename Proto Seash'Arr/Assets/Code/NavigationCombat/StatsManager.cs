@@ -1,15 +1,14 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using Unity.IO.LowLevel.Unsafe;
+using UnityEngine.EventSystems;
 
 public class StatsManager : MonoBehaviour
 {
-   // Temps de jeu
     [Header("Temps globaux")]
     public float TempsNavigation = 0;
     public float TempsCombat = 0;
@@ -20,30 +19,24 @@ public class StatsManager : MonoBehaviour
     public float TimerFightCooldown = 5;
     public float TimerRessourcesCooldown = 5;
 
-    [Space(20)]
-
-    // Random et switch entre cam�ras
     [Header("Temps avant le switch de camera")]
     public int LancementFight;
     public int LancementNavig = 10;
-    [Space(20)]
 
-    //Etat de jeu
     [Header("Etat des phases")]
-    public bool Navigation = true;
+    public bool Carte = true;
+    public bool Navigation = false;
     public bool Fight = false;
     public bool Ressources = false;
-    [Space(20)]
 
-    // Objets � toggle
     [Header("Objets Toggle")]
     public GameObject CameraFight;
     public GameObject CameraNavigation;
     public GameObject UIPopUpEnnemies;
     public GameObject UIPopUpRessources;
+    public GameObject carte;
+    public GameObject UI;
     public Slider slider;
-    
-    [Space(20)]
 
     [Header("Statistiques")]
     public int boatHealth;
@@ -53,9 +46,8 @@ public class StatsManager : MonoBehaviour
     public int nbrFood;
     public int nbrRhum;
     public int nbrRagout;
-    public int boatMaxHealth=300;
-    public int canonMaxHealth=100;
-    [Space(20)]
+    public int boatMaxHealth = 300;
+    public int canonMaxHealth = 100;
 
     [Header("Texts")]
     public TMP_Text boatHealthText;
@@ -65,20 +57,63 @@ public class StatsManager : MonoBehaviour
     public TMP_Text nbrFoodText;
     public TMP_Text nbrRhumText;
     public TMP_Text nbrRagoutText;
-    [Space(20)]
+
+    [Header("Iles")]
+    public Button Boat;
+    public Button Calmar;
+    public Button Espidoche;
+    public Button Scylla;
+    public Button Sil;
+    public Button Ahuizotl;
 
     private List<AtelierManager> ateliers = new List<AtelierManager>();
     public UseAtelier useAtelier;
     private float refreshRate = 2f;
+    private System.Random rnd = new System.Random();
+    private string currentIsland = null; // Mémorise la dernière île choisie
 
-    // Le random
-    System.Random rnd = new System.Random();
+    private Dictionary<(string, string), int> islandTravelTimes = new Dictionary<(string, string), int>()
+{
+    { ("Calmar", "Espidoche"), 120 },
+    { ("Calmar", "Scylla"), 180 },
+    { ("Calmar", "Sil"), 180 },
+    { ("Calmar", "Ahuizotl"), 120 },
 
+    { ("Espidoche", "Calmar"), 120 },
+    { ("Espidoche", "Scylla"), 120 },
+    { ("Espidoche", "Sil"), 240 },
+    { ("Espidoche", "Ahuizotl"), 180 },
 
-    // Start is called before the first frame update
+    { ("Scylla", "Calmar"), 180 },
+    { ("Scylla", "Espidoche"), 120 },
+    { ("Scylla", "Sil"), 120 },
+    { ("Scylla", "Ahuizotl"), 180 },
+
+    { ("Sil", "Calmar"), 180 },
+    { ("Sil", "Espidoche"), 240 },
+    { ("Sil", "Scylla"), 120 },
+    { ("Sil", "Ahuizotl"), 120 },
+
+    { ("Ahuizotl", "Calmar"), 120 },
+    { ("Ahuizotl", "Espidoche"), 180 },
+    { ("Ahuizotl", "Scylla"), 180 },
+    { ("Ahuizotl", "Sil"), 120 },
+};
+
+    private Dictionary<string, (int wood, int iron, int food)> islandResources = new Dictionary<string, (int, int, int)>()
+{
+    { "Calmar", (60, 20, 80) },
+    { "Espidoche", (130, 10, 70) },
+    { "Scylla", (30, 50, 90) },
+    { "Sil", (90, 30, 60) },
+    { "Ahuizotl", (70, 20, 120) }
+};
+
     void Start()
     {
-        LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight); //Randomise automatiquement le premier lancement de combat
+        carte.SetActive(true);
+        UI.SetActive(false);
+        LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
         slider.maxValue = TempsBeforeIsland;
         slider.value = 0;
         boatHealth = boatMaxHealth;
@@ -92,7 +127,6 @@ public class StatsManager : MonoBehaviour
         while (true)
         {
             ateliers = new List<AtelierManager>(FindObjectsOfType<AtelierManager>());
-            Debug.Log("Nombre total de scripts AtelierManager dans la sc�ne : " + ateliers.Count);
             yield return new WaitForSeconds(refreshRate);
         }
     }
@@ -101,60 +135,41 @@ public class StatsManager : MonoBehaviour
     {
         boatHealthText.text = boatHealth + " / " + boatMaxHealth;
         canonHealthText.text = canonHealth + " / " + canonMaxHealth;
-        nbrWoodText.text = nbrWood +"";
+        nbrWoodText.text = nbrWood + "";
         nbrIronText.text = nbrIron + "";
         nbrFoodText.text = nbrFood + "";
         nbrRhumText.text = nbrRhum + "";
         nbrRagoutText.text = nbrRagout + "";
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Navigation == true)
+        if (Carte == true) return;
+
+        if (Navigation)
         {
             TempsNavigation += Time.deltaTime;
             TempsCombat += Time.deltaTime;
             slider.value = TempsNavigation;
 
-            if (TempsCombat >= LancementFight- TimerFightCooldown)
-                {
-                    UIPopUpEnnemies.SetActive(true);
-                }
+            if (TempsCombat >= LancementFight - TimerFightCooldown)
+                UIPopUpEnnemies.SetActive(true);
 
             if (Mathf.Abs(TempsCombat - LancementFight) < 0.1f)
             {
                 Navigation = false;
                 Fight = true;
-                
-                CameraNavigation.SetActive(!CameraNavigation.activeSelf);
-                slider.maxValue = TempsBeforeIsland;
+                CameraNavigation.SetActive(false);
+                CameraFight.SetActive(true);
                 slider.value = LancementFight;
                 TempsNavigation = LancementFight;
-                CameraFight.SetActive(!CameraFight.activeSelf);
-                UIPopUpEnnemies.SetActive(!UIPopUpEnnemies.activeSelf);
-                
-                //SceneManager.LoadScene("FightTest"); // Remplacez "FightScene" par le nom de votre sc�ne de combat
-                //UI.SetActive(!UI.activeSelf);
-
-                TempsNavigation += Time.deltaTime;
-                slider.value = TempsNavigation;
-
-
-                // Red�finir Lancement pour le prochain combat al�atoire
+                UIPopUpEnnemies.SetActive(false);
                 LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
                 TempsCombat = 0;
-
-               
             }
 
             if (TempsNavigation >= TempsBeforeIsland - TimerRessourcesCooldown)
-            {
                 UIPopUpRessources.SetActive(true);
-            }
-
-            
 
             if (Mathf.Abs(TempsNavigation - TempsBeforeIsland) < 0.1f || TempsNavigation > TempsBeforeIsland)
             {
@@ -162,9 +177,7 @@ public class StatsManager : MonoBehaviour
                 foreach (AtelierManager atelier in ateliers)
                 {
                     if (atelier.PanelAncre != null && atelier.PanelAncre.activeInHierarchy)
-                    {
                         ancreActives++;
-                    }
                 }
 
                 if (ancreActives == 2)
@@ -177,36 +190,105 @@ public class StatsManager : MonoBehaviour
             }
         }
 
-        if (Fight == true)
+        if (Fight)
         {
-            //SceneManager.LoadScene("FightTest");
-
             TempsFight += Time.deltaTime;
             if (Mathf.Abs(TempsFight - LancementNavig) < 0.1f)
             {
                 Fight = false;
                 Navigation = true;
-                CameraNavigation.SetActive(!CameraNavigation.activeSelf);
-                CameraFight.SetActive(!CameraFight.activeSelf);
-               // UI.SetActive(!UI.activeSelf);
-
-                // R�initialiser TempsFight pour arr�ter le timer
+                CameraFight.SetActive(false);
+                CameraNavigation.SetActive(true);
                 TempsFight = 0;
             }
         }
 
-        if(Ressources == true)
+        if (Ressources)
         {
-            //if()
             TempsNavigation = 0;
-            TempsCombat = TempsCombat;
-            nbrFood += 60;
-            nbrWood += 90;
-            nbrIron += 30;
-            UpdateText();
-            Ressources = false;
-            Navigation = true;
             TempsCombat += Time.deltaTime;
+
+            // Obtention des ressources en fonction de l'île
+            if (islandResources.ContainsKey(currentIsland))
+            {
+                var resources = islandResources[currentIsland];
+                nbrWood += resources.wood;
+                nbrIron += resources.iron;
+                nbrFood += resources.food;
+
+                UpdateText(); // Met à jour l'UI avec les nouvelles ressources
+            }
+
+            Ressources = false;
+
+            // Retour à la carte pour rechoisir une île
+            Carte = true;
+            Navigation = false;
+            carte.SetActive(true);
+            UI.SetActive(false); // UI de navigation si désactivée pendant le choix
+
+            // Réinitialiser l'input système
+            ResetInputSystem();
         }
+    }
+
+    // === Méthodes pour chaque île ===
+    public void ChoisirCalmar() => InitierVoyage("Calmar", Calmar);
+    public void ChoisirEspidoche() => InitierVoyage("Espidoche", Espidoche);
+    public void ChoisirScylla() => InitierVoyage("Scylla", Scylla);
+    public void ChoisirSil() => InitierVoyage("Sil", Sil);
+    public void ChoisirAhuizotl() => InitierVoyage("Ahuizotl", Ahuizotl);
+
+     
+
+    private void InitierVoyage(string nomIle, Button boutonIle)
+    {
+        if (!string.IsNullOrEmpty(currentIsland))
+        {
+            if (islandTravelTimes.TryGetValue((currentIsland, nomIle), out int travelTime))
+            {
+                TempsBeforeIsland = travelTime;
+            }
+            else
+            {
+                Debug.LogWarning("Pas de durée définie pour ce trajet : " + currentIsland + " → " + nomIle);
+                TempsBeforeIsland = 90; // par défaut
+            }
+        }
+        else
+            {
+                switch (nomIle)
+                {
+                    case "Calmar": TempsBeforeIsland = 60; break;
+                    case "Espidoche": TempsBeforeIsland = 120; break;
+                    case "Scylla": TempsBeforeIsland = 120; break;
+                    case "Sil": TempsBeforeIsland = 120; break;
+                    case "Ahuizotl": TempsBeforeIsland = 60; break;
+                    default:
+                        Debug.LogWarning("Ile inconnue : " + nomIle);
+                        return;
+                }
+            }
+
+        currentIsland = nomIle;
+
+        // Positionne le bouton Boat sans animation
+        RectTransform boatRect = Boat.GetComponent<RectTransform>();
+        RectTransform ileRect = boutonIle.GetComponent<RectTransform>();
+        boatRect.anchoredPosition = ileRect.anchoredPosition;
+
+        carte.SetActive(false);
+        UI.SetActive(true);
+        slider.maxValue = TempsBeforeIsland;
+        slider.value = 0;
+        Carte = false;
+        Navigation = true;
+    }
+
+    void ResetInputSystem()
+    {
+        // Réactive les événements de souris et de manette
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(Boat.gameObject); // ou n'importe quel autre bouton actif
     }
 }
