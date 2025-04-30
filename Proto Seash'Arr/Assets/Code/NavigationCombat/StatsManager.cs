@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using Unity.IO.LowLevel.Unsafe;
 
 public class StatsManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class StatsManager : MonoBehaviour
     public int TempsMaxBeforeFight = 75;
     public int TempsBeforeIsland = 90;
     public float TimerFightCooldown = 5;
+    public float TimerRessourcesCooldown = 5;
 
     [Space(20)]
 
@@ -38,6 +40,7 @@ public class StatsManager : MonoBehaviour
     public GameObject CameraFight;
     public GameObject CameraNavigation;
     public GameObject UIPopUpEnnemies;
+    public GameObject UIPopUpRessources;
     public Slider slider;
     
     [Space(20)]
@@ -65,6 +68,7 @@ public class StatsManager : MonoBehaviour
     [Space(20)]
 
     private List<AtelierManager> ateliers = new List<AtelierManager>();
+    public UseAtelier useAtelier;
     private float refreshRate = 2f;
 
     // Le random
@@ -145,6 +149,13 @@ public class StatsManager : MonoBehaviour
                
             }
 
+            if (TempsNavigation >= TempsBeforeIsland - TimerRessourcesCooldown)
+            {
+                UIPopUpRessources.SetActive(true);
+            }
+
+            
+
             if (Mathf.Abs(TempsNavigation - TempsBeforeIsland) < 0.1f || TempsNavigation > TempsBeforeIsland)
             {
                 int ancreActives = 0;
@@ -158,8 +169,10 @@ public class StatsManager : MonoBehaviour
 
                 if (ancreActives == 2)
                 {
+                    useAtelier.AnnulerAction();
                     Navigation = false;
                     Ressources = true;
+                    UIPopUpRessources.SetActive(false);
                 }
             }
         }

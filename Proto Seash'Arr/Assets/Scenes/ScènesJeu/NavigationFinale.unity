@@ -1401,7 +1401,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 5846948216655518270, guid: 38b0d7e65ea8d9c4e9097bcc776d5964, type: 3}
+  m_PlayerPrefab: {fileID: 2470498089678438476, guid: 38b0d7e65ea8d9c4e9097bcc776d5964, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -2060,6 +2060,81 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350618011}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1384517988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1384517989}
+  - component: {fileID: 1384517991}
+  - component: {fileID: 1384517990}
+  m_Layer: 5
+  m_Name: PopUpUIRessources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1384517989
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384517988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.3990655, y: 0.49431604, z: 0.49431604}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3491273657684302600}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -34, y: -197}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1384517990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384517988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1384517991
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384517988}
+  m_CullTransparentMesh: 1
 --- !u!1 &1387545537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3941,6 +4016,7 @@ RectTransform:
   m_Children:
   - {fileID: 4947084514032414947}
   - {fileID: 2289509583578509904}
+  - {fileID: 1384517989}
   - {fileID: 1907223775}
   - {fileID: 1092908854}
   - {fileID: 917628547}
@@ -4069,6 +4145,7 @@ MonoBehaviour:
   TempsMaxBeforeFight: 75
   TempsBeforeIsland: 90
   TimerFightCooldown: 5
+  TimerRessourcesCooldown: 5
   LancementFight: 0
   LancementNavig: 10
   Navigation: 1
@@ -4077,6 +4154,7 @@ MonoBehaviour:
   CameraFight: {fileID: 4698288069239188497}
   CameraNavigation: {fileID: 6933764799586937339}
   UIPopUpEnnemies: {fileID: 811162128552143284}
+  UIPopUpRessources: {fileID: 1384517988}
   slider: {fileID: 1266599528}
   boatHealth: 300
   canonHealth: 100
@@ -4094,6 +4172,7 @@ MonoBehaviour:
   nbrFoodText: {fileID: 6160297814641879481}
   nbrRhumText: {fileID: 7605544719461919172}
   nbrRagoutText: {fileID: 4775772842755969295}
+  useAtelier: {fileID: 2761150448300063040}
 --- !u!1 &4565389069196022936
 GameObject:
   m_ObjectHideFlags: 0

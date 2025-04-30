@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     public GameObject MedusePF;
     public GameObject BlobFishPF;
     public GameObject CalamarPF;
+    public GameObject BossPF;
 
     private Player player;
     private StatsManager statsManager;
@@ -53,6 +54,8 @@ public class Enemy : MonoBehaviour
                 break;
             case Type.AOE:
                 break;
+            case Type.Boss:
+                break;
         }
         
         AssignType();
@@ -65,7 +68,7 @@ public class Enemy : MonoBehaviour
 
     private void AssignType()
     {
-        roleIndex = UnityEngine.Random.Range(0, 4);
+        roleIndex = UnityEngine.Random.Range(1, 4);
 
         // Définir le rôle basé sur l'index aléatoire
         type = (Type)roleIndex;
@@ -111,6 +114,17 @@ public class Enemy : MonoBehaviour
             CanonBoatATT = 0;
             AllATT = 10;
             HealPower = 0;
+            BoostPower = 0;
+        }
+
+        if(roleIndex ==5)
+        {
+            BossPF.SetActive(true);
+            HPMax = 250;
+            ATT = 30;
+            CanonBoatATT = 100;
+            AllATT = 20;
+            HealPower = 20;
             BoostPower = 0;
         }
     }

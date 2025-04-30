@@ -10,6 +10,8 @@ public class UseAtelier : MonoBehaviour
     public float tempsAction;
     public float timer;
     public bool isBusy = false;
+    private Coroutine currentActionCoroutine;
+    private AtelierManager currentAtelier;
 
     [SerializeField] private float refreshRate = 2f; // Temps entre chaque mise à jour (en secondes)
 
@@ -46,7 +48,7 @@ public class UseAtelier : MonoBehaviour
     {
         if (!isBusy)
         {
-            StartCoroutine(ActionRoutine(actionName, action, onActionCompleted));
+            currentActionCoroutine = StartCoroutine(ActionRoutine(actionName, action, onActionCompleted));
         }
         else
         {
@@ -60,6 +62,7 @@ public class UseAtelier : MonoBehaviour
         Debug.Log("Début de l'action : " + actionName);
 
         AtelierManager activeAtelier = GetActiveAtelier();
+        currentAtelier = activeAtelier;
         Slider activeSlider = null;
 
         if (activeAtelier != null)
@@ -100,6 +103,7 @@ public class UseAtelier : MonoBehaviour
         onActionCompleted?.Invoke(); // Phase 2 : effet post-slider
 
         isBusy = false;
+        currentAtelier = null;
         Debug.Log("Fin de l'action : " + actionName);
     }
 
@@ -237,5 +241,28 @@ public class UseAtelier : MonoBehaviour
             StatsManager.canonHealth += 30;
             StatsManager.UpdateText();
         });
+    }
+
+    public void AnnulerAction()
+    {
+        if (isBusy && currentActionCoroutine != null)
+        {
+            StopCoroutine(currentActionCoroutine);
+            currentActionCoroutine = null;
+            isBusy = false;
+            timer = 0;
+
+            if (currentAtelier != null)
+            {
+                currentAtelier.CuisineSlider?.gameObject.SetActive(false);
+                currentAtelier.IngeniorSlider?.gameObject.SetActive(false);
+                currentAtelier.CanonSlider?.gameObject.SetActive(false);
+                currentAtelier.PiqueNiqueSlider?.gameObject.SetActive(false);
+            }
+
+            currentAtelier = null;
+
+            Debug.Log("Action annulée.");
+        }
     }
 }
