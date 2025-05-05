@@ -237,9 +237,7 @@ public class UseAtelier : MonoBehaviour
         },
         () =>
         {
-            StatsManager.boatHealth += 30;
-            StatsManager.canonHealth += 30;
-            StatsManager.UpdateText();
+            
         });
     }
 

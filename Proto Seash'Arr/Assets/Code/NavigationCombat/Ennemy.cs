@@ -47,7 +47,7 @@ public class Ennemy : MonoBehaviour
             isBoosted = false;
         }
 
-        UI_Manager.UiUpdateHealthBar();
+        UIManager.UiUpdateHealthBar();
     }
 
     public static void AttackAll(int DMG)
@@ -112,7 +112,7 @@ public class Ennemy : MonoBehaviour
                 AttackPlayer(Fight.Players[Random.Range(0, Fight.Players.Count)], att);
             }
             
-            UI_Manager.UiUpdateHealthBar();
+            UIManager.UiUpdateHealthBar();
             Fight.isTurnOver = true;
             yield return null;
         }

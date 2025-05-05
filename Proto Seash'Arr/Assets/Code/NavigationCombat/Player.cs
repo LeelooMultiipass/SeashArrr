@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -25,7 +26,10 @@ public class Player : MonoBehaviour
     [SerializeField] private int HealPower;
     [SerializeField] private float BoostPower;
     [SerializeField] private int FixPower;
-    [SerializeField] private UI_Manager UIManager;
+    [SerializeField] private UIManager UIManager;
+    [SerializeField] private StatsManager statsManager;
+    public Battle_Handler battleHandler;
+
 
     private bool isBoosted;
     public Role role;
@@ -33,7 +37,15 @@ public class Player : MonoBehaviour
     public GameObject DoctorPrefab;
 
     private int HP { get; set; }
-    
+
+    public InputAction AttackInput;
+    public InputAction HealInput;
+    public InputAction BoostInput;
+    public InputAction CanonInput;
+    public InputAction FixInput;
+
+    private int currentTargetIndex;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +73,21 @@ public class Player : MonoBehaviour
         HP = HPMax;
         AssignRole();
         ChangePrefab();
+
+        AttackInput.Enable();
+        AttackInput.performed += OnAttack;
+
+        HealInput.Enable();
+        HealInput.performed += OnHeal;
+
+        BoostInput.Enable();
+        BoostInput.performed += OnBoost;
+
+        CanonInput.Enable();
+        CanonInput.performed += OnCanon;
+
+        FixInput.Enable();
+        FixInput.performed += OnFix;
 
     }
 
@@ -106,36 +133,26 @@ public class Player : MonoBehaviour
         Debug.Log(action +"," +target);
         switch (action)
         {
-            case 0: // Attaquer
-                Attack(target);
-                break;
-            case 1: // Canon
-                Canon();
-                break;
-            case 2: // Réparer
-                Fix(target);
-                break;
-            case 3: // Soigner
-                Heal(target);
-                break;
-            case 4: // Booster
-                Boost(target);
-                break;
+            case 0: OnAttack(new InputAction.CallbackContext()); break;
+            case 1: OnCanon(new InputAction.CallbackContext()); break;
+            case 2: OnFix(new InputAction.CallbackContext()); break;
+            case 3: OnHeal(new InputAction.CallbackContext()); break;
+            case 4: OnBoost(new InputAction.CallbackContext()); break;
         }
 
         yield return null;
+        battleHandler.isTurnOver = true;
     }
-    
 
-    private void Attack(int target)
+
+    private void OnAttack(InputAction.CallbackContext context)
     {
-       /* Ennemy ennemy = Fight.Ennemies[target];
-        ennemy.SetHP(ennemy.GetHP()-ATT);*/
-       Debug.Log(Fight.Ennemies[target]);
-       Fight.Ennemies[target].SetHP(Fight.Ennemies[target].GetHP()-ATT);
+        Debug.Log("Attacking with input...");
+        var enemy = Fight.Ennemies[currentTargetIndex];
+        enemy.SetHP(enemy.GetHP() - ATT);
     }
-    
-    private void Canon()
+
+    private void OnCanon(InputAction.CallbackContext context)
     {
         if (!Fight.IsCanonUsed)
         {
@@ -143,36 +160,58 @@ public class Player : MonoBehaviour
         }
         else
         {
-            foreach (var ennemy in Fight.Ennemies)
+            foreach (var enemy in Fight.Ennemies)
             {
-                ennemy.SetHP(ennemy.GetHP()-CanonPower);
+                enemy.SetHP(enemy.GetHP() - CanonPower);
             }
         }
     }
 
-    private void Fix(int target)
+    private void OnHeal(InputAction.CallbackContext context)
     {
+        Player targetPlayer = Fight.Players[currentTargetIndex];
+        targetPlayer.SetHP(targetPlayer.GetHP() + HealPower);
+    }
+
+    private void OnBoost(InputAction.CallbackContext context)
+    {
+        Fight.Players[currentTargetIndex].isBoosted = true;
+    }
+
+
+private void Fix(int target)
+    {
+        // 0 = boat, 1 = cannon
         switch (target)
         {
             case 0:
-                // HEal bateau
+                statsManager.boatHealth += FixPower;
+                Debug.Log("Fixed Boat for " + FixPower + " HP.");
                 break;
             case 1:
-                // Heal canon
+                statsManager.canonHealth += FixPower;
+                Debug.Log("Fixed Canon for " + FixPower + " HP.");
+                break;
+            default:
+                Debug.LogWarning("Invalid target index for Fix");
                 break;
         }
     }
 
-    private void Heal(int target)
+    private void OnFix(InputAction.CallbackContext context)
     {
-        Player player = Fight.Players[target];
-        player.SetHP(player.GetHP()+HealPower);
+        Debug.Log("Fixing target " + currentTargetIndex);
+        Fix(currentTargetIndex);
     }
 
-    private void Boost(int target)
+    void OnDestroy()
     {
-        Fight.Players[target].isBoosted = true;
+        AttackInput.performed -= OnAttack;
+        HealInput.performed -= OnHeal;
+        BoostInput.performed -= OnBoost;
+        CanonInput.performed -= OnCanon;
     }
+
 
     public int GetHP()
     {

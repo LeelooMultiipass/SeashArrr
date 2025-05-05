@@ -37,6 +37,7 @@ public class StatsManager : MonoBehaviour
     public GameObject carte;
     public GameObject UI;
     public Slider slider;
+    public Battle_Handler battleHandler;
 
     [Header("Statistiques")]
     public int boatHealth;
@@ -109,7 +110,9 @@ public class StatsManager : MonoBehaviour
     { "Ahuizotl", (70, 20, 120) }
 };
 
-    void Start()
+    private Dictionary<string, Button> islandButtons;
+
+void Start()
     {
         carte.SetActive(true);
         UI.SetActive(false);
@@ -120,6 +123,15 @@ public class StatsManager : MonoBehaviour
         canonHealth = canonMaxHealth;
         UpdateText();
         StartCoroutine(RefreshAtelierList());
+        islandButtons = new Dictionary<string, Button>()
+{
+    { "Calmar", Calmar
+},
+    { "Espidoche", Espidoche },
+    { "Scylla", Scylla },
+    { "Sil", Sil },
+    { "Ahuizotl", Ahuizotl }
+};
     }
 
     private IEnumerator RefreshAtelierList()
@@ -192,15 +204,16 @@ public class StatsManager : MonoBehaviour
 
         if (Fight)
         {
-            TempsFight += Time.deltaTime;
-            if (Mathf.Abs(TempsFight - LancementNavig) < 0.1f)
+            battleHandler.gameObject.SetActive(true);
+            if(battleHandler.isBattleOver == true)
             {
                 Fight = false;
                 Navigation = true;
+                battleHandler.isBattleOver = false;
                 CameraFight.SetActive(false);
                 CameraNavigation.SetActive(true);
-                TempsFight = 0;
             }
+
         }
 
         if (Ressources)
@@ -226,9 +239,8 @@ public class StatsManager : MonoBehaviour
             Navigation = false;
             carte.SetActive(true);
             UI.SetActive(false); // UI de navigation si désactivée pendant le choix
-
-            // Réinitialiser l'input système
-            ResetInputSystem();
+            FocusOnCurrentIslandButton();
+            Time.timeScale = 0f; // PAUSE
         }
     }
 
@@ -279,16 +291,19 @@ public class StatsManager : MonoBehaviour
 
         carte.SetActive(false);
         UI.SetActive(true);
+        Time.timeScale = 1f;
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         slider.maxValue = TempsBeforeIsland;
         slider.value = 0;
         Carte = false;
         Navigation = true;
     }
 
-    void ResetInputSystem()
+    private void FocusOnCurrentIslandButton()
     {
-        // Réactive les événements de souris et de manette
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(Boat.gameObject); // ou n'importe quel autre bouton actif
+        if (islandButtons.ContainsKey(currentIsland))
+        {
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(islandButtons[currentIsland].gameObject);
+        }
     }
 }
