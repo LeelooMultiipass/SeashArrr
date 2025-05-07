@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject actionPanel;
+    public GameObject ordrePanel;
     public GameObject targetPanel;
+
+    public GameObject[] listPictures;
 
     public Button[] targetButtons; // Filled dynamically
 
@@ -18,6 +21,7 @@ public class UIManager : MonoBehaviour
     private bool targetChosen = false;
 
     private Player currentPlayer;
+    public Battle_Handler battleHandler;
 
     public (int, int) Starter(Player player)
     {
@@ -38,9 +42,10 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator ActionSelection()
     {
-        actionPanel.SetActive(true);
+        ordrePanel.SetActive(true);
         targetPanel.SetActive(false);
 
+        listPictures.AddRange(battleHandler.turnOrder);
     
         // Wait for action to be selected
         yield return new WaitUntil(() => actionChosen);
@@ -55,7 +60,7 @@ public class UIManager : MonoBehaviour
     {
         selectedAction = index;
         actionChosen = true;
-        actionPanel.SetActive(false);
+        //actionPanel.SetActive(false);
     }
 
     private IEnumerator TargetSelection()

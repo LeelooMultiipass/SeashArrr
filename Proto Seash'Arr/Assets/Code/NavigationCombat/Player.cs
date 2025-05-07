@@ -89,7 +89,50 @@ public class Player : MonoBehaviour
         UIManager = UIManagerObject.GetComponent<UIManager>();
         battleHandler = battleManager.GetComponent<Battle_Handler>();
 
-        AttackInput.Enable();
+       
+
+        UIBattle.SetActive(false);
+        UIBattleItems.SetActive(false);
+        UIBattleFix.SetActive(false);
+       
+    }
+
+    private void AssignRole()
+    {
+        // Définir le rôle basé sur l'index global
+        role = (Role)roleIndex;
+
+        // Incrémenter l'index global et revenir au début si nécessaire
+        roleIndex = (roleIndex + 1) % Enum.GetValues(typeof(Role)).Length;
+    }
+
+        
+    public void ChangePrefab()
+    {
+        if (roleIndex == 1) //Captain
+            {
+            CaptainPrefab.SetActive(true);
+            ATT = 25;
+            CanonPower = 10;
+            HealPower = 50;
+            BoostPower = 0.5f;
+            FixPower = 100;
+            }
+        if (roleIndex == 2) // Doctor
+        {
+            DoctorPrefab.SetActive(true);
+            ATT = 25;
+            CanonPower = 10;
+            HealPower = 100;
+            BoostPower = 0f;
+            FixPower = 100;
+        }
+    }
+
+    
+    public IEnumerator Action()
+    {
+       /* AttackInput.Enable();
         AttackInput.performed += OnAttack;
 
         HealInput.Enable();
@@ -114,51 +157,10 @@ public class Player : MonoBehaviour
         BoatFixInput.performed += OnBoatFix;
 
         Annuler.Enable();
-        Annuler.performed += OnCancel;
+        Annuler.performed += OnCancel;*/
 
-        UIBattle.SetActive(false);
-        UIBattleItems.SetActive(false);
-       
-    }
-
-    private void AssignRole()
-    {
-        // Définir le rôle basé sur l'index global
-        role = (Role)roleIndex;
-
-        // Incrémenter l'index global et revenir au début si nécessaire
-        roleIndex = (roleIndex + 1) % Enum.GetValues(typeof(Role)).Length;
-    }
-
-        
-    public void ChangePrefab()
-    {
-        if (roleIndex == 1)
-            {
-            CaptainPrefab.SetActive(true);
-            ATT = 25;
-            CanonPower = 10;
-            HealPower = 50;
-            BoostPower = 0.5f;
-            FixPower = 100;
-            }
-        if (roleIndex == 2)
+        if (statsManager.Fight == true)
         {
-            DoctorPrefab.SetActive(true);
-            ATT = 25;
-            CanonPower = 10;
-            HealPower = 100;
-            BoostPower = 0f;
-            FixPower = 100;
-        }
-    }
-
-    
-    public IEnumerator Action()
-    {
-        if(statsManager.Fight == true)
-        {
-            UIBattle.SetActive(true);
             (int, int) choice = UIManager.Starter(this);
             int action = choice.Item1;
             int target = choice.Item2;

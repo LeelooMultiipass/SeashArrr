@@ -173,8 +173,8 @@ void Start()
                 Fight = true;
                 CameraNavigation.SetActive(false);
                 CameraFight.SetActive(true);
-                slider.value = LancementFight;
-                TempsNavigation = LancementFight;
+                slider.value = TempsNavigation;
+                TempsNavigation = TempsNavigation;
                 UIPopUpEnnemies.SetActive(false);
                 LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
                 TempsCombat = 0;
@@ -204,7 +204,6 @@ void Start()
 
         if (Fight)
         {
-            battleHandler.gameObject.SetActive(true);
             foreach(var atelier in ateliers)
             {
                 atelier.canonActive = false;

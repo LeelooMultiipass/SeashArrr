@@ -11,17 +11,33 @@ public class Battle_Handler : MonoBehaviour
     private int currentTurnIndex = 0;
     public bool isBattleOver = false;
     public bool isTurnOver = false;
-
+    public StatsManager statsManager;
+    private bool fightStarted = false;
 
     void Start()
     {
         Players.Clear();
         Ennemies.Clear();
+    }
 
-        // Find all player and enemy GameObjects
+   
+
+    private void Update()
+    {
+        if (statsManager.Fight && !fightStarted)
+        {
+            fightStarted = true;
+            OnFightBegin();
+        }
+    }
+
+    public void OnFightBegin()
+    {
+        Players.Clear(); // Optionnel : au cas où tu veux réinitialiser
+        Ennemies.Clear();
+
         Players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         Ennemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-
 
         BuildTurnOrder();
         StartCoroutine(BattleLoop());
@@ -56,6 +72,7 @@ public class Battle_Handler : MonoBehaviour
             {
                 Debug.Log("Battle Over!");
                 isBattleOver = true;
+                fightStarted = false;
                 yield break;
 
             }
