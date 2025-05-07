@@ -13000,6 +13000,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  ItemInput:
+    m_Name: Item Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1ded23da-a022-4261-a7af-e58e9f3150fa
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &7684367904236998644
 GameObject:
   m_ObjectHideFlags: 0

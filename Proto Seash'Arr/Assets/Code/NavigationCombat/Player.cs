@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     }
 
     private static int roleIndex = 0;
+    [SerializeField]public GameObject UIBattle; 
+    [SerializeField] public GameObject UIBattleItems;
+    [SerializeField] public GameObject UIBattleFix;
 
     [SerializeField] private int HPMax;
     [SerializeField] private int ATT;
@@ -29,7 +32,7 @@ public class Player : MonoBehaviour
     [SerializeField] private UIManager UIManager;
     [SerializeField] private StatsManager statsManager;
     public Battle_Handler battleHandler;
-
+    
 
     private bool isBoosted;
     public Role role;
@@ -43,6 +46,10 @@ public class Player : MonoBehaviour
     public InputAction BoostInput;
     public InputAction CanonInput;
     public InputAction FixInput;
+    public InputAction ItemInput;
+    public InputAction CanonFixInput;
+    public InputAction BoatFixInput;
+    public InputAction Annuler;
 
     private int currentTargetIndex;
 
@@ -74,6 +81,14 @@ public class Player : MonoBehaviour
         AssignRole();
         ChangePrefab();
 
+        GameObject playerObject = GameObject.FindGameObjectWithTag("StatsManager");
+        GameObject battleManager = GameObject.FindGameObjectWithTag("BattleManager");
+        GameObject UIManagerObject = GameObject.FindGameObjectWithTag("BattleManager");
+
+        statsManager = playerObject.GetComponent<StatsManager>();
+        UIManager = UIManagerObject.GetComponent<UIManager>();
+        battleHandler = battleManager.GetComponent<Battle_Handler>();
+
         AttackInput.Enable();
         AttackInput.performed += OnAttack;
 
@@ -89,6 +104,21 @@ public class Player : MonoBehaviour
         FixInput.Enable();
         FixInput.performed += OnFix;
 
+        ItemInput.Enable();
+        ItemInput.performed += OnItem;
+
+        CanonFixInput.Enable();
+        CanonFixInput.performed += OnCanonFix;
+
+        BoatFixInput.Enable();
+        BoatFixInput.performed += OnBoatFix;
+
+        Annuler.Enable();
+        Annuler.performed += OnCancel;
+
+        UIBattle.SetActive(false);
+        UIBattleItems.SetActive(false);
+       
     }
 
     private void AssignRole()
@@ -126,22 +156,25 @@ public class Player : MonoBehaviour
     
     public IEnumerator Action()
     {
-        (int, int) choice = UIManager.Starter(this);
-        int action = choice.Item1;
-        int target = choice.Item2;
-        
-        Debug.Log(action +"," +target);
-        switch (action)
+        if(statsManager.Fight == true)
         {
-            case 0: OnAttack(new InputAction.CallbackContext()); break;
-            case 1: OnCanon(new InputAction.CallbackContext()); break;
-            case 2: OnFix(new InputAction.CallbackContext()); break;
-            case 3: OnHeal(new InputAction.CallbackContext()); break;
-            case 4: OnBoost(new InputAction.CallbackContext()); break;
-        }
+            UIBattle.SetActive(true);
+            (int, int) choice = UIManager.Starter(this);
+            int action = choice.Item1;
+            int target = choice.Item2;
 
-        yield return null;
-        battleHandler.isTurnOver = true;
+            Debug.Log(action + "," + target);
+            switch (action)
+            {
+                case 0: OnAttack(new InputAction.CallbackContext()); break;
+                case 1: OnCanon(new InputAction.CallbackContext()); break;
+                case 2: OnFix(new InputAction.CallbackContext()); break;
+                case 3: OnItem(new InputAction.CallbackContext()); break;
+            }
+
+            yield return null;
+            battleHandler.isTurnOver = true;
+        }
     }
 
 
@@ -167,41 +200,68 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnItem(InputAction.CallbackContext context)
+    {
+        UIBattle.SetActive(false);
+        UIBattleItems.SetActive(true);
+    }
+
     private void OnHeal(InputAction.CallbackContext context)
     {
-        Player targetPlayer = Fight.Players[currentTargetIndex];
-        targetPlayer.SetHP(targetPlayer.GetHP() + HealPower);
+        if(UIBattleItems.activeInHierarchy)
+        {
+            Player targetPlayer = Fight.Players[currentTargetIndex];
+            targetPlayer.SetHP(targetPlayer.GetHP() + HealPower);
+        }
+        
     }
 
     private void OnBoost(InputAction.CallbackContext context)
     {
-        Fight.Players[currentTargetIndex].isBoosted = true;
-    }
-
-
-private void Fix(int target)
-    {
-        // 0 = boat, 1 = cannon
-        switch (target)
+        if(UIBattleItems.activeInHierarchy)
         {
-            case 0:
-                statsManager.boatHealth += FixPower;
-                Debug.Log("Fixed Boat for " + FixPower + " HP.");
-                break;
-            case 1:
-                statsManager.canonHealth += FixPower;
-                Debug.Log("Fixed Canon for " + FixPower + " HP.");
-                break;
-            default:
-                Debug.LogWarning("Invalid target index for Fix");
-                break;
+            Fight.Players[currentTargetIndex].isBoosted = true;
         }
+        
     }
 
     private void OnFix(InputAction.CallbackContext context)
     {
-        Debug.Log("Fixing target " + currentTargetIndex);
-        Fix(currentTargetIndex);
+        UIBattle.SetActive(false);
+        UIBattleFix.SetActive(true);
+    }
+
+    private void OnCanonFix(InputAction.CallbackContext context)
+    {
+        if(UIBattleFix.activeInHierarchy)
+        {
+            statsManager.canonHealth += FixPower;
+            Debug.Log("Fixed Canon for " + FixPower + " HP.");
+        }
+    }
+
+    private void OnBoatFix(InputAction.CallbackContext context)
+    {
+        if (UIBattleFix.activeInHierarchy)
+        {
+            statsManager.boatHealth += FixPower;
+            Debug.Log("Fixed Boat for " + FixPower + " HP.");
+        }
+    }
+
+    private void OnCancel(InputAction.CallbackContext context)
+    {
+        if (UIBattleFix.activeInHierarchy)
+        {
+            UIBattleFix.SetActive(!true);
+            UIBattle.SetActive(true);
+        }
+
+        else if (UIBattleItems.activeInHierarchy)
+        {
+            UIBattleItems.SetActive(!true);
+            UIBattle.SetActive(true);
+        }
     }
 
     void OnDestroy()
@@ -210,7 +270,13 @@ private void Fix(int target)
         HealInput.performed -= OnHeal;
         BoostInput.performed -= OnBoost;
         CanonInput.performed -= OnCanon;
-    }
+        FixInput.performed -= OnFix;
+        ItemInput.performed -= OnItem;
+        CanonFixInput.performed -= OnCanonFix;
+        BoatFixInput.performed -= OnBoatFix;
+        Annuler.performed -= OnCancel;
+
+}
 
 
     public int GetHP()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Battle_Handler : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Battle_Handler : MonoBehaviour
     public bool isBattleOver = false;
     public bool isTurnOver = false;
 
+
     void Start()
     {
         Players.Clear();
@@ -19,6 +21,7 @@ public class Battle_Handler : MonoBehaviour
         // Find all player and enemy GameObjects
         Players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         Ennemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+
 
         BuildTurnOrder();
         StartCoroutine(BattleLoop());
@@ -54,6 +57,7 @@ public class Battle_Handler : MonoBehaviour
                 Debug.Log("Battle Over!");
                 isBattleOver = true;
                 yield break;
+
             }
 
             GameObject currentUnit = turnOrder[currentTurnIndex];

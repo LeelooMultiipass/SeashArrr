@@ -9,9 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject actionPanel;
     public GameObject targetPanel;
 
-    public Button[] actionButtons; // 0: Attack, 1: Canon, 2: Fix, 3: Heal, 4: Boost
     public Button[] targetButtons; // Filled dynamically
-    public TMP_Text promptText;
 
     private int selectedAction = -1;
     private int selectedTarget = -1;
@@ -42,15 +40,8 @@ public class UIManager : MonoBehaviour
     {
         actionPanel.SetActive(true);
         targetPanel.SetActive(false);
-        promptText.text = "Choose your action";
 
-        // Assign button listeners
-        actionButtons[0].onClick.AddListener(() => SelectAction(0)); // Attack
-        actionButtons[1].onClick.AddListener(() => SelectAction(1)); // Canon
-        actionButtons[2].onClick.AddListener(() => SelectAction(2)); // Fix
-        actionButtons[3].onClick.AddListener(() => SelectAction(3)); // Heal
-        actionButtons[4].onClick.AddListener(() => SelectAction(4)); // Boost
-
+    
         // Wait for action to be selected
         yield return new WaitUntil(() => actionChosen);
 
@@ -76,7 +67,6 @@ public class UIManager : MonoBehaviour
         foreach (Transform child in targetPanel.transform)
             Destroy(child.gameObject);
 
-        promptText.text = "Choose your target";
 
         // Create buttons based on selectedAction
         List<string> targets = new List<string>();

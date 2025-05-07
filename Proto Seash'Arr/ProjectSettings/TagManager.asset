@@ -11,6 +11,7 @@ TagManager:
   - StatsManager
   - Ancre
   - Enemy
+  - BattleManager
   layers:
   - Default
   - TransparentFX

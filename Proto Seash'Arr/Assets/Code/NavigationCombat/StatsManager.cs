@@ -205,6 +205,14 @@ void Start()
         if (Fight)
         {
             battleHandler.gameObject.SetActive(true);
+            foreach(var atelier in ateliers)
+            {
+                atelier.canonActive = false;
+                atelier.cuisineActive = false;
+                atelier.tableIngenieurActive = false;
+                atelier.piqueNiqueActive = false;
+            }
+
             if(battleHandler.isBattleOver == true)
             {
                 Fight = false;
