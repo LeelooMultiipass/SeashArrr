@@ -8212,7 +8212,7 @@ MonoBehaviour:
   - {fileID: 2090121217}
   - {fileID: 403257141}
   - {fileID: 803615343}
-  battleHandler: {fileID: 0}
+  battleHandler: {fileID: 1508727575}
 --- !u!1 &1561144940
 GameObject:
   m_ObjectHideFlags: 0
@@ -8495,7 +8495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10252,7 +10252,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 6ceb2e8bc3236544e8dbfd5d58f610db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12121,6 +12121,7 @@ MonoBehaviour:
   carte: {fileID: 1190524342}
   UI: {fileID: 3868460830263217206}
   slider: {fileID: 1266599528}
+  sliderNavigation: {fileID: 1266599526}
   battleHandler: {fileID: 1508727575}
   boatHealth: 300
   canonHealth: 100

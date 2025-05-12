@@ -37,6 +37,7 @@ public class StatsManager : MonoBehaviour
     public GameObject carte;
     public GameObject UI;
     public Slider slider;
+    public GameObject sliderNavigation;
     public Battle_Handler battleHandler;
 
     [Header("Statistiques")]
@@ -176,6 +177,7 @@ void Start()
                 slider.value = TempsNavigation;
                 TempsNavigation = TempsNavigation;
                 UIPopUpEnnemies.SetActive(false);
+                sliderNavigation.SetActive(false);
                 LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
                 TempsCombat = 0;
             }
@@ -219,6 +221,7 @@ void Start()
                 battleHandler.isBattleOver = false;
                 CameraFight.SetActive(false);
                 CameraNavigation.SetActive(true);
+                sliderNavigation.SetActive(true);
             }
 
         }
